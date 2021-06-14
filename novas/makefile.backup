@@ -1,0 +1,26 @@
+
+all: checkout-stars checkout-stars-full example
+
+BASE1 := novas.c novascon.c nutation.c readeph0.c
+SRCS1 := checkout-stars.c solsys3.c $(BASE1)
+OBJS1 := $(subst .c,.o,$(SRCS1))
+
+checkout-stars : $(OBJS1)
+	gcc -o checkout-stars $(OBJS1)
+
+BASE2 := solsys1.c eph_manager.c $(BASE1)
+SRCS2 := checkout-stars-full.c $(BASE2)
+OBJS2 := $(subst .c,.o,$(SRCS2))
+
+checkout-stars-full : $(OBJS2)
+	gcc -o checkout-stars-full $(OBJS2)
+
+SRCS3 := example.c $(BASE2)
+OBJS3 := $(subst .c,.o,$(SRCS3))
+
+example : $(OBJS3)
+	gcc -o example $(OBJS3)
+
+%.o : %.c
+	gcc -c $<
+
