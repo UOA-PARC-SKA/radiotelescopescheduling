@@ -57,6 +57,7 @@ public class Scheduler
 		skyState.createAllBadThingsThatMove(telescope);
 		observation = new Observation(props, telescope, skyState);
 		
+		// policy = (DispatchPolicy) Class.forName(props.getProperty("policy_class")).newInstance();
 		policy = (DispatchPolicy) Class.forName(props.getProperty("policy_class")).newInstance();
 		policy.initialise(props, telescope, schedule, targets, skyState);
 	}

@@ -1,10 +1,13 @@
 # java-telescope-scheduling
 
 ## Getting Started
-### IntelliJ
-1) Right-click on the root project.
-2) Select _Open Module Settings_.
-3) Select Libraries.
-4) Click '+' or add and select _From Maven_.
-5) Paste `org.mongodb:bson:4.2.3` and click _ok_.
-6) Do the same for `org.mongodb:mongodb-driver-core:4.2.3` and `org.mongodb:mongodb-driver:3.12.8`.
+
+### Windows
+
+1. Add the 3 jar files _(bson-4.2.3.jar, mongodb-driver-core-4.2.3.jar, mongo-java-driver-3.12.8.jar)_ as Libraries.
+2. Use the latest MinGW-w64 for the g++ compilers.
+3. Update the jdk paths used in the makefiles in the norad and noras folders according to your system.
+4. In the norad and noras folders, delete all the .o and .dll files.
+5. Run make in both norad and noras folders. **Make for Windows can be installed using chocolatey**
+6. Once the dll files have been generated, add them as libraries in the project.
+7. The GUI can be started by running the _ProcessingMain main function_.

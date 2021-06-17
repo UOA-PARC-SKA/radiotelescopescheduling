@@ -1,6 +1,6 @@
 #Properties for Telescope Scheduling Program
 database_name=test
-dataset=data/psrs.txt
+dataset=data/allpulsars.txt
 telescope=Parkes
 #ratio for the nearest neighbour heuristic
 nn_distance_ratio=0.98
@@ -13,7 +13,7 @@ scint_timescale_limit=0.8
 norad_file_path=data/noraddata
 simulation_speed=40
 wait_time=60
-policy_class=optimisation.BasicNNScheduler
+policy_class=optimisation.EarliestSettingPolicy
 satellite_closeness_limit=0.017453292519943295
 print_results=false
 show_gui=true
