@@ -103,7 +103,7 @@ public class Telescope
 		}
 		return state;
 	}
-	
+
 	public void applyNewState(TelescopeState ts)
 	{
 		this.currentState = ts;
