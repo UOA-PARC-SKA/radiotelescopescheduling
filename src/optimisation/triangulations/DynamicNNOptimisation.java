@@ -83,8 +83,4 @@ public class DynamicNNOptimisation extends NNOptimisation
 		}
 		//	System.out.println("Pulsar "+ target1.getName()+" neighbour list "+target1.getNeighbours().size());
 	}
-	
-	
-
-
 }

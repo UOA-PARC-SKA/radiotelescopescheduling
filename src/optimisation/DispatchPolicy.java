@@ -15,6 +15,7 @@ import observation.TelescopeState;
 import observation.interference.SkyState;
 import observation.live.ObservationState;
 import optimisation.triangulations.DynamicNNOptimisation;
+import optimisation.triangulations.RandomOptimisation;
 import simulation.Clock;
 import util.exceptions.LastEntryException;
 import util.exceptions.OutOfObservablesException;
@@ -31,7 +32,7 @@ public abstract class DispatchPolicy
 	protected Schedule schedule;
 	private double triangulationRatio;
 	private DynamicNNOptimisation dno;
-	
+	private RandomOptimisation ro;
 	
 	
 	public abstract Connection findNextPath(Pointable pointable);
@@ -57,6 +58,7 @@ public abstract class DispatchPolicy
 		}
 		triangulationRatio = Double.parseDouble(props.getProperty("nn_distance_ratio"));
 		dno = new DynamicNNOptimisation();
+		ro = new RandomOptimisation();
 	}
 	
 	//Some are below the horizon, but still in the pool
@@ -99,6 +101,37 @@ public abstract class DispatchPolicy
 			schedule.getCurrentState().addWaitTime(waitingPeriod);
 			schedule.getCurrentState().addComment("Waited for more observables to rise above the horizon.");
 		}
+
+	protected void waitForObservablesRandom() throws LastEntryException
+	{
+		int waitingPeriod = 0;
+		remaining = getRemainingObservables();
+//			for (Target target : remaining) {
+//				System.out.println(
+//				target.getEquatorialCoordinates().getDeclination());
+//			}
+
+		if (remaining.size() == 1)
+		{
+			schedule.setComplete(true);
+			throw new LastEntryException();
+		}
+		while(true)
+		{
+			//advance clock until more observables emerge
+			Clock.getScheduleClock().advanceBy(waitTime);
+			waitingPeriod += waitTime;
+			try {
+				addRandomNeighbours(schedule.getCurrentState().getCurrentTarget());
+				break;
+			} catch (OutOfObservablesException e1) {
+				continue;
+			}
+		}
+		telescope.applyWaitState();
+		schedule.getCurrentState().addWaitTime(waitingPeriod);
+		schedule.getCurrentState().addComment("Waited for more observables to rise above the horizon.");
+	}
 		
 		public List<Target> getRemainingObservables() {
 			
@@ -120,7 +153,6 @@ public abstract class DispatchPolicy
 			Observable o = newTarget.findObservableByObservationTime();
 			schedule.addState(new ObservationState(newTarget, Clock.getScheduleClock().getTime(), link, o, telescope.getLocation()));
 
-
 		}
 		
 		
@@ -129,4 +161,7 @@ public abstract class DispatchPolicy
 			dno.createDynamicLinksByTriangles(observables, current, triangulationRatio, Clock.getScheduleClock(), telescope.getLocation());
 		}
 
+		public void addRandomNeighbours(Pointable current) throws OutOfObservablesException {
+			ro.createRandomLinks(observables, current, triangulationRatio, Clock.getScheduleClock(), telescope.getLocation());
+		}
 }

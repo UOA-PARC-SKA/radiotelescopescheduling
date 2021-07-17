@@ -71,8 +71,9 @@ public class Scheduler
 		while (!schedule.isComplete()) 
 		{
 			try {
-				policy.addDynamicNeighbours(schedule.getCurrentState().getCurrentTarget());
-
+				// ---------- Change for Random here
+				//policy.addDynamicNeighbours(schedule.getCurrentState().getCurrentTarget());
+				policy.addRandomNeighbours(schedule.getCurrentState().getCurrentTarget());
 			} catch (OutOfObservablesException e) 
 			{
 				if(policy.hasNoMoreObservables())
@@ -83,7 +84,9 @@ public class Scheduler
 				else
 				{
 					try {
-						policy.waitForObservables();
+						// ---------- Change for Random here
+						//policy.waitForObservables();
+						policy.waitForObservablesRandom();
 					} catch (LastEntryException e1) {
 						break;
 					}
