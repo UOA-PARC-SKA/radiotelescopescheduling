@@ -64,7 +64,7 @@ public class Scheduler
 
 
 	
-	public void buildSchedule() 
+	public void buildSchedule(String preoptimisation)
 	{	
 		makeInitialState();
 
@@ -73,7 +73,8 @@ public class Scheduler
 			try {
 				// ---------- Change for Random here
 				//policy.addDynamicNeighbours(schedule.getCurrentState().getCurrentTarget());
-				policy.addRandomNeighbours(schedule.getCurrentState().getCurrentTarget());
+				//policy.addRandomNeighbours(schedule.getCurrentState().getCurrentTarget());
+				policy.addNeighbours(preoptimisation, schedule.getCurrentState().getCurrentTarget());
 			} catch (OutOfObservablesException e) 
 			{
 				if(policy.hasNoMoreObservables())
@@ -86,7 +87,8 @@ public class Scheduler
 					try {
 						// ---------- Change for Random here
 						//policy.waitForObservables();
-						policy.waitForObservablesRandom();
+						//policy.waitForObservablesRandom();
+						policy.waitForObservables(preoptimisation);
 					} catch (LastEntryException e1) {
 						break;
 					}

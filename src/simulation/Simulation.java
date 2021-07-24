@@ -59,9 +59,9 @@ public class Simulation extends java.util.Observable
 		frame.setVisible(true);
 	}
 
-	public void run() 
+	public void run(Properties props)
 	{	
-		scheduler.buildSchedule();
+		scheduler.buildSchedule(props.getProperty("preoptimisation"));
 		if(printResults)
 		{
 			results.setSchedule(scheduler.getSchedule());
