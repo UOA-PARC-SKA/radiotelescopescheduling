@@ -70,7 +70,7 @@ public class Scheduler
 
 		while (!schedule.isComplete())
 		{
-			System.out.println("hello");
+			System.out.println("running");
 			try {
 				policy.addNeighbours(preoptimisation, schedule.getCurrentState().getCurrentTarget());
 			} catch (OutOfObservablesException e)
