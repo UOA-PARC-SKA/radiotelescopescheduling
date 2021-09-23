@@ -50,6 +50,7 @@ public class SchedulingMain {
 	{
 		for (int i = 0; i < noRepeats; i++) 
 		{
+			System.out.println(i);
 			Simulation sim = new Simulation(props);
 			sim.run();
 			results.add(sim.getResults());

@@ -92,6 +92,8 @@ public class Scheduler
 			policy.nextMove();
 			observation.observe(schedule.getCurrentState());
 
+			// added this here in hope to fix the JVM error
+			System.gc();
 		}
 		schedule.setEndTime(Clock.getScheduleClock().getTime().getTimeInMillis());
 	}
