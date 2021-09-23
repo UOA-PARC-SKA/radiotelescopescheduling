@@ -43,7 +43,7 @@ public class SchedulingMain {
 	public static void runOnce() throws Exception
 	{
 		Simulation sim = new Simulation(props);
-		sim.run(props);
+		sim.run();
 	}
 
 	public static void runRepeats(int noRepeats) throws Exception
@@ -51,7 +51,7 @@ public class SchedulingMain {
 		for (int i = 0; i < noRepeats; i++) 
 		{
 			Simulation sim = new Simulation(props);
-			sim.run(props);
+			sim.run();
 			results.add(sim.getResults());
 		}
 		

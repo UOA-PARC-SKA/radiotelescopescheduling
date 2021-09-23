@@ -57,24 +57,21 @@ public class Scheduler
 		skyState.createAllBadThingsThatMove(telescope);
 		observation = new Observation(props, telescope, skyState);
 		
-		// policy = (DispatchPolicy) Class.forName(props.getProperty("policy_class")).newInstance();
 		policy = (DispatchPolicy) Class.forName(props.getProperty("policy_class")).newInstance();
 		policy.initialise(props, telescope, schedule, targets, skyState);
 	}
 
 
 	
-	public void buildSchedule(String preoptimisation)
+	public void buildSchedule() 
 	{	
 		makeInitialState();
 
 		while (!schedule.isComplete()) 
 		{
 			try {
-				// ---------- Change for Random here
-				//policy.addDynamicNeighbours(schedule.getCurrentState().getCurrentTarget());
-				//policy.addRandomNeighbours(schedule.getCurrentState().getCurrentTarget());
-				policy.addNeighbours(preoptimisation, schedule.getCurrentState().getCurrentTarget());
+				policy.addDynamicNeighbours(schedule.getCurrentState().getCurrentTarget());
+
 			} catch (OutOfObservablesException e) 
 			{
 				if(policy.hasNoMoreObservables())
@@ -85,10 +82,7 @@ public class Scheduler
 				else
 				{
 					try {
-						// ---------- Change for Random here
-						//policy.waitForObservables();
-						//policy.waitForObservablesRandom();
-						policy.waitForObservables(preoptimisation);
+						policy.waitForObservables();
 					} catch (LastEntryException e1) {
 						break;
 					}
