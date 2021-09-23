@@ -21,20 +21,20 @@ import util.exceptions.LastEntryException;
 import util.exceptions.OutOfObservablesException;
 
 
-public class Scheduler 
+public class Scheduler
 {
-	
-	
+
+
 	private Schedule schedule = null;
-	
+
 	private List<Target> targets;
 
 	private Observation observation = null;
 	private SkyState skyState = null;
 	private DispatchPolicy policy;
-	
-	 
-	
+
+
+
 	public Scheduler(Properties props, Telescope telescope) throws Exception
 	{
 		Satellite.setMinAngDist(Double.parseDouble(props.getProperty("satellite_closeness_limit")));
@@ -46,7 +46,7 @@ public class Scheduler
 		}else
 		{
 			TargetLocationReader fr = new TargetLocationReader();
-			targets = fr.getPulsarData(props.getProperty("dataset"));	
+			targets = fr.getPulsarData(props.getProperty("dataset"));
 			fr.addObservationData(targets, props.getProperty("observations_dataset"));
 		}
 
@@ -56,33 +56,34 @@ public class Scheduler
 		skyState = new SkyState(props.getProperty("norad_file_path"));
 		skyState.createAllBadThingsThatMove(telescope);
 		observation = new Observation(props, telescope, skyState);
-		
+
+		// policy = (DispatchPolicy) Class.forName(props.getProperty("policy_class")).newInstance();
 		policy = (DispatchPolicy) Class.forName(props.getProperty("policy_class")).newInstance();
 		policy.initialise(props, telescope, schedule, targets, skyState);
 	}
 
 
-	
-	public void buildSchedule() 
-	{	
+
+	public void buildSchedule(String preoptimisation)
+	{
 		makeInitialState();
 
-		while (!schedule.isComplete()) 
+		while (!schedule.isComplete())
 		{
+			System.out.println("hello");
 			try {
-				policy.addDynamicNeighbours(schedule.getCurrentState().getCurrentTarget());
-
-			} catch (OutOfObservablesException e) 
+				policy.addNeighbours(preoptimisation, schedule.getCurrentState().getCurrentTarget());
+			} catch (OutOfObservablesException e)
 			{
 				if(policy.hasNoMoreObservables())
 				{
-					schedule.setComplete(true); 
+					schedule.setComplete(true);
 					break;
 				}
 				else
 				{
 					try {
-						policy.waitForObservables();
+						policy.waitForObservables(preoptimisation);
 					} catch (LastEntryException e1) {
 						break;
 					}
@@ -94,12 +95,12 @@ public class Scheduler
 		}
 		schedule.setEndTime(Clock.getScheduleClock().getTime().getTimeInMillis());
 	}
-		
 
-	
-	private void makeInitialState() 
+
+
+	private void makeInitialState()
 	{
-		ObservationState firstState = new ObservationState(new Position(Telescope.PARKING_COORDINATES), 
+		ObservationState firstState = new ObservationState(new Position(Telescope.PARKING_COORDINATES),
 				Clock.getScheduleClock().getTime().getTimeInMillis(), null, null);
 		firstState.setStartingCoordinates(Telescope.PARKING_COORDINATES);
 		schedule.addState(firstState);
@@ -112,29 +113,29 @@ public class Scheduler
 	}
 
 
-	public void startSchedulingClock(String property) 
+	public void startSchedulingClock(String property)
 	{
 		Date startDate = Utilities.stringToDate(property);
 		Clock.getScheduleClock().startAt(startDate);
 		schedule.setStartTime(startDate.getTime());
 	}
-	
+
 	public Schedule getSchedule()
 	{
 		return schedule;
 	}
-	
+
 	public List<Target> getAllTargets()
 	{
 		return targets;
 	}
-	
+
 
 	public SkyState getSkyState() {
 		return skyState;
 	}
 
 
-	
+
 
 }
