@@ -72,6 +72,7 @@ public class SchedulingMain {
 			props.setProperty("observation_start", timeString);
 			if (batches > 1)
 			{
+				System.out.println(batches);
 				results = new ArrayList<>();
 				runRepeats(batches);
 			}
