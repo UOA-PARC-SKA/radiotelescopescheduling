@@ -18,6 +18,7 @@ import com.google.ortools.constraintsolver.RoutingModel;
 import com.google.ortools.constraintsolver.RoutingSearchParameters;
 import com.google.ortools.constraintsolver.main;
 
+import java.awt.*;
 import java.util.Arrays;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -89,10 +90,10 @@ public class TravellingSalesmanTimeWindowPolicy extends DispatchPolicy {
             //nameMatrix[i] = ((Target) tempConn.getOtherTarget(current)).getName();
             //----------
             TelescopeState possState = telescope.getStateForShortestSlew(p.getHorizonCoordinates(telescope.getLocation(), Clock.getScheduleClock().getTime()));
-//            distanceMatrix[i][0] = (long) possState.getSlewTime() + tempOb.getExpectedIntegrationTime();
-//            distanceMatrix[0][i] = (long) possState.getSlewTime() + tempOb.getExpectedIntegrationTime();
-            distanceMatrix[i][0] = (long) possState.getSlewTime();
-            distanceMatrix[0][i] = (long) possState.getSlewTime();
+            distanceMatrix[i][0] = (long) possState.getSlewTime() + tempOb.getExpectedIntegrationTime();
+            distanceMatrix[0][i] = (long) possState.getSlewTime() + tempOb.getExpectedIntegrationTime();
+//            distanceMatrix[i][0] = (long) possState.getSlewTime();
+//            distanceMatrix[0][i] = (long) possState.getSlewTime();
         }
 
         for (int i = 1; i < current.getNeighbours().size()+1; i++) {
@@ -108,9 +109,11 @@ public class TravellingSalesmanTimeWindowPolicy extends DispatchPolicy {
                     p1 = tempConn1.getOtherTarget(current);
                     p2 = tempConn2.getOtherTarget(current);
 
+                    Observable tempOb = ((Target) p2).findObservableByObservationTime();
+
                     long slewTime = Telescope.calculateShortestSlewTimeBetween(p1.getHorizonCoordinates(telescope.getLocation(), Clock.getScheduleClock().getTime()), p2.getHorizonCoordinates(telescope.getLocation(), Clock.getScheduleClock().getTime()));
 
-                    distanceMatrix[i][k] = slewTime;
+                    distanceMatrix[i][k] = slewTime + tempOb.getExpectedIntegrationTime();
                 }
             }
 
@@ -240,8 +243,14 @@ public class TravellingSalesmanTimeWindowPolicy extends DispatchPolicy {
 
         Connection next;
 
+        Connection conn;
 
-        Connection conn = current.getNeighbours().get(nextIndex-1);
+        if (nextIndex == 0) {
+            conn = current.getNeighbours().get(0);
+        } else {
+            conn = current.getNeighbours().get(nextIndex-1);
+        }
+
         Pointable p = conn.getOtherTarget(current);
         TelescopeState possState = telescope.getStateForShortestSlew(p.getHorizonCoordinates(telescope.getLocation(), Clock.getScheduleClock().getTime()));
         currentTelescopeState = possState;

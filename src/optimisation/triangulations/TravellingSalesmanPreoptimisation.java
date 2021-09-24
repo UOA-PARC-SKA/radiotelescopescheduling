@@ -68,7 +68,7 @@ public class TravellingSalesmanPreoptimisation extends NNOptimisation
 
         Collections.sort(sortedDist_tsp);
 
-        int neighboursCap = (Math.min(sortedDist_tsp.size(), 40));
+        int neighboursCap = (Math.min(sortedDist_tsp.size(), 30));
 
         for (int i = 0; i < neighboursCap; i++) {
             Connection c = new Connection(current, hm_tsp.get(sortedDist_tsp.get(i)), sortedDist_tsp.get(i));
