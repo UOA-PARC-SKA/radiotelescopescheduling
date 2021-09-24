@@ -1,7 +1,6 @@
 package optimisation;
 
 import observation.*;
-import optimisation.triangulations.RandomOptimisation;
 import simulation.Clock;
 import util.exceptions.OutOfObservablesException;
 

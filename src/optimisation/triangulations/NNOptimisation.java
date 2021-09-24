@@ -16,7 +16,7 @@ import util.exceptions.WrongTypeException;
 public abstract class NNOptimisation 
 {
 	protected HashMap<Double, Target> hm;
-	protected ArrayList<Double> sortedDist ;
+	protected ArrayList<Double> sortedDist;
 	
 	
 	// Pulsar1 has its neighbours sorted out. Pulsar2 is a candidate. Have to find the nearest existing 

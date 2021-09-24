@@ -165,7 +165,7 @@ public abstract class DispatchPolicy {
 	}
 
 	public void addTSPNeighbours(Pointable current) throws OutOfObservablesException {
-		tspo.createTSPLinks(observables, current, triangulationRatio, Clock.getScheduleClock(), telescope.getLocation());
+		tspo.createTSPLinks(observables, current, triangulationRatio, Clock.getScheduleClock(), telescope.getLocation(), telescope);
 	}
 
 	public void addNeighbours(String preoptimisation, Pointable current) throws OutOfObservablesException {
@@ -173,7 +173,7 @@ public abstract class DispatchPolicy {
 			ro.createRandomLinks(observables, current, triangulationRatio, Clock.getScheduleClock(), telescope.getLocation());
 		}
 		else if (preoptimisation.equals("tsp")) {
-			tspo.createTSPLinks(observables, current, triangulationRatio, Clock.getScheduleClock(), telescope.getLocation());
+			tspo.createTSPLinks(observables, current, triangulationRatio, Clock.getScheduleClock(), telescope.getLocation(), telescope);
 		}
 		else {
 			dno.createDynamicLinksByTriangles(observables, current, triangulationRatio, Clock.getScheduleClock(), telescope.getLocation());
