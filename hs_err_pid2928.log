@@ -773,23 +773,23 @@ Event: 611.878 GC heap after
 
 Deoptimization events (20 events):
 Event: 328.988 Thread 0x00000256067f34f0 Uncommon trap: trap_request=0xffffffbe fr.pc=0x0000025616e7da14 relative=0x00000000000017d4
-Event: 328.988 Thread 0x00000256067f34f0 Uncommon trap: reason=profile_predicate action=maybe_recompile pc=0x0000025616e7da14 method=optimisation.triangulations.RandomOptimisation.createRandomLinks(Ljava/util/List;Lobservation/Pointable;DLsimulation/Clock;Lastrometrics/Location;)V @ 26 c2
+Event: 328.988 Thread 0x00000256067f34f0 Uncommon trap: reason=profile_predicate action=maybe_recompile pc=0x0000025616e7da14 method=optimisation.triangulations.AllPulsarsAsNeighbours.createRandomLinks(Ljava/util/List;Lobservation/Pointable;DLsimulation/Clock;Lastrometrics/Location;)V @ 26 c2
 Event: 328.988 Thread 0x00000256067f34f0 DEOPT PACKING pc=0x0000025616e7da14 sp=0x00000068c5eff3a0
 Event: 328.988 Thread 0x00000256067f34f0 DEOPT UNPACKING pc=0x000002560f1fd72e sp=0x00000068c5eff368 mode 2
 Event: 329.784 Thread 0x00000256067f34f0 Uncommon trap: trap_request=0xffffffbe fr.pc=0x0000025616e7da14 relative=0x00000000000017d4
-Event: 329.784 Thread 0x00000256067f34f0 Uncommon trap: reason=profile_predicate action=maybe_recompile pc=0x0000025616e7da14 method=optimisation.triangulations.RandomOptimisation.createRandomLinks(Ljava/util/List;Lobservation/Pointable;DLsimulation/Clock;Lastrometrics/Location;)V @ 26 c2
+Event: 329.784 Thread 0x00000256067f34f0 Uncommon trap: reason=profile_predicate action=maybe_recompile pc=0x0000025616e7da14 method=optimisation.triangulations.AllPulsarsAsNeighbours.createRandomLinks(Ljava/util/List;Lobservation/Pointable;DLsimulation/Clock;Lastrometrics/Location;)V @ 26 c2
 Event: 329.784 Thread 0x00000256067f34f0 DEOPT PACKING pc=0x0000025616e7da14 sp=0x00000068c5eff3a0
 Event: 329.784 Thread 0x00000256067f34f0 DEOPT UNPACKING pc=0x000002560f1fd72e sp=0x00000068c5eff368 mode 2
 Event: 331.082 Thread 0x00000256067f34f0 Uncommon trap: trap_request=0xffffffbe fr.pc=0x0000025616e7da14 relative=0x00000000000017d4
-Event: 331.082 Thread 0x00000256067f34f0 Uncommon trap: reason=profile_predicate action=maybe_recompile pc=0x0000025616e7da14 method=optimisation.triangulations.RandomOptimisation.createRandomLinks(Ljava/util/List;Lobservation/Pointable;DLsimulation/Clock;Lastrometrics/Location;)V @ 26 c2
+Event: 331.082 Thread 0x00000256067f34f0 Uncommon trap: reason=profile_predicate action=maybe_recompile pc=0x0000025616e7da14 method=optimisation.triangulations.AllPulsarsAsNeighbours.createRandomLinks(Ljava/util/List;Lobservation/Pointable;DLsimulation/Clock;Lastrometrics/Location;)V @ 26 c2
 Event: 331.082 Thread 0x00000256067f34f0 DEOPT PACKING pc=0x0000025616e7da14 sp=0x00000068c5eff3a0
 Event: 331.082 Thread 0x00000256067f34f0 DEOPT UNPACKING pc=0x000002560f1fd72e sp=0x00000068c5eff368 mode 2
 Event: 335.280 Thread 0x00000256067f34f0 Uncommon trap: trap_request=0xffffffbe fr.pc=0x0000025616e8155c relative=0x000000000000181c
-Event: 335.280 Thread 0x00000256067f34f0 Uncommon trap: reason=profile_predicate action=maybe_recompile pc=0x0000025616e8155c method=optimisation.triangulations.RandomOptimisation.createRandomLinks(Ljava/util/List;Lobservation/Pointable;DLsimulation/Clock;Lastrometrics/Location;)V @ 175 c2
+Event: 335.280 Thread 0x00000256067f34f0 Uncommon trap: reason=profile_predicate action=maybe_recompile pc=0x0000025616e8155c method=optimisation.triangulations.AllPulsarsAsNeighbours.createRandomLinks(Ljava/util/List;Lobservation/Pointable;DLsimulation/Clock;Lastrometrics/Location;)V @ 175 c2
 Event: 335.280 Thread 0x00000256067f34f0 DEOPT PACKING pc=0x0000025616e8155c sp=0x00000068c5eff3a0
 Event: 335.280 Thread 0x00000256067f34f0 DEOPT UNPACKING pc=0x000002560f1fd72e sp=0x00000068c5eff370 mode 2
 Event: 336.436 Thread 0x00000256067f34f0 Uncommon trap: trap_request=0xffffffbe fr.pc=0x0000025616e8155c relative=0x000000000000181c
-Event: 336.436 Thread 0x00000256067f34f0 Uncommon trap: reason=profile_predicate action=maybe_recompile pc=0x0000025616e8155c method=optimisation.triangulations.RandomOptimisation.createRandomLinks(Ljava/util/List;Lobservation/Pointable;DLsimulation/Clock;Lastrometrics/Location;)V @ 175 c2
+Event: 336.436 Thread 0x00000256067f34f0 Uncommon trap: reason=profile_predicate action=maybe_recompile pc=0x0000025616e8155c method=optimisation.triangulations.AllPulsarsAsNeighbours.createRandomLinks(Ljava/util/List;Lobservation/Pointable;DLsimulation/Clock;Lastrometrics/Location;)V @ 175 c2
 Event: 336.436 Thread 0x00000256067f34f0 DEOPT PACKING pc=0x0000025616e8155c sp=0x00000068c5eff3a0
 Event: 336.436 Thread 0x00000256067f34f0 DEOPT UNPACKING pc=0x000002560f1fd72e sp=0x00000068c5eff370 mode 2
 

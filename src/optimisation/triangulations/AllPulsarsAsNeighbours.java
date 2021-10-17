@@ -14,17 +14,17 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
-public class RandomOptimisation extends NNOptimisation {
+public class AllPulsarsAsNeighbours extends NNOptimisation {
 
     ArrayList<Double> distList = new ArrayList<Double>();
 
-    public RandomOptimisation()
+    public AllPulsarsAsNeighbours()
     {
         hm = new HashMap<Double, Target>();
         sortedDist = new ArrayList<Double>();
     }
 
-    public void createRandomLinks(List<Target> targets, Pointable current, double ratio, Clock clock, Location loc) throws OutOfObservablesException {
+    public void createAllLinks(List<Target> targets, Pointable current, double ratio, Clock clock, Location loc) throws OutOfObservablesException {
 
         current.clearNeighbours();
         Target target;

@@ -65,23 +65,15 @@ public class TravellingSalesmanSlewTime extends DispatchPolicy {
         for (int i = 1; i < current.getNeighbours().size()+1; i++) {
             tempConn = current.getNeighbours().get(i-1);
             Pointable p = tempConn.getOtherTarget(current);
-            // ---------
+
             Observable tempOb = ((Target) p).findObservableByObservationTime();
             nameMatrix[i] = tempOb.getName();
-            //nameMatrix[i] = ((Target) tempConn.getOtherTarget(current)).getName();
-            //----------
+
             TelescopeState possState = telescope.getStateForShortestSlew(p.getHorizonCoordinates(telescope.getLocation(), Clock.getScheduleClock().getTime()));
             distanceMatrix[i][0] = (long) possState.getSlewTime() + tempOb.getExpectedIntegrationTime();
             distanceMatrix[0][i] = (long) possState.getSlewTime() + tempOb.getExpectedIntegrationTime();
 //            distanceMatrix[i][0] = (long) possState.getSlewTime();
 //            distanceMatrix[0][i] = (long) possState.getSlewTime();
-
-//            System.out.println("SLEW TIME:");
-//            System.out.println(possState.getSlewTime());
-//
-//            System.out.println("INTEGRATION TIME:");
-//            System.out.println(tempOb.getExpectedIntegrationTime());
-
         }
 
         for (int i = 1; i < current.getNeighbours().size()+1; i++) {
@@ -134,13 +126,8 @@ public class TravellingSalesmanSlewTime extends DispatchPolicy {
         Assignment solution = routing.solveWithParameters(searchParameters);
 
         long index = routing.start(0);
-//        System.out.println("current: " + manager.indexToNode(index));
-//        System.out.println("current index: " + index);
 
         index = solution.value(routing.nextVar(index));
-
-//        System.out.println("next: " + manager.indexToNode(index));
-//        System.out.println("next index: " + index);
 
         int nextIndex = manager.indexToNode(index);
 

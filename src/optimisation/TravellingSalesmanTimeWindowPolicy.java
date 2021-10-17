@@ -84,11 +84,8 @@ public class TravellingSalesmanTimeWindowPolicy extends DispatchPolicy {
         for (int i = 1; i < current.getNeighbours().size() + 1; i++) {
             tempConn = current.getNeighbours().get(i-1);
             Pointable p = tempConn.getOtherTarget(current);
-            // ---------
             Observable tempOb = ((Target) p).findObservableByObservationTime();
             nameMatrix[i] = tempOb.getName();
-            //nameMatrix[i] = ((Target) tempConn.getOtherTarget(current)).getName();
-            //----------
             TelescopeState possState = telescope.getStateForShortestSlew(p.getHorizonCoordinates(telescope.getLocation(), Clock.getScheduleClock().getTime()));
             distanceMatrix[i][0] = (long) possState.getSlewTime() + tempOb.getExpectedIntegrationTime();
             distanceMatrix[0][i] = (long) possState.getSlewTime() + tempOb.getExpectedIntegrationTime();
@@ -167,16 +164,12 @@ public class TravellingSalesmanTimeWindowPolicy extends DispatchPolicy {
 
         RoutingModel routing = new RoutingModel(manager);
 
-//        System.out.println("1111111111");
         print2D(distanceMatrix);
 
         final int transitCallbackIndex =
                 routing.registerTransitCallback((long fromIndex, long toIndex) -> {
                     int fromNode = manager.indexToNode(fromIndex);
                     int toNode = manager.indexToNode(toIndex);
-//                    if (scaledTimeWindows[toNode][1] < 0) {
-//                        return Long.MAX_VALUE;
-//                    }
                     return distanceMatrix[fromNode][toNode];
                 });
 
@@ -195,36 +188,26 @@ public class TravellingSalesmanTimeWindowPolicy extends DispatchPolicy {
 
         RoutingDimension timeDimension = routing.getMutableDimension("Time");
 
-//        System.out.println("2222222222");
         // Add time window constraints for each location except depot.
         for (int i = 1; i < scaledTimeWindows.length; ++i) {
             long index = manager.nodeToIndex(i);
-//            System.out.println(scaledTimeWindows[i][1]);
 //            long tempTimeWindow = Math.max(0, scaledTimeWindows[i][1]);
             long tempTimeWindow = Math.abs(scaledTimeWindows[i][1]);
 //            timeDimension.cumulVar(index).setRange(scaledTimeWindows[i][0], Math.abs(scaledTimeWindows[i][1]));
             timeDimension.cumulVar(index).setRange(scaledTimeWindows[i][0], tempTimeWindow);
-//            try {
-//                timeDimension.cumulVar(index).setRange(scaledTimeWindows[i][0], scaledTimeWindows[i][1]);
-//            } catch (Exception ex) {
-//                timeDimension.cumulVar(index).setRange(scaledTimeWindows[i][0], 208800);
-//            }
-            //System.out.println(scaledTimeWindows[i][1]);
         }
-//        System.out.println("333333333");
+
         // Add time window constraints for each vehicle start node.
         for (int i = 0; i < data.vehicleNumber; ++i) {
             long index = routing.start(i);
             timeDimension.cumulVar(index).setRange(scaledTimeWindows[0][0], scaledTimeWindows[0][1]);
         }
-//        System.out.println("4444444444444");
+
         // Instantiate route start and end times to produce feasible times.
         for (int i = 0; i < data.vehicleNumber; ++i) {
             routing.addVariableMinimizedByFinalizer(timeDimension.cumulVar(routing.start(i)));
             routing.addVariableMinimizedByFinalizer(timeDimension.cumulVar(routing.end(i)));
         }
-
-//        System.out.println("5555555555");
 
         RoutingSearchParameters searchParameters =
                 main.defaultRoutingSearchParameters()
@@ -232,13 +215,9 @@ public class TravellingSalesmanTimeWindowPolicy extends DispatchPolicy {
                         .setFirstSolutionStrategy(FirstSolutionStrategy.Value.PATH_CHEAPEST_ARC)
                         .build();
 
-//        System.out.println("55555.....5555555");
         Assignment solution = routing.solveWithParameters(searchParameters);
 
-//        System.out.println("6666666666666");
-
         long index = routing.start(0);
-//        System.out.println(index);
         index = solution.value(routing.nextVar(index));
         int nextIndex = manager.indexToNode(index);
 
