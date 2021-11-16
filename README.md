@@ -40,7 +40,7 @@ The main class that includes the main function which is needed to run the progra
 6) Run make in both norad and noras folders. Make for Windows can be installed using chocolatey
 7) Once the dll files have been generated, add them as libraries in the project.
 8) Change the outputdir address in the config file to be specific to your system.
-9) The program can be started by running the ProcessingMain main function.
+9) The program can be started by running the SchedulingMain main function.
 
 ## How to change the policy being used
 In the config file which is in the root directory, change the policy_class property to optimisation.<class name of the policy>, for eg: for policy with class name LargestSlewPolicy, change the policy_class property to optimisation.LargestSlewPolicy.
