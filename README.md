@@ -1,6 +1,7 @@
 # Telescope-Scheduling
 
 ---
+**NOTE: The stable branch is the branch that is to be used and contains the latest working code.**
 
 ## List of files and directories
 
