@@ -37,6 +37,14 @@ The main class that includes the main function which is needed to run the progra
 7) Once the dll files have been generated, add them as libraries in the project.
 8) The program can be started by running the ProcessingMain main function.
 
+## How to change the policy being used
+In the config file which is in the root directory, change the policy_class property to optimisation.<class name of the policy>, for eg: for policy with class name LargestSlewPolicy, change the policy_class property to optimisation.LargestSlewPolicy.
+
+## How to change the preoptimisation being used
+In the config file which is in the root directory, change the preoptimisation property to "all" for selecting the preoptimisation AllPulsarsAsNeighbours, change it to "tsp" for selecting the preoptimisation TravellingSalesmanPreoptimisation and any other string for that property would select the DynamicNNOptimisation.
+	
+**NOTE: To change the datasets being used, paths or any other configurations, update the config file present in the root directory.**
+	
 ## Make a new pre-optimisation
 1) In the optimisation/triangulations directory, make a class that extends NNOptimisation.
 
