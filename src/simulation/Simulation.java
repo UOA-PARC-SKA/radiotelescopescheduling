@@ -61,7 +61,7 @@ public class Simulation extends java.util.Observable
 
 	public void run() 
 	{	
-		scheduler.buildSchedule(props.getProperty("preoptimisation"));
+		scheduler.buildSchedule();
 		if(printResults)
 		{
 			results.setSchedule(scheduler.getSchedule());

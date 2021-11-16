@@ -50,8 +50,6 @@ public class SchedulingMain {
 	{
 		for (int i = 0; i < noRepeats; i++) 
 		{
-			System.out.println("BATCH NO:");
-			System.out.println(i);
 			Simulation sim = new Simulation(props);
 			sim.run();
 			results.add(sim.getResults());
@@ -74,7 +72,6 @@ public class SchedulingMain {
 			props.setProperty("observation_start", timeString);
 			if (batches > 1)
 			{
-				System.out.println(batches);
 				results = new ArrayList<>();
 				runRepeats(batches);
 			}

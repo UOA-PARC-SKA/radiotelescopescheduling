@@ -16,7 +16,7 @@ vpath %.class $(CLASS_PATH)
 #ext_NoradLink.o : ext_NoradLink.c NoradLinkImpl.cpp
 #	gcc -I"C:\Program Files\Java\jdk1.8.0_121\include" -I"C:\Program Files\Java\jdk1.8.0_121\include\win32" -c $< -o $@
 all: orbit_code core_code
-	g++ -Wl,--add-stdcall-alias -I"C:\Users\hp\.jdks\temurin-16.0.2\include" -I"C:\Users\hp\.jdks\temurin-16.0.2\include\win32" -Icore -Iorbit -shared orbit/*.o core/*.o -o norad.dll ext_NoradLink.c NoradLinkImpl.cpp
+	g++ -Wl,--add-stdcall-alias -I"C:\Program Files\Java\jdk1.8.0_121\include" -I"C:\Program Files\Java\jdk1.8.0_121\include\win32" -Icore -Iorbit -shared orbit/*.o core/*.o -o norad.dll ext_NoradLink.c NoradLinkImpl.cpp
 
 orbit_code:
 	$(MAKE) -C $(ORBIT_DIR)
