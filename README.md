@@ -10,6 +10,9 @@ Folder where the results are output. Each observation is output as a .csv file c
 ### data directory
 Contains the main three data set files name_ra_dec_minP_minS.txt which is the data set 1, dataset2.txt which is data set 2 and dataset3.txt which is data set 3. The dataset files contain the list of the pulsar samples used in the observation runs. The dataset also contains important information of the pulsar’s initial coordinates, scintillation timescale, and the estimated integration time during observation.
 
+### norad and novas directories
+These folders are for the norad and novas libraries used for getting satellite data which in used in the simulation. These folders were provided by the original repository as well. There are changes to be made to the files of these folders and have been described in the getting stared section.
+
 ### src/optimisation directory
 Contains all the scheduling policies. In the triangulations sub directory it contains all the pre-optimisation algorithms. The code for the main scheduler that schedules observations is in this directory as well.
 
@@ -35,7 +38,8 @@ The main class that includes the main function which is needed to run the progra
 5) In the novas folder, only delete the noval.dll file.
 6) Run make in both norad and noras folders. Make for Windows can be installed using chocolatey
 7) Once the dll files have been generated, add them as libraries in the project.
-8) The program can be started by running the ProcessingMain main function.
+8) Change the outputdir address in the config file to be specific to your system.
+9) The program can be started by running the ProcessingMain main function.
 
 ## How to change the policy being used
 In the config file which is in the root directory, change the policy_class property to optimisation.<class name of the policy>, for eg: for policy with class name LargestSlewPolicy, change the policy_class property to optimisation.LargestSlewPolicy.
