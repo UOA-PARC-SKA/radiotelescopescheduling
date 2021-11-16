@@ -1,6 +1,7 @@
 # Telescope-Scheduling
 
----
+**Original Repository (this code can also be found in the original branch): https://bitbucket.org/imoser/radiotelescopescheduling/src/master/** 
+
 **NOTE: The stable branch is the branch that is to be used and contains the latest working code.**
 
 ## List of files and directories
