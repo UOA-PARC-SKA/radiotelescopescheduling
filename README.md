@@ -33,7 +33,7 @@ The main class that includes the main function which is needed to run the progra
 	6) protobuf-java:3.17.3
 	7) ortools-java:8.2.9025
 2) Use the latest MinGW-w64 for the g++ compilers.
-3) Update the jdk paths used in the makefiles in the norad and noras folders according to your system. In the makefile in the norad folder, for the _all_ target, change the jdk paths to be specific to your system. Do the same for the _all_ target in the makefile of the navas folder as well.
+3) Update the jdk paths used in the makefiles in the norad and noras folders according to your system. In the makefile in the norad folder, for the _all_ target, change the jdk paths to be specific to your system. Add paths for the include and include/win32 directories of your jdk as already added in the makefiles. Do the same for the _all_ target in the makefile of the navas folder as well. Example for the paths: `C:\Users\hp\.jdks\temurin-16.0.2\include`, `C:\Users\hp\.jdks\temurin-16.0.2\include\win32`. The paths to these folders are to be updated in the makefiles.
 4) In the norad folder and it's sub folders, delete all .o and .dll files.
 5) In the novas folder, only delete the noval.dll file.
 6) Run make in both norad and noras folders. Make for Windows can be installed using chocolatey
