@@ -29,22 +29,29 @@ The main class that includes the main function which is needed to run the progra
 ## Getting Started
 ### Windows
 1) add the following libraries (these are the versions that were being used, latest versions of these libraries should work as well):
-	1) jna-platform:5.8.0
-	2) jna:5.8.0
-	3) bson:4.3.2
-	4) mongo-java-driver:3.12.8
-	5) mongodb-driver-core:4.2.3
-	6) protobuf-java:3.17.3
-	7) ortools-java:8.2.9025 (it seems that two files are needed, the ...java.jar and one for your platform e.g. win32-x86...)
-	8) GUROBI and necessary jar files for MipPolicy
-2) Use the latest MinGW-w64 for the g++ compilers.
-3) Update the jdk paths used in the makefiles in the norad and noras folders according to your system. In the makefile in the norad folder, for the _all_ target, change the jdk paths to be specific to your system. Add paths for the include and include/win32 directories of your jdk as already added in the makefiles. Do the same for the _all_ target in the makefile of the navas folder as well. Example for the paths: `C:\Users\hp\.jdks\temurin-16.0.2\include`, `C:\Users\hp\.jdks\temurin-16.0.2\include\win32`. The paths to these folders are to be updated in the makefiles.
-4) In the norad folder and it's sub folders, delete all .o and .dll files.
-5) In the novas folder, only delete the noval.dll file.
-6) Run make in both norad and noras folders. Make for Windows can be installed using chocolatey
-7) Once the dll files have been generated, add them as libraries in the project.
-8) Change the outputdir address in the config file to be specific to your system.
-9) The program can be started by running the SchedulingMain main function.
+    1) jna-platform:5.8.0 (net.java.dev.jna:jna-platform:5.8.0) 
+    2) jna:5.8.0 (net.java.dev.jna:jna:5.8.0)
+    3) bson:4.3.2 (org.mongodb:bson:4.3.2)
+    4) mongo-java-driver:3.12.8 (org.mongodb:mongo-java-driver:3.12.8 )
+    5) mongodb-driver-core:4.2.3 (org.mongodb:bson:4.3.2)
+    6) protobuf-java:3.17.3 (com.google.protobuf:protobuf-java:3.17.3)
+    7) ortools-java:8.2.9025  (com.google.ortools:ortools-java:jar:8.2.9025)
+2) Install Gurobi: 
+   1) Obtain a valid Gurobi license and download gurobi 9.1.
+   3) Add as a library using the .jar file in the lib folder.
+   4) Add the lib and bin folders as global libraries.
+3) Use the latest MinGW-w64 for the g++ compilers.
+4) Update the jdk paths used in the makefiles in the norad and noras folders according to your system. In the makefile in the norad folder, for the _all_ target, change the jdk paths to be specific to your system. Add paths for the include and include/win32 directories of your jdk as already added in the makefiles. Do the same for the _all_ target in the makefile of the navas folder as well. Example for the paths: `C:\Users\hp\.jdks\temurin-16.0.2\include`, `C:\Users\hp\.jdks\temurin-16.0.2\include\win32`. The paths to these folders are to be updated in the makefiles.
+5) In the norad folder and it's sub folders, delete all .o and .dll files.
+6) In the novas folder, only delete the noval.dll file.
+7) Run make in both norad and noras folders. Make for Windows can be installed using chocolatey
+8) Once the dll files have been generated, add them as libraries in the project.
+9) Change the outputdir address in the config file to be specific to your system.
+10) The program can be started by running the SchedulingMain main function.
+
+#### Common Instillation Issues
+1) The path is missing the r in 'results' to write the output. Fix: On Windows, change the '\' in the config file to a '/' as \r is an internal command - always use forward slash when giving reference to folders or directories.
+2) Error messages relating to Or-tools win32-x64. Fix: Also download 'ortools-win32-x86-64-8.2.9025.jar', add it into the project folder and as a library.
 
 ## How to change the policy being used
 In the config file which is in the root directory, change the policy_class property to optimisation.<class name of the policy>, for eg: for policy with class name LargestSlewPolicy, change the policy_class property to optimisation.LargestSlewPolicy.
