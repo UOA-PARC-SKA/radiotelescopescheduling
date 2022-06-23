@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/all_results/dataset1/dataset1.iml" filepath="$PROJECT_DIR$/all_results/dataset1/dataset1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/all_results/dataset2/dataset2.iml" filepath="$PROJECT_DIR$/all_results/dataset2/dataset2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/all_results/dataset3/dataset3.iml" filepath="$PROJECT_DIR$/all_results/dataset3/dataset3.iml" />
+      <module fileurl="file://$PROJECT_DIR$/radiotelescopescheduling.iml" filepath="$PROJECT_DIR$/radiotelescopescheduling.iml" />
+    </modules>
+  </component>
+</project>

@@ -28,20 +28,22 @@ The main class that includes the main function which is needed to run the progra
 
 ## Getting Started
 ### Windows
-1) add the following libraries (these are the versions that were being used, latest versions of these libraries should work as well):
-	1) jna-platform:5.8.0
-	2) jna:5.8.0
-	3) bson:4.3.2
-	4) mongo-java-driver:3.12.8
-	5) mongodb-driver-core:4.2.3
-	6) protobuf-java:3.17.3
-	7) ortools-java:8.2.9025
+1) add the following libraries use Maven (these are the versions that were being used, latest versions of these libraries should work as well):
+    1) jna-platform:5.8.0
+    2) jna:5.8.0
+    3) bson:4.3.2
+    4) mongo-java-driver:3.12.8
+    5) mongodb-driver-core:4.2.3
+    6) protobuf-java:3.17.3
+    7) ortools-java:8.2.9025
 2) Use the latest MinGW-w64 for the g++ compilers.
 3) Update the jdk paths used in the makefiles in the norad and noras folders according to your system. In the makefile in the norad folder, for the _all_ target, change the jdk paths to be specific to your system. Add paths for the include and include/win32 directories of your jdk as already added in the makefiles. Do the same for the _all_ target in the makefile of the navas folder as well. Example for the paths: `C:\Users\hp\.jdks\temurin-16.0.2\include`, `C:\Users\hp\.jdks\temurin-16.0.2\include\win32`. The paths to these folders are to be updated in the makefiles.
 4) In the norad folder and it's sub folders, delete all .o and .dll files.
 5) In the novas folder, only delete the noval.dll file.
 6) Run make in both norad and noras folders. Make for Windows can be installed using chocolatey
-7) Once the dll files have been generated, add them as libraries in the project.
+   (install chocolatey:	1.open command prompt. 2. run `@"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"` 3. run `choco install make`)
+
+7) Once the dll files have been generated, add them use 'java' as libraries in the project.
 8) Change the outputdir address in the config file to be specific to your system.
 9) The program can be started by running the SchedulingMain main function.
 

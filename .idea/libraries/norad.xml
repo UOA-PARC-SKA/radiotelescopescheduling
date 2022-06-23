@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="norad">
+    <CLASSES />
+    <JAVADOC />
+    <NATIVE>
+      <root url="file://$PROJECT_DIR$/norad" />
+    </NATIVE>
+    <SOURCES />
+  </library>
+</component>
