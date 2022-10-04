@@ -9,6 +9,9 @@ import javax.swing.JFrame;
 
 import evaluation.Results;
 import io.ResultFileWriter;
+import observation.Position;
+import observation.Target;
+import observation.live.ObservationState;
 import optimisation.Scheduler;
 import observation.Connection;
 import observation.Telescope;
@@ -23,6 +26,7 @@ public class Simulation extends java.util.Observable
 	private MainWindow frame;
 	private Clock clock;
 	private Telescope telescope;
+	private Telescope telescope1;
 	private Results results = null;
 	private boolean printResults = true;
 	private boolean showGui = true;
@@ -36,7 +40,8 @@ public class Simulation extends java.util.Observable
 	{
 		this.props = props;
 		telescope = Telescope.getTelescope(props.getProperty("telescope"));
-		scheduler = new Scheduler(props, telescope);
+		telescope1 = Telescope.getTelescope(props.getProperty("telescope"));
+		scheduler = new Scheduler(props, telescope, telescope1);
 		this.clock = Clock.getSimulationClock();
 		startSimulationClock(props.getProperty("observation_start"));
 		this.simulationIntervalInSeconds = Integer.parseInt(props.getProperty("simulation_speed"));
@@ -62,6 +67,25 @@ public class Simulation extends java.util.Observable
 	public void run() 
 	{	
 		scheduler.buildSchedule(props.getProperty("preoptimisation"));
+		List<ObservationState> states = scheduler.getSchedule().getScheduleStates();
+		List<ObservationState> states1 = scheduler.getSchedule1().getScheduleStates();
+
+
+		System.out.println("Telescope 1:");
+		for (ObservationState state : states){
+			if(state.getCurrentTarget() instanceof Position)
+				continue;
+			Target t = (Target) state.getCurrentTarget();
+			System.out.println(state.getCurrentObservable().getName());
+		}
+		System.out.println("Telescope 2:");
+		for (ObservationState state : states1){
+			if(state.getCurrentTarget() instanceof Position)
+				continue;
+			Target t = (Target) state.getCurrentTarget();
+			System.out.println(state.getCurrentObservable().getName());
+		}
+
 		if(printResults)
 		{
 			results.setSchedule(scheduler.getSchedule());

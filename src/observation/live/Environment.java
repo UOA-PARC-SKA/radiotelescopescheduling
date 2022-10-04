@@ -91,6 +91,7 @@ public class Environment
 	{
 		int currentScintTimescale = state.getCurrentObservable().getScintillationTimescale();
 		double nominalTime = state.getCurrentObservable().getRemainingIntegrationTime();
+		if(nominalTime==0) System.out.println(nominalTime);
 		int outcome = ObservationState.OBSERVATION_INTERRUPTION_NONE;
 	//	System.out.println("Nominal "+nominalTime + " remaining "+state.getCurrentObservable().getRemainingIntegrationTime());
 		int noTimescales = (int) Math.ceil( nominalTime/currentScintTimescale);

@@ -42,6 +42,9 @@ public class TravellingSalesmanPreoptimisation extends NNOptimisation
             if (current == target)
                 continue;
 
+            if(target.hasCompleteObservation())
+                continue;
+
             if(!isReadyForObservation(target, clock, loc))
                 continue;
 
@@ -60,7 +63,7 @@ public class TravellingSalesmanPreoptimisation extends NNOptimisation
 
         Collections.sort(sortedDist_tsp);
 
-        int neighboursCap = (Math.min(sortedDist_tsp.size(), 30));
+        int neighboursCap = (Math.min(sortedDist_tsp.size(), 10));
 
         for (int i = 0; i < neighboursCap; i++) {
             Connection c = new Connection(current, hm_tsp.get(sortedDist_tsp.get(i)), sortedDist_tsp.get(i));

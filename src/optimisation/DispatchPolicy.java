@@ -28,8 +28,11 @@ public abstract class DispatchPolicy {
 	//how long do we wait until checking for observables coming from behind the horizon
 	protected int waitTime;
 	protected Telescope telescope;
+	protected Telescope telescope1;
 	protected TelescopeState currentTelescopeState = null;
+	protected TelescopeState currentTelescopeState1 = null;
 	protected Schedule schedule;
+	protected Schedule schedule1;
 	private double triangulationRatio;
 	private DynamicNNOptimisation dno;
 	private AllPulsarsAsNeighbours allOb;
@@ -37,6 +40,16 @@ public abstract class DispatchPolicy {
 
 
 	public abstract Connection findNextPath(Pointable pointable);
+
+
+
+	public Connection[] findNext2Path(Pointable pointable, Pointable pointable1){
+		return null;
+	}
+
+	public void initialise(Properties props, Telescope scope, Telescope scope1, Schedule s, Schedule s1, List<Target> targets, SkyState skyState) {
+
+	}
 
 
 	public void initialise(Properties props, Telescope scope, Schedule s, List<Target> targets, SkyState skyState) {
@@ -125,6 +138,25 @@ public abstract class DispatchPolicy {
 
 	}
 
+	public int next2Move(){
+		Connection[] link = findNext2Path(schedule.getCurrentState().getCurrentTarget(), schedule1.getCurrentState().getCurrentTarget());
+		if(link==null){
+			schedule.setComplete(true);
+			schedule1.setComplete(true);
+			return -1;
+		}
+
+		Target newTarget = (Target) link[0].getOtherTarget(schedule.getCurrentState().getCurrentTarget());
+		Observable o = newTarget.findObservableByObservationTime();
+		schedule.addState(new ObservationState(newTarget, Clock.getScheduleClock().getTime(), link[0], o, telescope.getLocation()));
+
+		newTarget = (Target) link[1].getOtherTarget(schedule1.getCurrentState().getCurrentTarget());
+		o = newTarget.findObservableByObservationTime();
+		schedule1.addState(new ObservationState(newTarget, Clock.getScheduleClock().getTime(), link[1], o, telescope1.getLocation()));
+
+		return 0;
+	}
+
 
 	public void addDynamicNeighbours(Pointable current) throws OutOfObservablesException {
 		dno.createDynamicLinksByTriangles(observables, current, triangulationRatio, Clock.getScheduleClock(), telescope.getLocation());
@@ -147,6 +179,35 @@ public abstract class DispatchPolicy {
 		}
 		else {
 			dno.createDynamicLinksByTriangles(observables, current, triangulationRatio, Clock.getScheduleClock(), telescope.getLocation());
+		}
+	}
+
+
+
+	public void addNeighbours(String preoptimisation, Pointable current, Pointable current1) throws OutOfObservablesException {
+		if (preoptimisation.equals("all")) {
+			allOb.createAllLinks(observables, current, triangulationRatio, Clock.getScheduleClock(), telescope.getLocation());
+			current1.clearNeighbours();
+			for (Connection connection : current.getNeighbours()) {
+				current1.addNeighbour(connection);
+			}
+		}
+		else if (preoptimisation.equals("tsp")) {
+			tspo.createTSPLinks(observables, current, triangulationRatio, Clock.getScheduleClock(), telescope.getLocation(), telescope);
+			tspo.createTSPLinks(observables, current1, triangulationRatio, Clock.getScheduleClock(), telescope.getLocation(), telescope);
+		}
+		else {
+			dno.createDynamicLinksByTriangles(observables, current, triangulationRatio, Clock.getScheduleClock(), telescope.getLocation());
+			current1.clearNeighbours();
+			for (Connection connection : current.getNeighbours()) {
+				current1.addNeighbour(connection);
+			}
+		}
+
+		if(current.getNeighbours().size()<2){
+			schedule.setComplete(true);
+			schedule1.setComplete(true);
+			throw new OutOfObservablesException();
 		}
 	}
 }

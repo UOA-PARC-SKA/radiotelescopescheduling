@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>SchedulingMain</OriginalElement>
+  <nodes>
+    <node x="794.104662698413" y="245.0">observation.live.Observation</node>
+    <node x="214.4046626984129" y="245.0">optimisation.DispatchPolicy</node>
+    <node x="325.9046626984129" y="97.0">observation.Target</node>
+    <node x="656.1666666666667" y="97.0">observation.Pulsar</node>
+    <node x="511.1046626984129" y="245.0">io.TargetLocationReader</node>
+    <node x="469.11051587301597" y="0.0">observation.Observable</node>
+    <node x="341.1046626984129" y="383.0">optimisation.Scheduler</node>
+    <node x="0.4252480158730805" y="383.0">evaluation.Results</node>
+    <node x="81.38680555555567" y="97.0">observation.Schedule</node>
+    <node x="0.0" y="619.0">SchedulingMain</node>
+    <node x="85.66666666666669" y="501.0">simulation.Simulation</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="optimisation.Scheduler" target="observation.Schedule" relationship="CREATE">
+      <point x="-132.0" y="-34.0" />
+      <point x="357.6046626984129" y="363.0" />
+      <point x="192.9046626984129" y="363.0" />
+      <point x="192.9046626984129" y="215.0" />
+      <point x="154.38680555555567" y="215.0" />
+      <point x="0.0" y="34.0" />
+    </edge>
+    <edge source="optimisation.DispatchPolicy" target="observation.Schedule" relationship="TO_ONE">
+      <point x="-40.39999999999998" y="-34.0" />
+      <point x="275.0046626984129" y="185.0" />
+      <point x="216.95823412698434" y="185.0" />
+      <point x="62.57142857142867" y="34.0" />
+    </edge>
+    <edge source="simulation.Simulation" target="optimisation.Scheduler" relationship="TO_ONE">
+      <point x="91.20000000000016" y="-34.0" />
+      <point x="290.86666666666684" y="481.0" />
+      <point x="563.8546626984129" y="481.0" />
+      <point x="74.25" y="34.0" />
+    </edge>
+    <edge source="optimisation.DispatchPolicy" target="observation.Schedule" relationship="DEPENDENCY">
+      <point x="-80.80000000000007" y="-34.0" />
+      <point x="234.60466269841282" y="195.0" />
+      <point x="196.10109126984145" y="195.0" />
+      <point x="41.71428571428578" y="34.0" />
+    </edge>
+    <edge source="optimisation.DispatchPolicy" target="observation.Target" relationship="TO_MANY">
+      <point x="80.79999999999995" y="-34.0" />
+      <point x="396.20466269841285" y="225.0" />
+      <point x="410.5046626984129" y="225.0" />
+      <point x="-56.39999999999998" y="34.0" />
+    </edge>
+    <edge source="optimisation.Scheduler" target="optimisation.DispatchPolicy" relationship="DEPENDENCY">
+      <point x="-33.0" y="-34.0" />
+      <point x="456.6046626984129" y="333.0" />
+      <point x="365.9046626984129" y="333.0" />
+      <point x="50.5" y="34.0" />
+    </edge>
+    <edge source="simulation.Simulation" target="evaluation.Results" relationship="CREATE">
+      <point x="-45.599999999999795" y="-34.0" />
+      <point x="154.0666666666669" y="481.0" />
+      <point x="117.67524801587308" y="481.0" />
+      <point x="50.25" y="34.0" />
+    </edge>
+    <edge source="observation.live.Observation" target="observation.Observable" relationship="DEPENDENCY">
+      <point x="0.0" y="-34.0" />
+      <point x="985.104662698413" y="57.0" />
+      <point x="621.2771825396827" y="57.0" />
+      <point x="69.16666666666674" y="18.5" />
+    </edge>
+    <edge source="evaluation.Results" target="observation.Schedule" relationship="TO_ONE">
+      <point x="-33.5" y="-34.0" />
+      <point x="33.92524801587308" y="363.0" />
+      <point x="61.92524801587308" y="363.0" />
+      <point x="61.92524801587308" y="215.0" />
+      <point x="91.81537698412711" y="215.0" />
+      <point x="-62.571428571428555" y="34.0" />
+    </edge>
+    <edge source="optimisation.Scheduler" target="optimisation.DispatchPolicy" relationship="TO_ONE">
+      <point x="-66.0" y="-34.0" />
+      <point x="423.6046626984129" y="343.0" />
+      <point x="264.9046626984129" y="343.0" />
+      <point x="-50.5" y="34.0" />
+    </edge>
+    <edge source="observation.Target" target="observation.Observable" relationship="TO_MANY">
+      <point x="70.50000000000006" y="-34.0" />
+      <point x="-13.833333333333371" y="18.5" />
+    </edge>
+    <edge source="io.TargetLocationReader" target="observation.Pulsar" relationship="CREATE">
+      <point x="87.66666666666663" y="-34.0" />
+      <point x="730.2713293650795" y="225.0" />
+      <point x="738.6666666666667" y="225.0" />
+      <point x="0.0" y="34.0" />
+    </edge>
+    <edge source="optimisation.Scheduler" target="io.TargetLocationReader" relationship="CREATE">
+      <point x="66.0" y="-34.0" />
+      <point x="555.6046626984129" y="343.0" />
+      <point x="642.6046626984129" y="343.0" />
+      <point x="0.0" y="34.0" />
+    </edge>
+    <edge source="optimisation.Scheduler" target="observation.live.Observation" relationship="CREATE">
+      <point x="132.0" y="-34.0" />
+      <point x="621.6046626984129" y="363.0" />
+      <point x="1080.604662698413" y="363.0" />
+      <point x="95.5" y="34.0" />
+    </edge>
+    <edge source="observation.Pulsar" target="observation.Observable" relationship="REALIZATION">
+      <point x="0.0" y="-34.0" />
+      <point x="738.6666666666669" y="67.0" />
+      <point x="593.610515873016" y="67.0" />
+      <point x="41.5" y="18.5" />
+    </edge>
+    <edge source="SchedulingMain" target="evaluation.Results" relationship="TO_MANY">
+      <point x="0.0" y="-34.0" />
+      <point x="104.5" y="594.0" />
+      <point x="50.67524801587308" y="594.0" />
+      <point x="-16.75" y="34.0" />
+    </edge>
+    <edge source="optimisation.Scheduler" target="observation.Schedule" relationship="TO_ONE">
+      <point x="-99.0" y="-34.0" />
+      <point x="390.6046626984129" y="353.0" />
+      <point x="203.9046626984129" y="353.0" />
+      <point x="203.9046626984129" y="205.0" />
+      <point x="175.24394841269856" y="205.0" />
+      <point x="20.85714285714289" y="34.0" />
+    </edge>
+    <edge source="SchedulingMain" target="evaluation.Results" relationship="DEPENDENCY">
+      <point x="-69.66666666666669" y="-34.0" />
+      <point x="34.833333333333314" y="594.0" />
+      <point x="39.67524801587308" y="594.0" />
+      <point x="39.67524801587308" y="481.0" />
+      <point x="17.17524801587308" y="481.0" />
+      <point x="-50.25" y="34.0" />
+    </edge>
+    <edge source="optimisation.DispatchPolicy" target="observation.Observable" relationship="DEPENDENCY">
+      <point x="0.0" y="-34.0" />
+      <point x="315.4046626984129" y="67.0" />
+      <point x="482.94384920634934" y="67.0" />
+      <point x="-69.16666666666663" y="18.5" />
+    </edge>
+    <edge source="simulation.Simulation" target="observation.Schedule" relationship="DEPENDENCY">
+      <point x="1.1368683772161603E-13" y="-34.0" />
+      <point x="199.6666666666668" y="481.0" />
+      <point x="175.1752480158732" y="481.0" />
+      <point x="175.1752480158732" y="225.0" />
+      <point x="133.52966269841278" y="225.0" />
+      <point x="-20.85714285714289" y="34.0" />
+    </edge>
+    <edge source="evaluation.Results" target="observation.Schedule" relationship="DEPENDENCY">
+      <point x="33.5" y="-34.0" />
+      <point x="100.92524801587308" y="363.0" />
+      <point x="72.92524801587308" y="363.0" />
+      <point x="72.92524801587308" y="225.0" />
+      <point x="112.67251984127" y="225.0" />
+      <point x="-41.714285714285666" y="34.0" />
+    </edge>
+    <edge source="observation.Target" target="observation.Observable" relationship="DEPENDENCY">
+      <point x="-70.5" y="-34.0" />
+      <point x="396.4046626984129" y="77.0" />
+      <point x="510.61051587301597" y="77.0" />
+      <point x="-41.5" y="18.5" />
+    </edge>
+    <edge source="optimisation.DispatchPolicy" target="observation.Target" relationship="DEPENDENCY">
+      <point x="40.39999999999998" y="-34.0" />
+      <point x="355.80466269841287" y="225.0" />
+      <point x="354.10466269841294" y="225.0" />
+      <point x="-112.79999999999995" y="34.0" />
+    </edge>
+    <edge source="simulation.Simulation" target="evaluation.Results" relationship="TO_ONE">
+      <point x="-91.19999999999982" y="-34.0" />
+      <point x="108.46666666666687" y="481.0" />
+      <point x="84.17524801587308" y="481.0" />
+      <point x="16.75" y="34.0" />
+    </edge>
+    <edge source="optimisation.Scheduler" target="observation.Target" relationship="DEPENDENCY">
+      <point x="33.0" y="-34.0" />
+      <point x="522.6046626984129" y="363.0" />
+      <point x="500.6046626984129" y="363.0" />
+      <point x="500.6046626984129" y="225.0" />
+      <point x="523.3046626984128" y="225.0" />
+      <point x="56.39999999999992" y="34.0" />
+    </edge>
+    <edge source="io.TargetLocationReader" target="observation.Target" relationship="CREATE">
+      <point x="-87.66666666666663" y="-34.0" />
+      <point x="554.9379960317463" y="225.0" />
+      <point x="579.7046626984129" y="225.0" />
+      <point x="112.80000000000001" y="34.0" />
+    </edge>
+    <edge source="SchedulingMain" target="simulation.Simulation" relationship="CREATE">
+      <point x="69.66666666666669" y="-34.0" />
+      <point x="174.16666666666669" y="594.0" />
+      <point x="199.66666666666669" y="594.0" />
+      <point x="0.0" y="34.0" />
+    </edge>
+    <edge source="io.TargetLocationReader" target="observation.Observable" relationship="DEPENDENCY">
+      <point x="0.0" y="-34.0" />
+      <point x="642.6046626984129" y="77.0" />
+      <point x="565.9438492063493" y="77.0" />
+      <point x="13.833333333333371" y="18.5" />
+    </edge>
+    <edge source="optimisation.Scheduler" target="observation.live.Observation" relationship="TO_ONE">
+      <point x="99.0" y="-34.0" />
+      <point x="588.6046626984129" y="353.0" />
+      <point x="889.604662698413" y="353.0" />
+      <point x="-95.5" y="34.0" />
+    </edge>
+    <edge source="optimisation.Scheduler" target="observation.Target" relationship="TO_MANY">
+      <point x="0.0" y="-34.0" />
+      <point x="489.6046626984129" y="225.0" />
+      <point x="466.9046626984129" y="225.0" />
+      <point x="0.0" y="34.0" />
+    </edge>
+    <edge source="simulation.Simulation" target="optimisation.Scheduler" relationship="CREATE">
+      <point x="45.600000000000136" y="-34.0" />
+      <point x="245.26666666666682" y="471.0" />
+      <point x="415.3546626984129" y="471.0" />
+      <point x="-74.25" y="34.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic" zoom="0.9314954051796157" showDependencies="true" x="588.5" y="343.5" />
+  <SelectedNodes>
+    <node>SchedulingMain</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Constructors</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

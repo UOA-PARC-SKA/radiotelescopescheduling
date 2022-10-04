@@ -222,6 +222,7 @@ public class Target implements Pointable
 				toObserve = o;
 			}
 		}
+		//if(maxObs==0) return null;
 		return toObserve;
 	}
 }

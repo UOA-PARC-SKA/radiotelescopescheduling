@@ -16,5 +16,19 @@
     <orderEntry type="library" name="mongodb.driver.core" level="project" />
     <orderEntry type="library" name="norad" level="project" />
     <orderEntry type="library" name="novas" level="project" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://C:/gurobi952/win64/lib/gurobi.jar!/" />
+          <root url="file://C:/gurobi952/win64/lib" />
+        </CLASSES>
+        <JAVADOC />
+        <NATIVE>
+          <root url="file://C:/gurobi952/win64/lib" />
+        </NATIVE>
+        <SOURCES />
+        <jarDirectory url="file://C:/gurobi952/win64/lib" recursive="false" />
+      </library>
+    </orderEntry>
   </component>
 </module>
