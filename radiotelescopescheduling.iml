@@ -30,5 +30,6 @@
         <jarDirectory url="file://C:/gurobi952/win64/lib" recursive="false" />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="bin" level="project" />
   </component>
 </module>
