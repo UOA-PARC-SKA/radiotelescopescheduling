@@ -163,6 +163,7 @@ public class Scheduler
 		Date startDate = Utilities.stringToDate(property);
 		Clock.getScheduleClock().startAt(startDate);
 		schedule.setStartTime(startDate.getTime());
+		schedule1.setStartTime(startDate.getTime());
 	}
 
 	public Schedule getSchedule()

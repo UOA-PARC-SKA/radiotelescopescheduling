@@ -28,6 +28,7 @@ public class Simulation extends java.util.Observable
 	private Telescope telescope;
 	private Telescope telescope1;
 	private Results results = null;
+	private Results results1 = null;
 	private boolean printResults = true;
 	private boolean showGui = true;
 	private Properties props;
@@ -48,8 +49,11 @@ public class Simulation extends java.util.Observable
 		this.clock.setSimulationSpeed(simulationIntervalInSeconds);
 		this.printResults= Boolean.parseBoolean(props.getProperty("print_results"));
 		this.showGui= Boolean.parseBoolean(props.getProperty("show_gui"));
-		if(printResults)
+		if(printResults){
 			results = new Results();
+			results1 = new Results();
+		}
+
 	}
 
 	public void createAndShowGUI() 
@@ -89,6 +93,7 @@ public class Simulation extends java.util.Observable
 		if(printResults)
 		{
 			results.setSchedule(scheduler.getSchedule());
+			results1.setSchedule(scheduler.getSchedule1());
 			printResults(props);
 		}
 		
@@ -135,6 +140,10 @@ public class Simulation extends java.util.Observable
 		ResultFileWriter fw = new ResultFileWriter(results, props);
 		fw.writeResults(results);
 		fw.closeWriter();
+
+		ResultFileWriter fw1 = new ResultFileWriter(results1, props);
+		fw1.writeResults(results1);
+		fw1.closeWriter();
 	}
 
 	public Results getResults() {
