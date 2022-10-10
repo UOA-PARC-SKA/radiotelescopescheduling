@@ -126,7 +126,7 @@ public class Scheduler
 					}
 				}
 			}
-			if(policy.next2Move()==-1) break;
+			policy.next2Move();
 			observation.observe(schedule.getCurrentState());
 			observation1.observe(schedule1.getCurrentState());
 			// added this here in hope to fix the JVM error

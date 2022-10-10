@@ -1,9 +1,12 @@
 package optimisation;
 
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Properties;
 
+import astrometrics.Conversions;
+import astrometrics.HorizonCoordinates;
 import observation.Connection;
 import observation.Observable;
 import observation.Pointable;
@@ -18,6 +21,7 @@ import optimisation.triangulations.AllPulsarsAsNeighbours;
 //import optimisation.triangulations.TravellingSalesmanPreoptimisation;
 import optimisation.triangulations.TravellingSalesmanPreoptimisation;
 import simulation.Clock;
+import util.Utilities;
 import util.exceptions.LastEntryException;
 import util.exceptions.OutOfObservablesException;
 
@@ -83,6 +87,7 @@ public abstract class DispatchPolicy {
 	}
 
 	protected void waitForObservables(String preoptimisation) throws LastEntryException {
+		System.out.println("Now waiting!");
 		int waitingPeriod = 0;
 		remaining = getRemainingObservables();
 //			for (Target target : remaining) {
@@ -99,6 +104,7 @@ public abstract class DispatchPolicy {
 			Clock.getScheduleClock().advanceBy(waitTime);
 			waitingPeriod += waitTime;
 			try {
+				/*
 				if(preoptimisation.equals("all")) {
 					addAllNeighbours(schedule.getCurrentState().getCurrentTarget());
 				}
@@ -108,14 +114,21 @@ public abstract class DispatchPolicy {
 				else {
 					addDynamicNeighbours(schedule.getCurrentState().getCurrentTarget());
 				}
+
+				 */
+				addNeighbours(preoptimisation, schedule.getCurrentState().getCurrentTarget(), schedule1.getCurrentState().getCurrentTarget());
 				break;
 			} catch (OutOfObservablesException e1) {
 				continue;
 			}
 		}
 		telescope.applyWaitState();
+		telescope1.applyWaitState();
 		schedule.getCurrentState().addWaitTime(waitingPeriod);
 		schedule.getCurrentState().addComment("Waited for more observables to rise above the horizon.");
+		schedule1.getCurrentState().addWaitTime(waitingPeriod);
+		schedule1.getCurrentState().addComment("Waited for more observables to rise above the horizon.");
+
 	}
 
 	public List<Target> getRemainingObservables() {
@@ -194,7 +207,24 @@ public abstract class DispatchPolicy {
 		}
 		else if (preoptimisation.equals("tsp")) {
 			tspo.createTSPLinks(observables, current, triangulationRatio, Clock.getScheduleClock(), telescope.getLocation(), telescope);
-			tspo.createTSPLinks(observables, current1, triangulationRatio, Clock.getScheduleClock(), telescope.getLocation(), telescope);
+			//tspo.createTSPLinks(observables, current1, triangulationRatio, Clock.getScheduleClock(), telescope1.getLocation(), telescope1);
+
+			current1.clearNeighbours();
+			for(Connection conn : current.getNeighbours()){
+				Target target = (Target) conn.getOtherTarget(current);
+				HorizonCoordinates hc = target.getHorizonCoordinates(telescope1.getLocation(), Clock.getScheduleClock().getTime());
+				TelescopeState possState = telescope1.getStateForShortestSlew(hc);
+				GregorianCalendar setTime = Utilities.cloneDate(Clock.getScheduleClock().getTime());
+				int slewInSeconds = (int) possState.getSlewTime();
+				setTime.add(GregorianCalendar.SECOND, slewInSeconds);
+				long time = (long) Conversions.getTimeUntilObjectSetsInSeconds(telescope1.getLocation(), target, setTime);
+				Connection c = new Connection(current1, target, time);
+				current1.addNeighbour(c);
+
+			}
+
+
+
 		}
 		else {
 			dno.createDynamicLinksByTriangles(observables, current, triangulationRatio, Clock.getScheduleClock(), telescope.getLocation());
@@ -204,9 +234,10 @@ public abstract class DispatchPolicy {
 			}
 		}
 
+		System.out.println("number of current neighbours: "+current.getNeighbours().size());
+		System.out.println("number of current1 neighbours: "+current1.getNeighbours().size());
 		if(current.getNeighbours().size()<2){
-			schedule.setComplete(true);
-			schedule1.setComplete(true);
+
 			throw new OutOfObservablesException();
 		}
 	}

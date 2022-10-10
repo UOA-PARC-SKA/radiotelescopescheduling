@@ -36,11 +36,6 @@ public class MultiTelescopesMTSPPolicy extends DispatchPolicy {
         int m = 2;
         Connection[] next = new Connection[m];
 
-        if(pointable.getNeighbours().size()<2) {
-            System.out.println("is already complete");
-            next = null;
-            return next;
-        }
 
         double[][] cost = constructCostMatrix(points);
 

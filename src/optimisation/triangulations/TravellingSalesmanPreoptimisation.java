@@ -42,11 +42,14 @@ public class TravellingSalesmanPreoptimisation extends NNOptimisation
             if (current == target)
                 continue;
 
+            /*
             if(target.hasCompleteObservation())
                 continue;
 
             if(target.findObservableByObservationTime()==null)
                 continue;
+
+ */
 
             if(!isReadyForObservation(target, clock, loc))
                 continue;
