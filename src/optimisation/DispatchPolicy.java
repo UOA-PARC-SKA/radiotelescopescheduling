@@ -95,11 +95,13 @@ public abstract class DispatchPolicy {
 //				target.getEquatorialCoordinates().getDeclination());
 //			}
 
-		if (remaining.size() == 1) {
-			schedule.setComplete(true);
-			throw new LastEntryException();
-		}
 		while (true) {
+			if (remaining.size()<2) {
+				schedule.setComplete(true);
+				schedule1.setComplete(true);
+				throw new LastEntryException();
+			}
+
 			//advance clock until more observables emerge
 			Clock.getScheduleClock().advanceBy(waitTime);
 			waitingPeriod += waitTime;
@@ -151,14 +153,9 @@ public abstract class DispatchPolicy {
 
 	}
 
-	public int next2Move(){
-		Connection[] link = findNext2Path(schedule.getCurrentState().getCurrentTarget(), schedule1.getCurrentState().getCurrentTarget());
-		if(link==null){
-			schedule.setComplete(true);
-			schedule1.setComplete(true);
-			return -1;
-		}
+	public void next2Move(){
 
+		Connection[] link = findNext2Path(schedule.getCurrentState().getCurrentTarget(), schedule1.getCurrentState().getCurrentTarget());
 		Target newTarget = (Target) link[0].getOtherTarget(schedule.getCurrentState().getCurrentTarget());
 		Observable o = newTarget.findObservableByObservationTime();
 		schedule.addState(new ObservationState(newTarget, Clock.getScheduleClock().getTime(), link[0], o, telescope.getLocation()));
@@ -166,8 +163,13 @@ public abstract class DispatchPolicy {
 		newTarget = (Target) link[1].getOtherTarget(schedule1.getCurrentState().getCurrentTarget());
 		o = newTarget.findObservableByObservationTime();
 		schedule1.addState(new ObservationState(newTarget, Clock.getScheduleClock().getTime(), link[1], o, telescope1.getLocation()));
+	}
 
-		return 0;
+	public void addNeighbourtoScheduleState(Schedule schedule, Connection link){
+		Target newTarget = (Target) link.getOtherTarget(schedule.getCurrentState().getCurrentTarget());
+		Observable o = newTarget.findObservableByObservationTime();
+		schedule.addState(new ObservationState(newTarget, Clock.getScheduleClock().getTime(), link, o, telescope.getLocation()));
+
 	}
 
 
@@ -220,11 +222,7 @@ public abstract class DispatchPolicy {
 				long time = (long) Conversions.getTimeUntilObjectSetsInSeconds(telescope1.getLocation(), target, setTime);
 				Connection c = new Connection(current1, target, time);
 				current1.addNeighbour(c);
-
 			}
-
-
-
 		}
 		else {
 			dno.createDynamicLinksByTriangles(observables, current, triangulationRatio, Clock.getScheduleClock(), telescope.getLocation());
@@ -236,8 +234,7 @@ public abstract class DispatchPolicy {
 
 		System.out.println("number of current neighbours: "+current.getNeighbours().size());
 		System.out.println("number of current1 neighbours: "+current1.getNeighbours().size());
-		if(current.getNeighbours().size()<2){
-
+		if(current.getNeighbours().size()<1){
 			throw new OutOfObservablesException();
 		}
 	}

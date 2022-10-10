@@ -6,11 +6,7 @@ import java.util.Properties;
 
 import db.MongoDBReader;
 import io.TargetLocationReader;
-import observation.Connection;
-import observation.Position;
-import observation.Schedule;
-import observation.Target;
-import observation.Telescope;
+import observation.*;
 import observation.interference.Satellite;
 import observation.interference.SkyState;
 import observation.live.Observation;
@@ -108,6 +104,21 @@ public class Scheduler
 			System.out.println("running");
 			try {
 				policy.addNeighbours(preoptimisation, schedule.getCurrentState().getCurrentTarget(), schedule1.getCurrentState().getCurrentTarget());
+				if(schedule.getCurrentState().getCurrentTarget().getNeighbours().size()==1){
+					System.out.println("This is an only one neighbour case");
+
+					Connection link = schedule.getCurrentState().getCurrentTarget().getNeighbours().get(0);
+					if(link.getOtherTarget(schedule.getCurrentState().getCurrentTarget())==schedule1.getCurrentState().getCurrentTarget()) {
+						link = schedule1.getCurrentState().getCurrentTarget().getNeighbours().get(0);
+						policy.addNeighbourtoScheduleState(schedule1, link);
+						observation1.observe(schedule1.getCurrentState());
+					}
+					else{
+						policy.addNeighbourtoScheduleState(schedule, link);
+						observation.observe(schedule.getCurrentState());
+					}
+					continue;
+				}
 			} catch (OutOfObservablesException e)
 			{
 				if(policy.hasNoMoreObservables())
@@ -121,6 +132,21 @@ public class Scheduler
 				{
 					try {
 						policy.waitForObservables(preoptimisation);
+						if(schedule.getCurrentState().getCurrentTarget().getNeighbours().size()==1){
+							System.out.println("This is an only one neighbour case");
+
+							Connection link = schedule.getCurrentState().getCurrentTarget().getNeighbours().get(0);
+							if(link.getOtherTarget(schedule.getCurrentState().getCurrentTarget())==schedule1.getCurrentState().getCurrentTarget()) {
+								link = schedule1.getCurrentState().getCurrentTarget().getNeighbours().get(0);
+								policy.addNeighbourtoScheduleState(schedule1, link);
+								observation1.observe(schedule1.getCurrentState());
+							}
+							else{
+								policy.addNeighbourtoScheduleState(schedule, link);
+								observation.observe(schedule.getCurrentState());
+							}
+							continue;
+						}
 					} catch (LastEntryException e1) {
 						break;
 					}
