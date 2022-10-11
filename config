@@ -20,7 +20,7 @@ show_gui=false
 batch=1
 outputdir=G:/UOA_Courses/thesis/project/radiotelescopescheduling/results
 useDB=false
-preoptimisation=tsp
+preoptimisation=smallestDifference
 
 
 teles_num=2

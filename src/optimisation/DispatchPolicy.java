@@ -19,6 +19,7 @@ import observation.live.ObservationState;
 import optimisation.triangulations.DynamicNNOptimisation;
 import optimisation.triangulations.AllPulsarsAsNeighbours;
 //import optimisation.triangulations.TravellingSalesmanPreoptimisation;
+import optimisation.triangulations.SmallestIntegrationTimeDifference;
 import optimisation.triangulations.TravellingSalesmanPreoptimisation;
 import simulation.Clock;
 import util.Utilities;
@@ -41,6 +42,7 @@ public abstract class DispatchPolicy {
 	private DynamicNNOptimisation dno;
 	private AllPulsarsAsNeighbours allOb;
 	private TravellingSalesmanPreoptimisation tspo;
+	protected SmallestIntegrationTimeDifference stdo;
 
 
 	public abstract Connection findNextPath(Pointable pointable);
@@ -208,9 +210,9 @@ public abstract class DispatchPolicy {
 			}
 		}
 		else if (preoptimisation.equals("tsp")) {
-			tspo.createTSPLinks(observables, current, triangulationRatio, Clock.getScheduleClock(), telescope.getLocation(), telescope);
+			tspo.createTSPLinks(observables, current, current1, triangulationRatio, Clock.getScheduleClock(), telescope.getLocation(), telescope, telescope1);
 			//tspo.createTSPLinks(observables, current1, triangulationRatio, Clock.getScheduleClock(), telescope1.getLocation(), telescope1);
-
+/*
 			current1.clearNeighbours();
 			for(Connection conn : current.getNeighbours()){
 				Target target = (Target) conn.getOtherTarget(current);
@@ -223,6 +225,10 @@ public abstract class DispatchPolicy {
 				Connection c = new Connection(current1, target, time);
 				current1.addNeighbour(c);
 			}
+ */
+		}
+		else if(preoptimisation.equals("smallestDifference")){
+			stdo.createLinks(observables, current, current1, triangulationRatio, Clock.getScheduleClock(), telescope.getLocation(), telescope, telescope1);
 		}
 		else {
 			dno.createDynamicLinksByTriangles(observables, current, triangulationRatio, Clock.getScheduleClock(), telescope.getLocation());

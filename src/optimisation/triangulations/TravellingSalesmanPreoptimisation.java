@@ -42,14 +42,55 @@ public class TravellingSalesmanPreoptimisation extends NNOptimisation
             if (current == target)
                 continue;
 
-            /*
-            if(target.hasCompleteObservation())
+            if(!isReadyForObservation(target, clock, loc))
                 continue;
 
-            if(target.findObservableByObservationTime()==null)
+            HorizonCoordinates hc = target.getHorizonCoordinates(telescope.getLocation(), Clock.getScheduleClock().getTime());
+            TelescopeState possState = telescope.getStateForShortestSlew(hc);
+            GregorianCalendar setTime = Utilities.cloneDate(Clock.getScheduleClock().getTime());
+            int slewInSeconds = (int) possState.getSlewTime();
+            setTime.add(GregorianCalendar.SECOND, slewInSeconds);
+            long time = (long) Conversions.getTimeUntilObjectSetsInSeconds(telescope.getLocation(), target, setTime);
+            hm_tsp.put(time, target);
+            sortedDist_tsp.add(time);
+        }
+
+        if(sortedDist_tsp.isEmpty())
+            throw new OutOfObservablesException();
+
+        Collections.sort(sortedDist_tsp);
+
+        int neighboursCap = (Math.min(sortedDist_tsp.size(), 10));
+
+        for (int i = 0; i < neighboursCap; i++) {
+            Connection c = new Connection(current, hm_tsp.get(sortedDist_tsp.get(i)), sortedDist_tsp.get(i));
+            current.addNeighbour(c);
+        }
+    }
+
+
+    public void createTSPLinks(List<Target> targets, Pointable current, Pointable current1, double ratio, Clock clock, Location loc, Telescope telescope, Telescope telescope1) throws OutOfObservablesException
+    {
+        HashMap<Long, Target> hm_tsp = new HashMap<Long, Target>();
+        ArrayList<Long> sortedDist_tsp = new ArrayList<Long>();
+
+        current.clearNeighbours();
+        current1.clearNeighbours();
+        Target target;
+
+        sortedDist.clear();
+        hm.clear();
+
+        double maxSettingTime = 0;
+
+        for (int i = 0; i < targets.size(); i++) {
+            target = targets.get(i);
+
+            if (current == target)
                 continue;
 
- */
+            if (current1 == target)
+                continue;
 
             if(!isReadyForObservation(target, clock, loc))
                 continue;
@@ -74,6 +115,17 @@ public class TravellingSalesmanPreoptimisation extends NNOptimisation
         for (int i = 0; i < neighboursCap; i++) {
             Connection c = new Connection(current, hm_tsp.get(sortedDist_tsp.get(i)), sortedDist_tsp.get(i));
             current.addNeighbour(c);
+
+            target = hm_tsp.get(sortedDist_tsp.get(i));
+            HorizonCoordinates hc = target.getHorizonCoordinates(telescope1.getLocation(), Clock.getScheduleClock().getTime());
+            TelescopeState possState = telescope1.getStateForShortestSlew(hc);
+            GregorianCalendar setTime = Utilities.cloneDate(Clock.getScheduleClock().getTime());
+            int slewInSeconds = (int) possState.getSlewTime();
+            setTime.add(GregorianCalendar.SECOND, slewInSeconds);
+            long time = (long) Conversions.getTimeUntilObjectSetsInSeconds(telescope1.getLocation(), target, setTime);
+            Connection c1 = new Connection(current1, target, time);
+            current1.addNeighbour(c1);
+
         }
     }
 }

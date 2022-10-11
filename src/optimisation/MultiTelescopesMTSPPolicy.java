@@ -3,6 +3,7 @@ package optimisation;
 import astrometrics.HorizonCoordinates;
 import observation.*;
 import observation.interference.SkyState;
+import optimisation.triangulations.SmallestIntegrationTimeDifference;
 import simulation.Clock;
 
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ public class MultiTelescopesMTSPPolicy extends DispatchPolicy {
         super.initialise(props, scope, s, targets, skyState);
         telescope1 = scope1;
         schedule1 = s1;
+        stdo = new SmallestIntegrationTimeDifference();
     }
 
     @Override
