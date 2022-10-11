@@ -45,7 +45,10 @@ The main class that includes the main function which is needed to run the progra
 
 7) Once the dll files have been generated, add them use 'java' as libraries in the project.
 8) Change the outputdir address in the config file to be specific to your system.
-9) The program can be started by running the SchedulingMain main function.
+9) Add GUROBI library
+    1) Download and install GUROBI Optimizer, set the license.
+    2) Add `gurobi_root/win64/lib` and `gurobi_root/win64/bin` as project library 
+10) The program can be started by running the SchedulingMain main function.
 
 ## How to change the policy being used
 In the config file which is in the root directory, change the policy_class property to optimisation.<class name of the policy>, for eg: for policy with class name LargestSlewPolicy, change the policy_class property to optimisation.LargestSlewPolicy.
