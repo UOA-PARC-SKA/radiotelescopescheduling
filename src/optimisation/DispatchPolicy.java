@@ -44,6 +44,8 @@ public abstract class DispatchPolicy {
 	private TravellingSalesmanPreoptimisation tspo;
 	protected SmallestIntegrationTimeDifference stdo;
 
+	public long offset = 0;
+
 
 	public abstract Connection findNextPath(Pointable pointable);
 
@@ -157,20 +159,31 @@ public abstract class DispatchPolicy {
 
 	public void next2Move(){
 
+		if(schedule.getScheduleStates().size()==1 || schedule1.getScheduleStates().size()==1)
+			offset = 0;
+		else{
+			ObservationState previous = schedule.getScheduleStates().get(schedule.getScheduleStates().size()-1);
+			ObservationState previous1 = schedule1.getScheduleStates().get(schedule1.getScheduleStates().size()-1);
+			long duration = previous.getEndTime()-previous.getStartTime();
+			long duration1 = previous1.getEndTime()-previous1.getStartTime();
+			offset += duration>duration1 ? duration1 : duration;
+		}
+
+
 		Connection[] link = findNext2Path(schedule.getCurrentState().getCurrentTarget(), schedule1.getCurrentState().getCurrentTarget());
 		Target newTarget = (Target) link[0].getOtherTarget(schedule.getCurrentState().getCurrentTarget());
 		Observable o = newTarget.findObservableByObservationTime();
-		schedule.addState(new ObservationState(newTarget, Clock.getScheduleClock().getTime(), link[0], o, telescope.getLocation()));
+		schedule.addState(new ObservationState(newTarget, Clock.getScheduleClock().getTime(), link[0], o, telescope.getLocation(), offset));
 
 		newTarget = (Target) link[1].getOtherTarget(schedule1.getCurrentState().getCurrentTarget());
 		o = newTarget.findObservableByObservationTime();
-		schedule1.addState(new ObservationState(newTarget, Clock.getScheduleClock().getTime(), link[1], o, telescope1.getLocation()));
+		schedule1.addState(new ObservationState(newTarget, Clock.getScheduleClock().getTime(), link[1], o, telescope1.getLocation(), offset));
 	}
 
 	public void addNeighbourtoScheduleState(Schedule schedule, Connection link){
 		Target newTarget = (Target) link.getOtherTarget(schedule.getCurrentState().getCurrentTarget());
 		Observable o = newTarget.findObservableByObservationTime();
-		schedule.addState(new ObservationState(newTarget, Clock.getScheduleClock().getTime(), link, o, telescope.getLocation()));
+		schedule.addState(new ObservationState(newTarget, Clock.getScheduleClock().getTime(), link, o, telescope.getLocation(), offset));
 
 	}
 

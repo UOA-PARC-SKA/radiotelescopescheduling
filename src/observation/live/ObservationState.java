@@ -58,6 +58,16 @@ public class ObservationState
 		currentObservable.incrementAttempts();
 		howManiethAttempt = o.getAttempts();
 	}
+
+	public ObservationState (Pointable target, GregorianCalendar gc, Connection link, Observable o, Location loc, long offset)
+	{
+		this(target, gc.getTimeInMillis()-offset, null, null);
+		startHC = target.getHorizonCoordinates(loc, gc);
+		this.linkToHere = link;
+		currentObservable = o;
+		currentObservable.incrementAttempts();
+		howManiethAttempt = o.getAttempts();
+	}
 	
 	public ObservationState(Pointable position, long timeInMillis, Object object, Object object2) {
 		currentTarget = position;
