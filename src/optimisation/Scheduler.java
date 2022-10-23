@@ -12,6 +12,7 @@ import observation.interference.SkyState;
 import observation.live.Observation;
 import observation.live.ObservationState;
 import simulation.Clock;
+import simulation.Simulation;
 import util.Utilities;
 import util.exceptions.LastEntryException;
 import util.exceptions.OutOfObservablesException;
@@ -21,18 +22,17 @@ public class Scheduler
 {
 
 
-	private Schedule schedule = null;
-	private Schedule schedule1 = null;
+	private Schedule[] schedules = null;
 
 	private List<Target> targets;
 
-	private Observation observation = null;
-	private Observation observation1 = null;
+	private Observation[] observations = null;
+
 	private SkyState skyState = null;
 	private DispatchPolicy policy;
 
 
-	public Scheduler(Properties props, Telescope telescope, Telescope telescope1) throws Exception
+	public Scheduler(Properties props, Telescope[] telescopes) throws Exception
 	{
 		Satellite.setMinAngDist(Double.parseDouble(props.getProperty("satellite_closeness_limit")));
 		boolean useDB = Boolean.parseBoolean(props.getProperty("useDB"));
@@ -47,25 +47,28 @@ public class Scheduler
 			fr.addObservationData(targets, props.getProperty("observations_dataset"));
 		}
 
-
-		schedule = new Schedule();
-		schedule1 = new Schedule();
+		schedules = new Schedule[Simulation.NUMTELESCOPES];
 		startSchedulingClock(props.getProperty("observation_start"));
 		skyState = new SkyState(props.getProperty("norad_file_path"));
-		skyState.createAllBadThingsThatMove(telescope);
-		observation = new Observation(props, telescope, skyState);
-		observation1 = new Observation(props, telescope1, skyState);
+		skyState.createAllBadThingsThatMove(telescopes[0]);
+		observations = new Observation[Simulation.NUMTELESCOPES];
+
+		for(int i=0; i< Simulation.NUMTELESCOPES; i++){
+			schedules[i] = new Schedule();
+			observations[i] = new Observation(props, telescopes[i], skyState);
+
+		}
 		// policy = (DispatchPolicy) Class.forName(props.getProperty("policy_class")).newInstance();
 		policy = (DispatchPolicy) Class.forName(props.getProperty("policy_class")).newInstance();
-		if(policy instanceof MultiTelescopesMTSPPolicy)
-			policy.initialise(props, telescope, telescope1, schedule, schedule1, targets, skyState);
-		else
-			policy.initialise(props, telescope, schedule, targets, skyState);
+//		if(policy instanceof MultiTelescopesMTSPPolicy)
+		policy.initialise(props, telescopes, schedules, targets, skyState);
+//		else
+//			policy.initialise(props, telescope, schedule, targets, skyState);
 	}
 
 
 
-
+/*
 	public Scheduler(Properties props, Telescope telescope) throws Exception
 	{
 		Satellite.setMinAngDist(Double.parseDouble(props.getProperty("satellite_closeness_limit")));
@@ -92,6 +95,7 @@ public class Scheduler
 		policy = (DispatchPolicy) Class.forName(props.getProperty("policy_class")).newInstance();
 		policy.initialise(props, telescope, schedule, targets, skyState);
 	}
+ */
 
 
 
@@ -99,11 +103,17 @@ public class Scheduler
 	{
 		makeInitialState();
 
-		while (!schedule.isComplete() || !schedule1.isComplete())
+		boolean complete = false;
+		while (!complete)
 		{
 			System.out.println("running");
 			try {
-				policy.addNeighbours(preoptimisation, schedule.getCurrentState().getCurrentTarget(), schedule1.getCurrentState().getCurrentTarget());
+				Pointable[] pointables = new Pointable[Simulation.NUMTELESCOPES];
+				for(int i=0; i< Simulation.NUMTELESCOPES; i++)
+					pointables[i] = schedules[i].getCurrentState().getCurrentTarget();
+				policy.addNeighbours(preoptimisation, pointables);
+
+				/*
 				if(schedule.getCurrentState().getCurrentTarget().getNeighbours().size()==1){
 					System.out.println("This is an only one neighbour case");
 
@@ -119,6 +129,8 @@ public class Scheduler
 					}
 					continue;
 				}
+				*/
+
 			} catch (OutOfObservablesException e)
 			{
 				if(policy.hasNoMoreObservables())
@@ -132,6 +144,7 @@ public class Scheduler
 				{
 					try {
 						policy.waitForObservables(preoptimisation);
+						/*
 						if(schedule.getCurrentState().getCurrentTarget().getNeighbours().size()==1){
 							System.out.println("This is an only one neighbour case");
 
@@ -147,34 +160,34 @@ public class Scheduler
 							}
 							continue;
 						}
+						 */
+
 					} catch (LastEntryException e1) {
 						break;
 					}
 				}
 			}
-			policy.next2Move();
-			observation.observe(schedule.getCurrentState());
-			observation1.observe(schedule1.getCurrentState());
+			policy.nextMoves();
+			for(int i=0; i< Simulation.NUMTELESCOPES; i++)
+				observations[i].observe(schedules[i].getCurrentState());
+
 			// added this here in hope to fix the JVM error
 			System.gc();
 		}
-		schedule.setEndTime(Clock.getScheduleClock().getTime().getTimeInMillis());
-		schedule1.setEndTime(Clock.getScheduleClock().getTime().getTimeInMillis());
+		for(int i=0; i< Simulation.NUMTELESCOPES; i++)
+			schedules[i].setEndTime(Clock.getScheduleClock().getTime().getTimeInMillis());
 	}
 
 
 
 	private void makeInitialState()
 	{
-		ObservationState firstState = new ObservationState(new Position(Telescope.PARKING_COORDINATES),
-				Clock.getScheduleClock().getTime().getTimeInMillis(), null, null);
-		firstState.setStartingCoordinates(Telescope.PARKING_COORDINATES);
-        ObservationState firstState1 = new ObservationState(new Position(Telescope.PARKING_COORDINATES),
-                Clock.getScheduleClock().getTime().getTimeInMillis(), null, null);
-        firstState1.setStartingCoordinates(Telescope.PARKING_COORDINATES);
-
-		schedule.addState(firstState);
-		schedule1.addState(firstState1);
+		for(int i=0; i< Simulation.NUMTELESCOPES; i++) {
+			ObservationState firstState = new ObservationState(new Position(Telescope.PARKING_COORDINATES),
+					Clock.getScheduleClock().getTime().getTimeInMillis(), null, null);
+			firstState.setStartingCoordinates(Telescope.PARKING_COORDINATES);
+			schedules[i].addState(firstState);
+		}
 	}
 
 
@@ -192,15 +205,11 @@ public class Scheduler
 		schedule1.setStartTime(startDate.getTime());
 	}
 
-	public Schedule getSchedule()
+	public Schedule getSchedule(int i)
 	{
-		return schedule;
+		return schedules[i];
 	}
 
-	public Schedule getSchedule1()
-	{
-		return schedule1;
-	}
 
 	public List<Target> getAllTargets()
 	{

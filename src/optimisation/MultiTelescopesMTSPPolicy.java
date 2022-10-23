@@ -3,7 +3,10 @@ package optimisation;
 import astrometrics.HorizonCoordinates;
 import observation.*;
 import observation.interference.SkyState;
+import optimisation.triangulations.AllPulsarsAsNeighbours;
+import optimisation.triangulations.DynamicNNOptimisation;
 import optimisation.triangulations.SmallestIntegrationTimeDifference;
+import optimisation.triangulations.TravellingSalesmanPreoptimisation;
 import simulation.Clock;
 
 import java.util.ArrayList;
@@ -14,13 +17,6 @@ import gurobi.*;
 
 public class MultiTelescopesMTSPPolicy extends DispatchPolicy {
 
-    @Override
-    public void initialise(Properties props, Telescope scope, Telescope scope1, Schedule s, Schedule s1, List<Target> targets, SkyState skyState) {
-        super.initialise(props, scope, s, targets, skyState);
-        telescope1 = scope1;
-        schedule1 = s1;
-        stdo = new SmallestIntegrationTimeDifference();
-    }
 
     @Override
     public Connection[] findNext2Path(Pointable pointable, Pointable pointable1) {

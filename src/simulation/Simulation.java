@@ -25,10 +25,10 @@ public class Simulation extends java.util.Observable
 	private Scheduler scheduler;
 	private MainWindow frame;
 	private Clock clock;
+	public static int NUMTELESCOPES;
 	private Telescope telescope;
-	private Telescope telescope1;
-	private Results results = null;
-	private Results results1 = null;
+	private Telescope[] telescopes;
+	private Results[] results;
 	private boolean printResults = true;
 	private boolean showGui = true;
 	private Properties props;
@@ -40,22 +40,26 @@ public class Simulation extends java.util.Observable
 	public Simulation (Properties props) throws Exception
 	{
 		this.props = props;
-		telescope = Telescope.getTelescope(props.getProperty("telescope"));
-		telescope1 = Telescope.getTelescope(props.getProperty("telescope"));
-		scheduler = new Scheduler(props, telescope, telescope1);
+		NUMTELESCOPES = Integer.parseInt(props.getProperty("teles_num"));
+		telescopes = new Telescope[NUMTELESCOPES];
+		for(int i=0; i<NUMTELESCOPES; i++)
+			telescopes[i] = Telescope.getTelescope(props.getProperty("telescope"));
+
+		scheduler = new Scheduler(props, telescopes);
 		this.clock = Clock.getSimulationClock();
 		startSimulationClock(props.getProperty("observation_start"));
 		this.simulationIntervalInSeconds = Integer.parseInt(props.getProperty("simulation_speed"));
 		this.clock.setSimulationSpeed(simulationIntervalInSeconds);
 		this.printResults= Boolean.parseBoolean(props.getProperty("print_results"));
-		this.showGui= Boolean.parseBoolean(props.getProperty("show_gui"));
+		this.showGui= false;//Boolean.parseBoolean(props.getProperty("show_gui"));
 		if(printResults){
-			results = new Results();
-			results1 = new Results();
+			results = new Results[NUMTELESCOPES];
+			for(int i=0; i<NUMTELESCOPES; i++)
+				results[i] = new Results();
 		}
 
 	}
-
+/*
 	public void createAndShowGUI() 
 	{
 		//Create and set up the window.
@@ -68,43 +72,32 @@ public class Simulation extends java.util.Observable
 		frame.setVisible(true);
 	}
 
+ */
+
 	public void run() 
 	{	
 		scheduler.buildSchedule(props.getProperty("preoptimisation"));
-		List<ObservationState> states = scheduler.getSchedule().getScheduleStates();
-		List<ObservationState> states1 = scheduler.getSchedule1().getScheduleStates();
-
-
-		System.out.println("Telescope 1:");
-		for (ObservationState state : states){
-			if(state.getCurrentTarget() instanceof Position)
-				continue;
-			Target t = (Target) state.getCurrentTarget();
-			System.out.println(state.getCurrentObservable().getName());
-		}
-		System.out.println("Telescope 2:");
-		for (ObservationState state : states1){
-			if(state.getCurrentTarget() instanceof Position)
-				continue;
-			Target t = (Target) state.getCurrentTarget();
-			System.out.println(state.getCurrentObservable().getName());
+		List<ObservationState>[] states = new List[NUMTELESCOPES];
+		for(int i=0; i<NUMTELESCOPES; i++){
+			states[i] = scheduler.getSchedule(i).getScheduleStates();
 		}
 
 		if(printResults)
 		{
-			results.setSchedule(scheduler.getSchedule());
-			results1.setSchedule(scheduler.getSchedule1());
+			for(int i=0; i<NUMTELESCOPES; i++)
+				results[i].setSchedule(scheduler.getSchedule(i));
 			printResults(props);
 		}
 		
 		if(!showGui)
 			return;
-
+/*
 		java.awt.EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				createAndShowGUI();
 			}
 		});
+
 
 //		long endTime = Clock.getSimulationClock().getTime().getTimeInMillis() + 864400000;
 		while (scheduler.getSchedule().getEndTime()+6000 > Clock.getSimulationClock().getTime().getTimeInMillis()) 
@@ -122,6 +115,7 @@ public class Simulation extends java.util.Observable
 			}
 			Clock.getSimulationClock().advanceBy(10);
 		}
+ */
 	}
 	
 	public List<Connection> getPath()
@@ -137,16 +131,14 @@ public class Simulation extends java.util.Observable
 	
 	public void printResults(Properties props)
 	{
-		ResultFileWriter fw = new ResultFileWriter(results, props);
-		fw.writeResults(results);
-		fw.closeWriter();
-
-		ResultFileWriter fw1 = new ResultFileWriter(results1, props);
-		fw1.writeResults(results1);
-		fw1.closeWriter();
+		for(int i=0; i<NUMTELESCOPES; i++){
+			ResultFileWriter fw = new ResultFileWriter(results[i], props);
+			fw.writeResults(results[i]);
+			fw.closeWriter();
+		}
 	}
 
-	public Results getResults() {
+	public Results[] getResults() {
 		return results;
 	}
 }

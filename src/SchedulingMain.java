@@ -24,7 +24,7 @@ public class SchedulingMain {
 		props = IoUtils.loadProps("config");
 		
 		sweep24hours = Boolean.parseBoolean(props.getProperty("24hoursweep"));
-		
+		/*
 		if(sweep24hours)
 			run24Hours();
 		else
@@ -38,6 +38,8 @@ public class SchedulingMain {
 			else
 				runOnce();
 		}
+		 */
+		runOnce();
 	}
 	
 	public static void runOnce() throws Exception
@@ -45,7 +47,7 @@ public class SchedulingMain {
 		Simulation sim = new Simulation(props);
 		sim.run();
 	}
-
+/*
 	public static void runRepeats(int noRepeats) throws Exception
 	{
 		for (int i = 0; i < noRepeats; i++) 
@@ -60,7 +62,8 @@ public class SchedulingMain {
 		ResultBatchWriter rbw = new ResultBatchWriter(results, props);
 		rbw.writeResults();
 	}
-	
+
+
 	public static void run24Hours() throws Exception
 	{
 		String timeString;
@@ -82,5 +85,7 @@ public class SchedulingMain {
 				runOnce();
 		}
 	}
+
+ */
 
 }
