@@ -69,7 +69,7 @@ public class TargetIllustrationPN extends JPanel implements Observer
 
 	public TargetIllustrationPN( List<Target> t,Schedule schedule, Telescope scope, SkyState sky) 
 	{
-		this.gc = Clock.getSimulationClock().getTime();
+		//this.gc = Clock.getSimulationClock().getTime();
 		addMouseListener(ada);
 		addMouseMotionListener(ada);
 		this.targets = t;

@@ -3,10 +3,6 @@ package optimisation;
 import astrometrics.HorizonCoordinates;
 import observation.*;
 import observation.interference.SkyState;
-import optimisation.triangulations.AllPulsarsAsNeighbours;
-import optimisation.triangulations.DynamicNNOptimisation;
-import optimisation.triangulations.SmallestIntegrationTimeDifference;
-import optimisation.triangulations.TravellingSalesmanPreoptimisation;
 import simulation.Clock;
 
 import java.util.ArrayList;
@@ -14,24 +10,25 @@ import java.util.List;
 import java.util.Properties;
 
 import gurobi.*;
+import simulation.Simulation;
 
 public class MultiTelescopesMTSPPolicy extends DispatchPolicy {
 
 
     @Override
-    public Connection[] findNext2Path(Pointable pointable, Pointable pointable1) {
+    public Connection[] findNextPaths(Pointable[] pointables) {
         List<Pointable> points = new ArrayList<Pointable>();
-        points.add(pointable);
-        points.add(pointable1);
+        for(int i = 0; i< Simulation.NUMTELESCOPES; i++)
+            points.add(pointables[i]);
 
-        for (Connection conn : pointable.getNeighbours()){
-            Pointable p = conn.getOtherTarget(pointable);
+        for (Connection conn : pointables[0].getNeighbours()){
+            Pointable p = conn.getOtherTarget(pointables[0]);
             points.add(p);
         }
 
         int p = points.size();
         int n = p+2;
-        int m = 2;
+        int m = Simulation.NUMTELESCOPES;
         Connection[] next = new Connection[m];
 
 
@@ -180,20 +177,9 @@ public class MultiTelescopesMTSPPolicy extends DispatchPolicy {
                         System.out.print(String.valueOf(tour[k][j]) + " ");
                     System.out.println();
 
-
-
-                    switch (tour[k][1]){
-                        case 1:
-                            Connection conn = pointable.getNeighbours().get(tour[k][2]-m-1);
-                            currentTelescopeState = telescope.getStateForShortestSlew(points.get(tour[k][2]-1).getHorizonCoordinates(telescope.getLocation(), Clock.getScheduleClock().getTime()));
-                            next[0]=conn;
-                            break;
-                        case 2:
-                            Connection conn1 = pointable1.getNeighbours().get(tour[k][2]-m-1);
-                            currentTelescopeState1 = telescope1.getStateForShortestSlew(points.get(tour[k][2]-1).getHorizonCoordinates(telescope1.getLocation(), Clock.getScheduleClock().getTime()));
-                            next[1]=conn1;
-                    }
-
+                    Connection conn = pointables[tour[k][1]-1].getNeighbours().get(tour[k][2]-m-1);
+                    currentTelescopeStates[tour[k][1]-1] = telescopes[tour[k][1]-1].getStateForShortestSlew(points.get(tour[k][2]-1).getHorizonCoordinates(telescopes[tour[k][1]-1].getLocation(), Clock.getScheduleClock()[tour[k][1]-1].getTime()));
+                    next[tour[k][1]-1]=conn;
 
                 }
             }else{
@@ -206,12 +192,10 @@ public class MultiTelescopesMTSPPolicy extends DispatchPolicy {
                     e.getMessage());
         }
 
-
-        telescope.applyNewState(currentTelescopeState);
-        schedule.addLink(next[0], currentTelescopeState);
-
-        telescope1.applyNewState(currentTelescopeState1);
-        schedule1.addLink(next[1], currentTelescopeState1);
+        for(int i=0; i< Simulation.NUMTELESCOPES; i++){
+            telescopes[i].applyNewState(currentTelescopeStates[i]);
+            schedules[i].addLink(next[0], currentTelescopeStates[i]);
+        }
 
         return next;
     }
@@ -219,7 +203,7 @@ public class MultiTelescopesMTSPPolicy extends DispatchPolicy {
     private double[][] constructCostMatrix(List<Pointable> points){
         int p = points.size();
         int n = p+2;
-        int m = 2;
+        int m = Simulation.NUMTELESCOPES;
 
         double[][] cost = new double[n][n];
 
@@ -249,8 +233,8 @@ public class MultiTelescopesMTSPPolicy extends DispatchPolicy {
 
         for(int i = 1; i< n-1; i++)
             for(int j = 1; j<n-1; j++){
-                HorizonCoordinates current = points.get(i-1).getHorizonCoordinates(telescope.getLocation(), Clock.getScheduleClock().getTime());
-                HorizonCoordinates next = points.get(j-1).getHorizonCoordinates(telescope.getLocation(), Clock.getScheduleClock().getTime());
+                HorizonCoordinates current = points.get(i-1).getHorizonCoordinates(telescopes[0].getLocation(), Clock.getScheduleClock()[0].getTime());
+                HorizonCoordinates next = points.get(j-1).getHorizonCoordinates(telescopes[0].getLocation(), Clock.getScheduleClock()[0].getTime());
                 cost[i][j] = Telescope.calculateShortestSlewTimeBetween(current, next);
             }
 

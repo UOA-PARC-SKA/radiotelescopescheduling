@@ -192,12 +192,12 @@ public class Target implements Pointable
 
 
 	//within scintillation timescale of previous observation
-	public boolean tooCloseToPreviousObservation()
+	public boolean tooCloseToPreviousObservation(Clock clock)
 	{
 		for (Observable observable : observables) 
 		{
 			//means we have just been there and scintillation wasn't good
-			if(observable.doNotLookYet(Clock.getScheduleClock().getTime()))
+			if(observable.doNotLookYet(clock.getTime()))
 				return true;
 		}
 		return false;

@@ -24,13 +24,16 @@ public class Environment
 	//skyState has all the bad things that move
 	private SkyState skyState;
 
+	private Clock clock;
+
 	
 	
-	public Environment(double max, double min, SkyState state)
+	public Environment(double max, double min, SkyState state, Clock c)
 	{
 		maxScintillations = max;
 		minScintillations = min;
 		skyState = state;
+		clock = c;
 				
 	}
 	
@@ -110,7 +113,7 @@ public class Environment
 		long obsTime = (long) totalActualTime;
 
 		//This returns the time until which the observation lasted; if the full time, it was successful
-		obsTime = skyState.willCollideWithSatelliteAt(Clock.getScheduleClock().getTime(), state, scope, obsTime);
+		obsTime = skyState.willCollideWithSatelliteAt(clock.getTime(), state, scope, obsTime);
 		
 		if(obsTime < totalActualTime)
 		{
@@ -118,7 +121,7 @@ public class Environment
 			outcome = ObservationState.OBSERVATION_ABORTED_SATELLITE;
 		}
 		
-		obsTime = (long)getSecondsBeforeObjectSets(scope.getLocation(), state, Clock.getScheduleClock().getTime());
+		obsTime = (long)getSecondsBeforeObjectSets(scope.getLocation(), state, clock.getTime());
 		
 		if(obsTime < totalActualTime)
 		{
@@ -178,7 +181,7 @@ public class Environment
 			break;
 		}
 
-		Clock.getScheduleClock().advanceBy((int)totalActualTime);
+		clock.advanceBy((int)totalActualTime);
 //		Target t = (Target)state.getCurrentTarget();
 //		System.out.println("Repeated Scintillation altitude after obs "+t.getHorizonCoordinates(scope.getLocation(), Clock.getScheduleClock().getTime()).getAltitude());
 
@@ -197,7 +200,7 @@ public class Environment
 		
 		int outcome = ObservationState.OBSERVATION_INTERRUPTION_NONE;
 		
-		double maxTime = getSecondsBeforeObjectSets(scope.getLocation(), state, Clock.getScheduleClock().getTime());
+		double maxTime = getSecondsBeforeObjectSets(scope.getLocation(), state, clock.getTime());
 		
 		if(time > maxTime)
 		{
@@ -206,7 +209,7 @@ public class Environment
 		}
 		long obsTime = (long) time;
 	
-		obsTime = skyState.willCollideWithSatelliteAt(Clock.getScheduleClock().getTime(), state, scope, obsTime);
+		obsTime = skyState.willCollideWithSatelliteAt(clock.getTime(), state, scope, obsTime);
 		if(Math.floor(time) > obsTime)
 		{
 			outcome = ObservationState.OBSERVATION_ABORTED_SATELLITE;
@@ -234,7 +237,7 @@ public class Environment
 		}
 		
 
-		Clock.getScheduleClock().advanceBy((int)time);
+		clock.advanceBy((int)time);
 //		Target t = (Target)state.getCurrentTarget();
 //		System.out.println("Normal Scintillation altitude after obs "+t.getHorizonCoordinates(scope.getLocation(), Clock.getScheduleClock().getTime()).getAltitude());
 	}
@@ -249,7 +252,7 @@ public class Environment
 		double actualTime = nominalTime / rayleigh;
 		int outcome = ObservationState.OBSERVATION_INTERRUPTION_NONE;
 		
-		double maxTime = getSecondsBeforeObjectSets(scope.getLocation(), state, Clock.getScheduleClock().getTime());
+		double maxTime = getSecondsBeforeObjectSets(scope.getLocation(), state, clock.getTime());
 		
 		if(actualTime > maxTime)
 		{
@@ -258,7 +261,7 @@ public class Environment
 		}
 		long obsTime = (long) actualTime;
 		
-		obsTime = skyState.willCollideWithSatelliteAt(Clock.getScheduleClock().getTime(), state, scope, obsTime);
+		obsTime = skyState.willCollideWithSatelliteAt(clock.getTime(), state, scope, obsTime);
 		if(Math.floor(actualTime) > obsTime)
 		{
 			outcome = ObservationState.OBSERVATION_ABORTED_SATELLITE;
@@ -291,7 +294,7 @@ public class Environment
 		}
 
 
-		Clock.getScheduleClock().advanceBy((int)actualTime);
+		clock.advanceBy((int)actualTime);
 //		Target t = (Target)state.getCurrentTarget();
 //		System.out.println("High Scintillation altitude after obs "+t.getHorizonCoordinates(scope.getLocation(), Clock.getScheduleClock().getTime()).getAltitude());
 	}
@@ -348,7 +351,7 @@ public class Environment
 		if(setTime < 60)// ridiculously short time, give up.
 		{
 			setTime = 0;
-			state.getCurrentObservable().setDontLookTime(60);
+			state.getCurrentObservable().setDontLookTime(60, clock);
 		}
 		return setTime;
 	}

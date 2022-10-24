@@ -48,16 +48,19 @@ public class Scheduler
 		}
 
 		schedules = new Schedule[Simulation.NUMTELESCOPES];
-		startSchedulingClock(props.getProperty("observation_start"));
-		skyState = new SkyState(props.getProperty("norad_file_path"));
-		skyState.createAllBadThingsThatMove(telescopes[0]);
 		observations = new Observation[Simulation.NUMTELESCOPES];
 
 		for(int i=0; i< Simulation.NUMTELESCOPES; i++){
 			schedules[i] = new Schedule();
-			observations[i] = new Observation(props, telescopes[i], skyState);
-
 		}
+
+		startSchedulingClock(props.getProperty("observation_start"));
+		for(int i=0; i< Simulation.NUMTELESCOPES; i++){
+			skyState = new SkyState(props.getProperty("norad_file_path"));
+			skyState.createAllBadThingsThatMove(telescopes[i], Clock.getScheduleClock()[i]);
+			observations[i] = new Observation(props, telescopes[i], skyState, Clock.getScheduleClock()[i]);
+		}
+
 		// policy = (DispatchPolicy) Class.forName(props.getProperty("policy_class")).newInstance();
 		policy = (DispatchPolicy) Class.forName(props.getProperty("policy_class")).newInstance();
 //		if(policy instanceof MultiTelescopesMTSPPolicy)
@@ -113,30 +116,25 @@ public class Scheduler
 					pointables[i] = schedules[i].getCurrentState().getCurrentTarget();
 				policy.addNeighbours(preoptimisation, pointables);
 
-				/*
-				if(schedule.getCurrentState().getCurrentTarget().getNeighbours().size()==1){
-					System.out.println("This is an only one neighbour case");
+				if(schedules[0].getCurrentState().getCurrentTarget().getNeighbours().size()<Simulation.NUMTELESCOPES){
+					System.out.println("targets are not enough for all telescopes");
+					int num = schedules[0].getCurrentState().getCurrentTarget().getNeighbours().size();
+					for(int i = 0; i<num; i++){
+						Connection link = schedules[i].getCurrentState().getCurrentTarget().getNeighbours().get(i);
+						policy.addNeighbourtoScheduleState(i, link, Clock.getScheduleClock()[i]);
+						observations[i].observe(schedules[i].getCurrentState());
+					}
 
-					Connection link = schedule.getCurrentState().getCurrentTarget().getNeighbours().get(0);
-					if(link.getOtherTarget(schedule.getCurrentState().getCurrentTarget())==schedule1.getCurrentState().getCurrentTarget()) {
-						link = schedule1.getCurrentState().getCurrentTarget().getNeighbours().get(0);
-						policy.addNeighbourtoScheduleState(schedule1, link);
-						observation1.observe(schedule1.getCurrentState());
-					}
-					else{
-						policy.addNeighbourtoScheduleState(schedule, link);
-						observation.observe(schedule.getCurrentState());
-					}
 					continue;
 				}
-				*/
 
 			} catch (OutOfObservablesException e)
 			{
 				if(policy.hasNoMoreObservables())
 				{
-					schedule.setComplete(true);
-					schedule1.setComplete(true);
+					for(int i=0; i< Simulation.NUMTELESCOPES; i++)
+						schedules[i].setComplete(true);
+					complete = true;
 					System.out.println("GOOD!!!!!!");
 					break;
 				}
@@ -144,23 +142,18 @@ public class Scheduler
 				{
 					try {
 						policy.waitForObservables(preoptimisation);
-						/*
-						if(schedule.getCurrentState().getCurrentTarget().getNeighbours().size()==1){
-							System.out.println("This is an only one neighbour case");
 
-							Connection link = schedule.getCurrentState().getCurrentTarget().getNeighbours().get(0);
-							if(link.getOtherTarget(schedule.getCurrentState().getCurrentTarget())==schedule1.getCurrentState().getCurrentTarget()) {
-								link = schedule1.getCurrentState().getCurrentTarget().getNeighbours().get(0);
-								policy.addNeighbourtoScheduleState(schedule1, link);
-								observation1.observe(schedule1.getCurrentState());
+						if(schedules[0].getCurrentState().getCurrentTarget().getNeighbours().size()<Simulation.NUMTELESCOPES){
+							System.out.println("targets are not enough for all telescopes");
+							int num = schedules[0].getCurrentState().getCurrentTarget().getNeighbours().size();
+							for(int i = 0; i<num; i++){
+								Connection link = schedules[i].getCurrentState().getCurrentTarget().getNeighbours().get(i);
+								policy.addNeighbourtoScheduleState(i, link, Clock.getScheduleClock()[i]);
+								observations[i].observe(schedules[i].getCurrentState());
 							}
-							else{
-								policy.addNeighbourtoScheduleState(schedule, link);
-								observation.observe(schedule.getCurrentState());
-							}
+
 							continue;
 						}
-						 */
 
 					} catch (LastEntryException e1) {
 						break;
@@ -175,7 +168,7 @@ public class Scheduler
 			System.gc();
 		}
 		for(int i=0; i< Simulation.NUMTELESCOPES; i++)
-			schedules[i].setEndTime(Clock.getScheduleClock().getTime().getTimeInMillis());
+			schedules[i].setEndTime(Clock.getScheduleClock()[i].getTime().getTimeInMillis());
 	}
 
 
@@ -184,25 +177,27 @@ public class Scheduler
 	{
 		for(int i=0; i< Simulation.NUMTELESCOPES; i++) {
 			ObservationState firstState = new ObservationState(new Position(Telescope.PARKING_COORDINATES),
-					Clock.getScheduleClock().getTime().getTimeInMillis(), null, null);
+					Clock.getScheduleClock()[i].getTime().getTimeInMillis(), null, null);
 			firstState.setStartingCoordinates(Telescope.PARKING_COORDINATES);
 			schedules[i].addState(firstState);
 		}
 	}
 
-
+/*
 	public List<Connection> getFinalPath()
 	{
 		return schedule.getFinalPath();
 	}
+ */
 
 
 	public void startSchedulingClock(String property)
 	{
 		Date startDate = Utilities.stringToDate(property);
-		Clock.getScheduleClock().startAt(startDate);
-		schedule.setStartTime(startDate.getTime());
-		schedule1.setStartTime(startDate.getTime());
+		for(int i=0; i< Simulation.NUMTELESCOPES; i++){
+			Clock.getScheduleClock()[i].startAt(startDate);
+			schedules[i].setStartTime(startDate.getTime());
+		}
 	}
 
 	public Schedule getSchedule(int i)

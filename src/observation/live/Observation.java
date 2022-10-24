@@ -19,20 +19,23 @@ public class Observation
 	private Telescope telescope;
 	//This is for a five minute sample until the signal to noise ratio can be calculated
 	private static final int LEADTIME = 300;
+
+	private Clock clock;
 	
-	public Observation(Properties props, Telescope scope, SkyState state)
+	public Observation(Properties props, Telescope scope, SkyState state, Clock c)
 	{
 		telescope = scope;
+		clock = c;
 		double rayleighMax = Double.parseDouble(props.getProperty("rayleigh_threshold_max"));
 		double rayleighMin = Double.parseDouble(props.getProperty("rayleigh_threshold_min"));
-		this.environment =new Environment(rayleighMax, rayleighMin, state);
+		this.environment =new Environment(rayleighMax, rayleighMin, state, c);
 		scintIntervalLimit= Double.parseDouble(props.getProperty("scint_timescale_limit"));
 	}
 	
 	public void observe (ObservationState state)
 	{
 		currentState = state;
-		Clock.getScheduleClock().advanceBy((int)state.getLinkToHere().getFinalSlewTime());
+		clock.advanceBy((int)state.getLinkToHere().getFinalSlewTime());
 		Observable observable = currentState.getCurrentObservable();
 	//	String name = observable.getName();
 	//	System.out.println(observable.getName());
@@ -51,7 +54,7 @@ public class Observation
 			//scintillation changes rapidly, need to re-check repeatedly
 			environment.checkScintillationRepeatedly(currentState, telescope);
 		}
-		currentState.setEndTime(telescope.getLocation());
+		currentState.setEndTime(telescope.getLocation(), clock);
 	}
 	
 	
@@ -77,8 +80,8 @@ public class Observation
 				currentState.setObservationResults(ObservationState.OBSERVATION_ABORTED_SCINT_WEAK, ObservationState.OBSERVATION_INTERRUPTION_NONE);
 			
 			//time spent on the object that was not useful; astronomers spend 5 minutes trying		
-			Clock.getScheduleClock().advanceBy(LEADTIME);
-			currentState.getCurrentObservable().setDontLookTime();
+			clock.advanceBy(LEADTIME);
+			currentState.getCurrentObservable().setDontLookTime(clock);
 //			Target t = (Target)currentState.getCurrentTarget();
 //			System.out.println("High Scintillation altitude after obs "+t.getHorizonCoordinates(telescope.getLocation(), Clock.getScheduleClock().getTime()).getAltitude());
 

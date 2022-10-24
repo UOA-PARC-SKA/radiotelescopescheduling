@@ -117,11 +117,13 @@ public class Simulation extends java.util.Observable
 		}
  */
 	}
-	
+
+	/*
 	public List<Connection> getPath()
 	{
 		return scheduler.getFinalPath();
 	}
+	 */
 
 	public void startSimulationClock(String property) 
 	{

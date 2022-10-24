@@ -1,5 +1,7 @@
 package observation;
 
+import simulation.Clock;
+
 import java.util.GregorianCalendar;
 
 public interface Observable 
@@ -23,8 +25,8 @@ public interface Observable
 	public double getRemainingIntegrationTime();
 //	public void addNominalTimeObserved(double elapsed);
 	public void addActualTimeObserved(double elapsed);
-	public void setDontLookTime();
-	public void setDontLookTime(long seconds);
+	public void setDontLookTime(Clock clock);
+	public void setDontLookTime(long seconds, Clock clock);
 	public boolean doNotLookYet(GregorianCalendar other);
 	public void incrementAttempts();
 	public int getAttempts();

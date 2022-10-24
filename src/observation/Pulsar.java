@@ -124,16 +124,16 @@ public class Pulsar implements Observable
 
 	//This is the current time plus the polling interval
 	@Override
-	public void setDontLookTime() {
+	public void setDontLookTime(Clock clock) {
 		this.doNotLookUntil = new GregorianCalendar();
-		this.doNotLookUntil.setTimeInMillis(Clock.getScheduleClock().getTime().getTimeInMillis() + (scintTimescale * 1000));
+		this.doNotLookUntil.setTimeInMillis(clock.getTime().getTimeInMillis() + (scintTimescale * 1000));
 		
 	}
 	@Override
-	public void setDontLookTime(long seconds) 
+	public void setDontLookTime(long seconds, Clock clock)
 	{
 		this.doNotLookUntil = new GregorianCalendar();
-		this.doNotLookUntil.setTimeInMillis(Clock.getScheduleClock().getTime().getTimeInMillis() 
+		this.doNotLookUntil.setTimeInMillis(clock.getTime().getTimeInMillis()
 				+(seconds * 1000));
 	}
 

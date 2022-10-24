@@ -172,7 +172,7 @@ public abstract class NNOptimisation
 		if(t.hasCompleteObservation())
 			return false;
 		//within scintillation timescale of previous observation
-		if(t.tooCloseToPreviousObservation())
+		if(t.tooCloseToPreviousObservation(clock))
 			return false;
 		HorizonCoordinates hc = t.getHorizonCoordinates(loc, clock.getTime());
 		if(hc.getAltitude() < 0)

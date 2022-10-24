@@ -233,12 +233,12 @@ public class ObservationState
 		return endTime;
 	}
 
-	public void setEndTime(Location loc) {
+	public void setEndTime(Location loc, Clock clock) {
 		this.endTime = startTime + 
 				(long)(linkToHere.getFinalSlewTime()*1000) + 
 				(long) (this.waitingTime*1000)
 				+(long) (this.integrationTime * 1000);
-		this.setEndHC(loc, Clock.getScheduleClock().getTime());
+		this.setEndHC(loc, clock.getTime());
 	}
 
 	public HorizonCoordinates getStartHC() {

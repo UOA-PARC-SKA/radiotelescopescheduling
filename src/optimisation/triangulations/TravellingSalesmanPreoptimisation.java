@@ -23,6 +23,7 @@ public class TravellingSalesmanPreoptimisation extends NNOptimisation
         sortedDist = new ArrayList<Double>();
     }
 
+    /*
     //These targets are already the subset that needs observing
     public void createTSPLinks(List<Target> targets, Pointable current, double ratio, Clock clock, Location loc, Telescope telescope) throws OutOfObservablesException
     {
@@ -68,6 +69,7 @@ public class TravellingSalesmanPreoptimisation extends NNOptimisation
             current.addNeighbour(c);
         }
     }
+     */
 
 
     public void createTSPLinks(List<Target> targets, Pointable[] currents, double ratio, Clock[] clock, Location loc, Telescope[] telescopes) throws OutOfObservablesException
@@ -106,9 +108,9 @@ public class TravellingSalesmanPreoptimisation extends NNOptimisation
             if(!mark)
                 continue;
 
-            HorizonCoordinates hc = target.getHorizonCoordinates(telescopes[0].getLocation(), Clock.getScheduleClock().getTime());
+            HorizonCoordinates hc = target.getHorizonCoordinates(telescopes[0].getLocation(), Clock.getScheduleClock()[0].getTime());
             TelescopeState possState = telescopes[0].getStateForShortestSlew(hc);
-            GregorianCalendar setTime = Utilities.cloneDate(Clock.getScheduleClock().getTime());
+            GregorianCalendar setTime = Utilities.cloneDate(Clock.getScheduleClock()[0].getTime());
             int slewInSeconds = (int) possState.getSlewTime();
             setTime.add(GregorianCalendar.SECOND, slewInSeconds);
             long time = (long) Conversions.getTimeUntilObjectSetsInSeconds(telescopes[0].getLocation(), target, setTime);
@@ -126,9 +128,9 @@ public class TravellingSalesmanPreoptimisation extends NNOptimisation
         for (int i = 0; i < neighboursCap; i++) {
             for(int k=0; k< Simulation.NUMTELESCOPES; k++){
                 target = hm_tsp.get(sortedDist_tsp.get(i));
-                HorizonCoordinates hc = target.getHorizonCoordinates(telescopes[k].getLocation(), Clock.getScheduleClock().getTime());
+                HorizonCoordinates hc = target.getHorizonCoordinates(telescopes[k].getLocation(), Clock.getScheduleClock()[k].getTime());
                 TelescopeState possState = telescopes[k].getStateForShortestSlew(hc);
-                GregorianCalendar setTime = Utilities.cloneDate(Clock.getScheduleClock().getTime());
+                GregorianCalendar setTime = Utilities.cloneDate(Clock.getScheduleClock()[k].getTime());
                 int slewInSeconds = (int) possState.getSlewTime();
                 setTime.add(GregorianCalendar.SECOND, slewInSeconds);
                 long time = (long) Conversions.getTimeUntilObjectSetsInSeconds(telescopes[k].getLocation(), target, setTime);

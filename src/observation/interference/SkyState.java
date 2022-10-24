@@ -32,23 +32,23 @@ public class SkyState
 		nv = new NovasLink();
 	}
 	
-	public void createAllBadThingsThatMove(Telescope scope)
+	public void createAllBadThingsThatMove(Telescope scope, Clock clock)
 	{
 		satellites = ndr.readSatellites();
 		for (Satellite satellite : satellites) 
 		{
-			satellite.initialise(Clock.getScheduleClock().getTime(), nl, scope);
+			satellite.initialise(clock.getTime(), nl, scope);
 			//finding average speeds for satellites; 60 second intervals and 30 of them
 			double [] angDist = nl.getDistancesForInterval(satellite, scope, 60, 30);
 			satellite.calculateSpeed(angDist);
 		}
-		createCelestialBodies(scope);
+		createCelestialBodies(scope, clock);
 
 	}
 	
-	private void createCelestialBodies(Telescope scope) 
+	private void createCelestialBodies(Telescope scope, Clock clock)
 	{
-		Date date = Clock.getScheduleClock().getTime().getTime();
+		Date date = clock.getTime().getTime();
 		celestialBodies = new ArrayList<>();
 		celestialBodies.add(new CelestialBody("Sun", date, nv, scope));
 		celestialBodies.add(new CelestialBody("Moon", date, nv, scope));

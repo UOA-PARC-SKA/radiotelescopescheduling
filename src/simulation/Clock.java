@@ -11,7 +11,7 @@ public class Clock
 	private int increment;
 	private int magnitude;
 	private static Clock simulationClock = null;
-	private static Clock scheduleClock = null;
+	private static Clock[] scheduleClocks = null;
 	
 	private Clock () 
 	{
@@ -62,10 +62,13 @@ public class Clock
 		return simulationClock;
 	}
 	
-	public static Clock getScheduleClock()
+	public static Clock[] getScheduleClock()
 	{
-		if (scheduleClock == null)		
-			scheduleClock = new Clock();
-		return scheduleClock;
+		if (scheduleClocks == null)	{
+			scheduleClocks = new Clock[Simulation.NUMTELESCOPES];
+			for(int i=0; i< Simulation.NUMTELESCOPES; i++)
+				scheduleClocks[i] = new Clock();
+		}
+		return scheduleClocks;
 	}
 }
