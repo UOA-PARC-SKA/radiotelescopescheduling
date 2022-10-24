@@ -108,8 +108,11 @@ public abstract class DispatchPolicy {
 
 	protected void waitForObservables(String preoptimisation) throws LastEntryException {
 		System.out.println("Now waiting!");
-		int waitingPeriod = 0;
-		remaining = getRemainingObservables();
+		int[] waitingPeriod = new int[Simulation.NUMTELESCOPES];
+        for(int i=0; i< Simulation.NUMTELESCOPES; i++)
+            waitingPeriod[i] = 0;
+
+        remaining = getRemainingObservables();
 //			for (Target target : remaining) {
 //				System.out.println(
 //				target.getEquatorialCoordinates().getDeclination());
@@ -122,11 +125,16 @@ public abstract class DispatchPolicy {
 				throw new LastEntryException();
 			}
 
-			//advance clock until more observables emerge
-			for(int i=0; i< Simulation.NUMTELESCOPES; i++)
-				Clock.getScheduleClock()[i].advanceBy(waitTime);
+			//advance clock until more observables emerge, only delay the earliest clock
+            int earliest = 0;
+			for(int i=0; i< Simulation.NUMTELESCOPES; i++){
+                if(Clock.getScheduleClock()[i].getTime().getTime().getTime() <
+                        Clock.getScheduleClock()[earliest].getTime().getTime().getTime())
+                    earliest = i;
+            }
+            Clock.getScheduleClock()[earliest].advanceBy(waitTime);
+			waitingPeriod[earliest] += waitTime;
 
-			waitingPeriod += waitTime;
 			try {
 				/*
 				if(preoptimisation.equals("all")) {
@@ -151,9 +159,11 @@ public abstract class DispatchPolicy {
 		}
 
 		for(int i=0; i< Simulation.NUMTELESCOPES; i++){
-			telescopes[i].applyWaitState();
-			schedules[i].getCurrentState().addWaitTime(waitingPeriod);
-			schedules[i].getCurrentState().addComment("Waited for more observables to rise above the horizon.");
+            if(waitingPeriod[i] != 0){
+                telescopes[i].applyWaitState();
+                schedules[i].getCurrentState().addWaitTime(waitingPeriod[i]);
+                schedules[i].getCurrentState().addComment("Waited for more observables to rise above the horizon.");
+            }
 		}
 
 	}
