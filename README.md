@@ -4,7 +4,7 @@
 
 **Google Colab Notebook: https://colab.research.google.com/drive/1YuAPVRLRgBWOwnkx5G_33pv4AK4MlYJS?usp=sharing**
 
-**NOTE: This branch is for the multiple telescopes simulation exclusively. Not compatible with single telescopes optimization policy. Currently, only `MultiTelescopesMTSPPolicy` policy and `TravellingSalesmanPreoptimisation` is available. Both GUI and batch test are not available, so GUI must be set to false and batch must equal to 1 in the config file. The number of telescopes can be set by the teles_num item in config**
+**NOTE: This branch is for the multiple telescopes simulation exclusively. Not compatible with single telescopes optimization policy. For the single telescope version, please checkout to stable branch. Currently, only `MultiTelescopesMTSPPolicy` policy and `TravellingSalesmanPreoptimisation` is available. Both GUI and batch test are not available, so GUI must be set to false and batch must equal to 1 in the config file. The number of telescopes can be set by the teles_num item in config**
 
 ## List of files and directories
 
