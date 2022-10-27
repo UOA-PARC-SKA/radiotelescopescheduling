@@ -200,7 +200,7 @@ public class MultiTelescopesMTSPPolicy extends DispatchPolicy {
         return next;
     }
 
-    private double[][] constructCostMatrix(List<Pointable> points){
+    protected double[][] constructCostMatrix(List<Pointable> points){
         int p = points.size();
         int n = p+2;
         int m = Simulation.NUMTELESCOPES;
