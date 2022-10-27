@@ -19,6 +19,7 @@ public class ResultBatchWriter
 	private static String file ;
 	private List<Results> results;
 	private String directory;
+	private static int fileNumber = 0;
 	
 	public ResultBatchWriter(List<Results> results, Properties props)
 	{	
@@ -33,7 +34,8 @@ public class ResultBatchWriter
 //		directory += "/"+number+"/";
 		directory += "/";
 		
-		file = "batch_"+gc.get(GregorianCalendar.YEAR)+"_"
+		file = "batch_"+ fileNumber++
+					+gc.get(GregorianCalendar.YEAR)+"_"
 					+(gc.get(GregorianCalendar.MONTH)+1)+"_"
 					+gc.get(GregorianCalendar.DAY_OF_MONTH)+"_"
 					+gc.get(GregorianCalendar.HOUR_OF_DAY)+"_"

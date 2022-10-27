@@ -1,6 +1,7 @@
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 
@@ -14,7 +15,7 @@ import simulation.Simulation;
 public class SchedulingMain {
 
 	public static Properties props = null;
-	public static List<Results> results = null;
+	public static List<Results[]> results = null;
 	public static boolean sweep24hours = false;
 	
 
@@ -39,7 +40,14 @@ public class SchedulingMain {
 				runOnce();
 		}
 		 */
-		runOnce();
+
+		int batches = Integer.parseInt(props.getProperty("batch"));
+		if (batches > 1){
+			//results = new ArrayList<>();
+			runRepeats(batches);
+		}
+		else
+			runOnce();
 	}
 	
 	public static void runOnce() throws Exception
@@ -47,7 +55,7 @@ public class SchedulingMain {
 		Simulation sim = new Simulation(props);
 		sim.run();
 	}
-/*
+
 	public static void runRepeats(int noRepeats) throws Exception
 	{
 		for (int i = 0; i < noRepeats; i++) 
@@ -56,14 +64,14 @@ public class SchedulingMain {
 			System.out.println(i);
 			Simulation sim = new Simulation(props);
 			sim.run();
-			results.add(sim.getResults());
+
+			ResultBatchWriter rbw = new ResultBatchWriter(new ArrayList<>(Arrays.asList(sim.getResults())), props);
+			rbw.writeResults();
+
 		}
-		
-		ResultBatchWriter rbw = new ResultBatchWriter(results, props);
-		rbw.writeResults();
 	}
 
-
+/*
 	public static void run24Hours() throws Exception
 	{
 		String timeString;
