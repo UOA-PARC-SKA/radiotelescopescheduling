@@ -265,8 +265,4 @@ public class MultiTelescopesMTSPPolicy extends DispatchPolicy {
     }
 
 
-
-
-    @Override
-    public Connection findNextPath(Pointable pointable){ return null;}
 }

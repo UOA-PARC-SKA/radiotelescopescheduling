@@ -44,13 +44,11 @@ public abstract class DispatchPolicy {
 	private AllPulsarsAsNeighbours allOb;
 	private TravellingSalesmanPreoptimisation tspo;
 
-	public abstract Connection findNextPath(Pointable pointable);
+	//public abstract Connection findNextPath(Pointable pointable);
 
 
 
-	public Connection[] findNextPaths(Pointable[] pointables){
-		return null;
-	}
+	public abstract Connection[] findNextPaths(Pointable[] pointables);
 
 	public void initialise(Properties props, Telescope[] scopes, Schedule[] s, List<Target> targets, SkyState skyState) {
 		telescopes = scopes;
@@ -251,6 +249,9 @@ public abstract class DispatchPolicy {
 		if (preoptimisation.equals("tsp")) {
 			tspo.createTSPLinks(observables, currents, triangulationRatio, Clock.getScheduleClock(), telescopes[0].getLocation(), telescopes);
 
+		}
+		else if (preoptimisation.equals("all")){
+			allOb.createAllLinks(observables, currents, triangulationRatio, Clock.getScheduleClock(), telescopes[0].getLocation(), telescopes);
 		}
 		else {
 			tspo.createTSPLinks(observables, currents, triangulationRatio, Clock.getScheduleClock(), telescopes[0].getLocation(), telescopes);
