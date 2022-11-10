@@ -34,7 +34,7 @@ public class ResultBatchWriter
 //		directory += "/"+number+"/";
 		directory += "/";
 		
-		file = "batch_"+ fileNumber++
+		file = "batch_"+ fileNumber++ +"_"
 					+gc.get(GregorianCalendar.YEAR)+"_"
 					+(gc.get(GregorianCalendar.MONTH)+1)+"_"
 					+gc.get(GregorianCalendar.DAY_OF_MONTH)+"_"

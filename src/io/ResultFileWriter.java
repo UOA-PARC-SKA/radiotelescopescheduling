@@ -45,7 +45,7 @@ public class ResultFileWriter
 					+gc.get(GregorianCalendar.MINUTE)+"_"
 					+gc.get(GregorianCalendar.SECOND)+"_";
 		
-		if(fileNumber == 30)
+		if(fileNumber == 60)
 			fileNumber = 0;
 		try
 		{
