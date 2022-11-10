@@ -104,9 +104,10 @@ public abstract class DispatchPolicy {
 		return true;
 	}
 
-	protected void waitForObservables(String preoptimisation) throws LastEntryException {
+	protected boolean waitForObservables(String preoptimisation, boolean[] teleMarks) throws LastEntryException {
 		System.out.println("Now waiting!");
 		int[] waitingPeriod = new int[Simulation.NUMTELESCOPES];
+		boolean not_wait = false;
         for(int i=0; i< Simulation.NUMTELESCOPES; i++)
             waitingPeriod[i] = 0;
 
@@ -150,9 +151,14 @@ public abstract class DispatchPolicy {
 				for(int i=0; i< Simulation.NUMTELESCOPES; i++)
 					pointables[i] = schedules[i].getCurrentState().getCurrentTarget();
 				addNeighbours(preoptimisation, pointables);
+				not_wait = false;
 				break;
 			} catch (OutOfObservablesException e1) {
-				continue;
+				if(nextMovesEach(teleMarks)){
+					not_wait = true;
+					break;
+				}
+				else continue;
 			}
 		}
 
@@ -163,7 +169,7 @@ public abstract class DispatchPolicy {
                 schedules[i].getCurrentState().addComment("Waited for more observables to rise above the horizon.");
             }
 		}
-
+		return not_wait;
 	}
 
 	public void addTelescopeIdleTime(int telescope_num){
@@ -207,6 +213,63 @@ public abstract class DispatchPolicy {
 			Observable o = newTarget.findObservableByObservationTime();
 			schedules[i].addState(new ObservationState(newTarget, Clock.getScheduleClock()[i].getTime(), link[i], o, telescopes[i].getLocation()));
 		}
+	}
+
+	public boolean nextMovesEach(boolean[] teleMarks){
+		Pointable[] pointables = new Pointable[Simulation.NUMTELESCOPES];
+		for(int i=0; i< Simulation.NUMTELESCOPES; i++)
+			pointables[i] = schedules[i].getCurrentState().getCurrentTarget();
+
+		for(int i=0; i< Simulation.NUMTELESCOPES; i++){
+			try{
+				allOb.createAllLinks(observables, pointables[i], pointables, triangulationRatio, Clock.getScheduleClock()[i], telescopes[i].getLocation());
+				Connection link = shortestSlew(schedules[i], telescopes[i], currentTelescopeStates[i], Clock.getScheduleClock()[i]);
+				Target newTarget = (Target) link.getOtherTarget(schedules[i].getCurrentState().getCurrentTarget());
+				Observable o = newTarget.findObservableByObservationTime();
+				schedules[i].addState(new ObservationState(newTarget, Clock.getScheduleClock()[i].getTime(), link, o, telescopes[i].getLocation()));
+				teleMarks[i] = true;
+				pointables[i] = schedules[i].getCurrentState().getCurrentTarget();
+
+			}catch (OutOfObservablesException e){
+				teleMarks[i] = false;
+			}
+		}
+
+		for(int i=0; i< Simulation.NUMTELESCOPES; i++)
+			if(teleMarks[i])
+				return true;
+
+		return false;
+	}
+
+
+	public Connection shortestSlew(Schedule schedule, Telescope telescope, TelescopeState currentTelescopeState, Clock clock)
+	{
+		Pointable current = schedule.getCurrentState().getCurrentTarget();
+		double minDist = Double.POSITIVE_INFINITY;
+		Connection next = null;
+
+		//System.out.println();
+		for (Connection conn : current.getNeighbours())
+		{
+			Pointable p = conn.getOtherTarget(current);
+			TelescopeState possState = telescope.getStateForShortestSlew(p.getHorizonCoordinates(telescope.getLocation(), clock.getTime()));
+			//System.out.println("Angle dist "+conn.getDistance()+" slew time "+possStates.get(0).getSlewTime());
+//			if(possStates.size() > 1)
+//				System.out.println("States "+possStates.size());
+			if(minDist > possState.getSlewTime())
+			{
+				next = conn;
+				minDist = possState.getSlewTime();
+				currentTelescopeState = possState;
+			}
+
+		}
+		//System.out.println(next.getDistance()+" "+state.getSlewTime());
+		telescope.applyNewState(currentTelescopeState);
+		schedule.addLink(next, currentTelescopeState);
+//		updateObservable((Target)next.getOtherTarget(current));
+		return next;
 	}
 
 	public void addNeighbourtoScheduleState(int telescope_num, Connection link, Clock clock){

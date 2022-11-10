@@ -22,17 +22,22 @@ public class AllPulsarsAsNeighbours extends NNOptimisation {
         sortedDist = new ArrayList<Double>();
     }
 
-    public void createAllLinks(List<Target> targets, Pointable current, double ratio, Clock clock, Location loc) throws OutOfObservablesException {
+    public void createAllLinks(List<Target> targets, Pointable current, Pointable[] currents, double ratio, Clock clock, Location loc) throws OutOfObservablesException {
 
         current.clearNeighbours();
         Target target;
         ArrayList<Connection> neighbours = new ArrayList<Connection>();
 
         for (int i = 0; i < targets.size(); i++) {
-
             target = targets.get(i);
 
-            if (current == target)
+            boolean mark = true;
+            for(int k=0; k< Simulation.NUMTELESCOPES; k++)
+                if (currents[k] == target){
+                    mark = false;
+                    break;
+                }
+            if(!mark)
                 continue;
 
             if(!isReadyForObservation(target, clock, loc))

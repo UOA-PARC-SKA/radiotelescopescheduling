@@ -124,12 +124,11 @@ public class Scheduler
 						policy.addNeighbourtoScheduleState(i, link, Clock.getScheduleClock()[i]);
 						observations[i].observe(schedules[i].getCurrentState());
 					}
-
 					continue;
 				}
 
-			} catch (OutOfObservablesException e)
-			{
+			} catch (OutOfObservablesException e) {
+
 				if(policy.hasNoMoreObservables())
 				{
 					for(int i=0; i< Simulation.NUMTELESCOPES; i++)
@@ -138,10 +137,25 @@ public class Scheduler
 					System.out.println("GOOD!!!!!!");
 					break;
 				}
-				else
-				{
+				else {
+					boolean[] teleMarks = new boolean[Simulation.NUMTELESCOPES];
+					if(policy.nextMovesEach(teleMarks)){
+						for(int i=0; i< Simulation.NUMTELESCOPES; i++){
+							if(!teleMarks[i])
+								continue;
+							observations[i].observe(schedules[i].getCurrentState());
+						}
+						continue;
+					}
 					try {
-						policy.waitForObservables(preoptimisation);
+						if(policy.waitForObservables(preoptimisation, teleMarks)){
+							for(int i=0; i< Simulation.NUMTELESCOPES; i++){
+								if(!teleMarks[i])
+									continue;
+								observations[i].observe(schedules[i].getCurrentState());
+							}
+							continue;
+						}
 
 						if(schedules[0].getCurrentState().getCurrentTarget().getNeighbours().size()<Simulation.NUMTELESCOPES){
 							System.out.println("targets are not enough for all telescopes");
@@ -151,7 +165,6 @@ public class Scheduler
 								policy.addNeighbourtoScheduleState(i, link, Clock.getScheduleClock()[i]);
 								observations[i].observe(schedules[i].getCurrentState());
 							}
-
 							continue;
 						}
 
