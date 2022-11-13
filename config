@@ -21,4 +21,4 @@ batch=10
 outputdir=G:/UOA_Courses/thesis/project/radiotelescopescheduling/results
 useDB=false
 preoptimisation=all
-teles_num=3
+teles_num=8

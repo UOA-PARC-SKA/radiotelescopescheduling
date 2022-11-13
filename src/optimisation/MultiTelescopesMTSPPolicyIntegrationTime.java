@@ -2,6 +2,7 @@ package optimisation;
 
 import astrometrics.HorizonCoordinates;
 import observation.Pointable;
+import observation.Position;
 import observation.Target;
 import observation.Telescope;
 import simulation.Clock;
@@ -44,8 +45,13 @@ public class MultiTelescopesMTSPPolicyIntegrationTime extends MultiTelescopesMTS
 
         for(int i = 1; i< n-1; i++)
             for(int j = 1; j<n-1; j++){
-                Target target = (Target) points.get(i-1);
-                cost[i][j] = target.findObservableByObservationTime().getRemainingIntegrationTime();
+                if(j==1||j==2||j==3){
+                    cost[i][j] = 0;
+                }
+                else {
+                    Target target = (Target) points.get(j-1);
+                    cost[i][j] = target.findObservableByObservationTime().getRemainingIntegrationTime();
+                }
             }
 
 

@@ -44,9 +44,10 @@ public class ResultFileWriter
 					+gc.get(GregorianCalendar.HOUR_OF_DAY)+"_"
 					+gc.get(GregorianCalendar.MINUTE)+"_"
 					+gc.get(GregorianCalendar.SECOND)+"_";
-		
+		/*
 		if(fileNumber == 60)
 			fileNumber = 0;
+		 */
 		try
 		{
 			printWriter = new PrintWriter(new FileWriter(directory + file + fileNumber++ + fileEnding, false));
