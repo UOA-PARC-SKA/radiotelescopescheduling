@@ -72,9 +72,9 @@ public class TravellingSalesmanPreoptimisation extends NNOptimisation
      */
 
 
-    public void createTSPLinks(List<Target> targets, Pointable[] currents, double ratio, Clock[] clock, Location loc, Telescope[] telescopes) throws OutOfObservablesException
+    public void createTSPLinks(List<Target> targets, Pointable[] currents, double ratio, Clock[] clock, Location loc, Telescope[] telescopes, int neigCap) throws OutOfObservablesException
     {
-        HashMap<Long, Target> hm_tsp = new HashMap<Long, Target>();
+        HashMap<Long, ArrayList<Target>> hm_tsp = new HashMap<Long, ArrayList<Target>>();
         ArrayList<Long> sortedDist_tsp = new ArrayList<Long>();
 
         for(int i = 0; i< Simulation.NUMTELESCOPES; i++)
@@ -114,7 +114,15 @@ public class TravellingSalesmanPreoptimisation extends NNOptimisation
             int slewInSeconds = (int) possState.getSlewTime();
             setTime.add(GregorianCalendar.SECOND, slewInSeconds);
             long time = (long) Conversions.getTimeUntilObjectSetsInSeconds(telescopes[0].getLocation(), target, setTime);
-            hm_tsp.put(time, target);
+            if(hm_tsp.get(time)==null){
+                ArrayList<Target> values= new ArrayList<Target>();
+                values.add(target);
+                hm_tsp.put(time, values);
+            }else{
+                ArrayList<Target> values= hm_tsp.get(time);
+                values.add(target);
+                hm_tsp.replace(time, values);
+            }
             sortedDist_tsp.add(time);
         }
 
@@ -123,19 +131,27 @@ public class TravellingSalesmanPreoptimisation extends NNOptimisation
 
         Collections.sort(sortedDist_tsp);
 
-        int neighboursCap = (Math.min(sortedDist_tsp.size(), 10));
+        int neighboursCap = (Math.min(sortedDist_tsp.size(), neigCap));
 
-        for (int i = 0; i < neighboursCap; i++) {
-            for(int k=0; k< Simulation.NUMTELESCOPES; k++){
-                target = hm_tsp.get(sortedDist_tsp.get(i));
-                HorizonCoordinates hc = target.getHorizonCoordinates(telescopes[k].getLocation(), Clock.getScheduleClock()[k].getTime());
-                TelescopeState possState = telescopes[k].getStateForShortestSlew(hc);
-                GregorianCalendar setTime = Utilities.cloneDate(Clock.getScheduleClock()[k].getTime());
-                int slewInSeconds = (int) possState.getSlewTime();
-                setTime.add(GregorianCalendar.SECOND, slewInSeconds);
-                long time = (long) Conversions.getTimeUntilObjectSetsInSeconds(telescopes[k].getLocation(), target, setTime);
-                Connection c = new Connection(currents[k], target, time);
-                currents[k].addNeighbour(c);
+        LinkedHashSet<Long> set = new LinkedHashSet<Long>();
+        for (int i = 0; i < neighboursCap; i++){
+            set.add(sortedDist_tsp.get(i));
+        }
+
+        for (long s : set) {
+            ArrayList<Target> ts = hm_tsp.get(s);
+            for(Target t : ts){
+                System.out.println(t);
+                for(int k=0; k< Simulation.NUMTELESCOPES; k++){
+                    HorizonCoordinates hc = t.getHorizonCoordinates(telescopes[k].getLocation(), Clock.getScheduleClock()[k].getTime());
+                    TelescopeState possState = telescopes[k].getStateForShortestSlew(hc);
+                    GregorianCalendar setTime = Utilities.cloneDate(Clock.getScheduleClock()[k].getTime());
+                    int slewInSeconds = (int) possState.getSlewTime();
+                    setTime.add(GregorianCalendar.SECOND, slewInSeconds);
+                    long time = (long) Conversions.getTimeUntilObjectSetsInSeconds(telescopes[k].getLocation(), t, setTime);
+                    Connection c = new Connection(currents[k], t, time);
+                    currents[k].addNeighbour(c);
+                }
             }
         }
     }

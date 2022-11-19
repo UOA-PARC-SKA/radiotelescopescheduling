@@ -24,7 +24,9 @@ public class MultiTelescopesMTSPPolicy extends DispatchPolicy {
         for (Connection conn : pointables[0].getNeighbours()){
             Pointable p = conn.getOtherTarget(pointables[0]);
             points.add(p);
+            System.out.print(p);
         }
+        System.out.println();
 
         int p = points.size();
         int n = p+2;
@@ -173,14 +175,24 @@ public class MultiTelescopesMTSPPolicy extends DispatchPolicy {
                     tour[k] = findsubtour(x_for_each_k);
 
                     System.out.print("Tour: ");
-                    for (int j = 0; j < tour[k].length; j++)
+                    for (int j = 0; j < tour[k].length; j++) {
                         System.out.print(String.valueOf(tour[k][j]) + " ");
+                    }
                     System.out.println();
 
                     Connection conn = pointables[tour[k][1]-1].getNeighbours().get(tour[k][2]-m-1);
                     currentTelescopeStates[tour[k][1]-1] = telescopes[tour[k][1]-1].getStateForShortestSlew(points.get(tour[k][2]-1).getHorizonCoordinates(telescopes[tour[k][1]-1].getLocation(), Clock.getScheduleClock()[tour[k][1]-1].getTime()));
                     next[tour[k][1]-1]=conn;
 
+                    ArrayList<Pointable> buffer = new ArrayList<Pointable>();
+                    for(int i = 2; i<tour[k].length-1; i++) {
+                        buffer.add(points.get(tour[k][i] - 1));
+                        System.out.print(tour[k][i] - 1);
+                        System.out.print(points.get(tour[k][i] - 1));
+                        System.out.print(" ");
+                    }
+                    System.out.println();
+                    targetBuffer.set(tour[k][1]-1, buffer);
                 }
             }else{
                 System.out.print("Con't find proper solution");
@@ -194,7 +206,7 @@ public class MultiTelescopesMTSPPolicy extends DispatchPolicy {
 
         for(int i=0; i< Simulation.NUMTELESCOPES; i++){
             telescopes[i].applyNewState(currentTelescopeStates[i]);
-            schedules[i].addLink(next[0], currentTelescopeStates[i]);
+            schedules[i].addLink(next[i], currentTelescopeStates[i]);
         }
 
         return next;

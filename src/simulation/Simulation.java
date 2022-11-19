@@ -76,7 +76,7 @@ public class Simulation extends java.util.Observable
 
 	public void run() 
 	{	
-		scheduler.buildSchedule(props.getProperty("preoptimisation"));
+		scheduler.buildSchedule(props);
 		List<ObservationState>[] states = new List[NUMTELESCOPES];
 		for(int i=0; i<NUMTELESCOPES; i++){
 			states[i] = scheduler.getSchedule(i).getScheduleStates();

@@ -39,6 +39,8 @@ public abstract class DispatchPolicy {
 
 	protected Schedule[] schedules;
 
+	protected List<List<Pointable>> targetBuffer;
+
 	private double triangulationRatio;
 	private DynamicNNOptimisation dno;
 	private AllPulsarsAsNeighbours allOb;
@@ -57,6 +59,10 @@ public abstract class DispatchPolicy {
 		observables = new ArrayList<Target>();
 		remaining = new ArrayList<Target>();
 		waitTime = Integer.parseInt(props.getProperty("wait_time"));
+
+		targetBuffer = new ArrayList<List<Pointable>>();
+		for(int i = 0; i<Simulation.NUMTELESCOPES; i++)
+			targetBuffer.add(null);
 
 		for (Target target : targets) {
 			if (target.needsObserving())
@@ -104,7 +110,7 @@ public abstract class DispatchPolicy {
 		return true;
 	}
 
-	protected boolean waitForObservables(String preoptimisation, boolean[] teleMarks) throws LastEntryException {
+	protected boolean waitForObservables(String preoptimisation, int neigCap, boolean[] teleMarks) throws LastEntryException {
 		System.out.println("Now waiting!");
 		int[] waitingPeriod = new int[Simulation.NUMTELESCOPES];
 		boolean not_wait = false;
@@ -150,7 +156,7 @@ public abstract class DispatchPolicy {
 				Pointable[] pointables = new Pointable[Simulation.NUMTELESCOPES];
 				for(int i=0; i< Simulation.NUMTELESCOPES; i++)
 					pointables[i] = schedules[i].getCurrentState().getCurrentTarget();
-				addNeighbours(preoptimisation, pointables);
+				addNeighbours(preoptimisation, neigCap, pointables);
 				not_wait = false;
 				break;
 			} catch (OutOfObservablesException e1) {
@@ -272,9 +278,34 @@ public abstract class DispatchPolicy {
 		return next;
 	}
 
+	public boolean getTargetFromBuffer(int count){
+		for(int i = 0; i<Simulation.NUMTELESCOPES; i++)
+			if(count >= targetBuffer.get(i).size())
+				return false;
+		for(int i = 0; i<Simulation.NUMTELESCOPES; i++){
+			Target target = (Target) targetBuffer.get(i).get(count);
+			HorizonCoordinates hc = target.getHorizonCoordinates(telescopes[i].getLocation(), Clock.getScheduleClock()[i].getTime());
+			TelescopeState possState = telescopes[i].getStateForShortestSlew(hc);
+			GregorianCalendar setTime = Utilities.cloneDate(Clock.getScheduleClock()[i].getTime());
+			int slewInSeconds = (int) possState.getSlewTime();
+			setTime.add(GregorianCalendar.SECOND, slewInSeconds);
+			long time = (long) Conversions.getTimeUntilObjectSetsInSeconds(telescopes[i].getLocation(), target, setTime);
+			Pointable current = schedules[i].getCurrentState().getCurrentTarget();
+			Connection c = new Connection(current, target, time);
+
+			addNeighbourtoScheduleState(i, c, Clock.getScheduleClock()[i]);
+		}
+		return true;
+	}
+
 	public void addNeighbourtoScheduleState(int telescope_num, Connection link, Clock clock){
 		Target newTarget = (Target) link.getOtherTarget(schedules[telescope_num].getCurrentState().getCurrentTarget());
 		Observable o = newTarget.findObservableByObservationTime();
+		if(o == null)
+			System.out.println("what the hall?");
+		TelescopeState newState = telescopes[telescope_num].getStateForShortestSlew(newTarget.getHorizonCoordinates(telescopes[telescope_num].getLocation(), Clock.getScheduleClock()[telescope_num].getTime()));
+		telescopes[telescope_num].applyNewState(newState);
+		schedules[telescope_num].addLink(link, newState);
 		schedules[telescope_num].addState(new ObservationState(newTarget, clock.getTime(), link, o, telescopes[telescope_num].getLocation()));
 	}
 
@@ -308,16 +339,16 @@ public abstract class DispatchPolicy {
 
 
 
-	public void addNeighbours(String preoptimisation, Pointable[] currents) throws OutOfObservablesException {
+	public void addNeighbours(String preoptimisation, int neigCap, Pointable[] currents) throws OutOfObservablesException {
 		if (preoptimisation.equals("tsp")) {
-			tspo.createTSPLinks(observables, currents, triangulationRatio, Clock.getScheduleClock(), telescopes[0].getLocation(), telescopes);
+			tspo.createTSPLinks(observables, currents, triangulationRatio, Clock.getScheduleClock(), telescopes[0].getLocation(), telescopes, neigCap);
 
 		}
 		else if (preoptimisation.equals("all")){
 			allOb.createAllLinks(observables, currents, triangulationRatio, Clock.getScheduleClock(), telescopes[0].getLocation(), telescopes);
 		}
 		else {
-			tspo.createTSPLinks(observables, currents, triangulationRatio, Clock.getScheduleClock(), telescopes[0].getLocation(), telescopes);
+			tspo.createTSPLinks(observables, currents, triangulationRatio, Clock.getScheduleClock(), telescopes[0].getLocation(), telescopes, neigCap);
 			}
 
 		for(Pointable current : currents)

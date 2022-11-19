@@ -102,19 +102,40 @@ public class Scheduler
 
 
 
-	public void buildSchedule(String preoptimisation)
+	public void buildSchedule(Properties props)
 	{
 		makeInitialState();
+		String preoptimisation = props.getProperty("preoptimisation");
+		int neigCap = Integer.parseInt(props.getProperty("used_neighbour_num"));
+
+		int reschedule_freq = Integer.parseInt(props.getProperty("reschedule_freq"));
+		int counter = -1;
+		boolean reschedule_everytime = Boolean.parseBoolean(props.getProperty("reschedule_everytime"));
 
 		boolean complete = false;
 		while (!complete)
 		{
 			System.out.println("running");
+			counter++;
+			if(counter==reschedule_freq)
+				counter=0;
+
+			if(!reschedule_everytime && counter>0){
+				//read targets from buffer
+				if(policy.getTargetFromBuffer(counter)){
+					for(int i=0; i< Simulation.NUMTELESCOPES; i++)
+						observations[i].observe(schedules[i].getCurrentState());
+					continue;
+				}
+				else
+					counter = 0;
+			}
+
 			try {
 				Pointable[] pointables = new Pointable[Simulation.NUMTELESCOPES];
 				for(int i=0; i< Simulation.NUMTELESCOPES; i++)
 					pointables[i] = schedules[i].getCurrentState().getCurrentTarget();
-				policy.addNeighbours(preoptimisation, pointables);
+				policy.addNeighbours(preoptimisation, neigCap, pointables);
 
 				if(schedules[0].getCurrentState().getCurrentTarget().getNeighbours().size()<Simulation.NUMTELESCOPES){
 					System.out.println("targets are not enough for all telescopes");
@@ -124,6 +145,7 @@ public class Scheduler
 						policy.addNeighbourtoScheduleState(i, link, Clock.getScheduleClock()[i]);
 						observations[i].observe(schedules[i].getCurrentState());
 					}
+					counter = -1;
 					continue;
 				}
 
@@ -145,15 +167,17 @@ public class Scheduler
 								continue;
 							observations[i].observe(schedules[i].getCurrentState());
 						}
+						counter = -1;
 						continue;
 					}
 					try {
-						if(policy.waitForObservables(preoptimisation, teleMarks)){
+						if(policy.waitForObservables(preoptimisation, neigCap, teleMarks)){
 							for(int i=0; i< Simulation.NUMTELESCOPES; i++){
 								if(!teleMarks[i])
 									continue;
 								observations[i].observe(schedules[i].getCurrentState());
 							}
+							counter = -1;
 							continue;
 						}
 
@@ -165,6 +189,7 @@ public class Scheduler
 								policy.addNeighbourtoScheduleState(i, link, Clock.getScheduleClock()[i]);
 								observations[i].observe(schedules[i].getCurrentState());
 							}
+							counter = -1;
 							continue;
 						}
 
