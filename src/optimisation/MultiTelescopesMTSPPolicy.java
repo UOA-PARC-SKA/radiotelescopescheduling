@@ -187,11 +187,11 @@ public class MultiTelescopesMTSPPolicy extends DispatchPolicy {
                     ArrayList<Pointable> buffer = new ArrayList<Pointable>();
                     for(int i = 2; i<tour[k].length-1; i++) {
                         buffer.add(points.get(tour[k][i] - 1));
-                        System.out.print(tour[k][i] - 1);
-                        System.out.print(points.get(tour[k][i] - 1));
-                        System.out.print(" ");
+                        //System.out.print(tour[k][i] - 1);
+                        //System.out.print(points.get(tour[k][i] - 1));
+                        //System.out.print(" ");
                     }
-                    System.out.println();
+                    //System.out.println();
                     targetBuffer.set(tour[k][1]-1, buffer);
                 }
             }else{
@@ -222,17 +222,17 @@ public class MultiTelescopesMTSPPolicy extends DispatchPolicy {
         for(int j = 0; j < n; j++){
             if(j<=m){
                 cost[0][j] = 0.0;
-                cost[n-1][j] = 10000.0;
+                cost[n-1][j] = 1000000.0;
             }
             else{
                 cost[0][j] = 10000.0;
-                cost[n-1][j] = 10000.0;
+                cost[n-1][j] = 1000000.0;
             }
         }
         for(int i = 0; i < n-1; i++){
             if(i<=m){
-                cost[i][0] = 0;
-                cost[i][n-1] = 10000;
+                cost[i][0] = 10000;
+                cost[i][n-1] = 1000000;
             }
 
             else{
@@ -240,8 +240,6 @@ public class MultiTelescopesMTSPPolicy extends DispatchPolicy {
                 cost[i][n-1] = 10000;
             }
         }
-        for(int k = 1; k<=m; k++) // Give a much larger to the cost of the path that from start to the end directly
-            cost[k][n-1]=1000000; // in case one telescope do nothing.
 
         for(int i = 1; i< n-1; i++)
             for(int j = 1; j<n-1; j++){

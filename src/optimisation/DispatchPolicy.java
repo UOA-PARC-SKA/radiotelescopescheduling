@@ -301,8 +301,6 @@ public abstract class DispatchPolicy {
 	public void addNeighbourtoScheduleState(int telescope_num, Connection link, Clock clock){
 		Target newTarget = (Target) link.getOtherTarget(schedules[telescope_num].getCurrentState().getCurrentTarget());
 		Observable o = newTarget.findObservableByObservationTime();
-		if(o == null)
-			System.out.println("what the hall?");
 		TelescopeState newState = telescopes[telescope_num].getStateForShortestSlew(newTarget.getHorizonCoordinates(telescopes[telescope_num].getLocation(), Clock.getScheduleClock()[telescope_num].getTime()));
 		telescopes[telescope_num].applyNewState(newState);
 		schedules[telescope_num].addLink(link, newState);

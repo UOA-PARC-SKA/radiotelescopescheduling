@@ -141,7 +141,7 @@ public class TravellingSalesmanPreoptimisation extends NNOptimisation
         for (long s : set) {
             ArrayList<Target> ts = hm_tsp.get(s);
             for(Target t : ts){
-                System.out.println(t);
+                //System.out.println(t);
                 for(int k=0; k< Simulation.NUMTELESCOPES; k++){
                     HorizonCoordinates hc = t.getHorizonCoordinates(telescopes[k].getLocation(), Clock.getScheduleClock()[k].getTime());
                     TelescopeState possState = telescopes[k].getStateForShortestSlew(hc);
