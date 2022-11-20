@@ -50,6 +50,21 @@ The main class that includes the main function which is needed to run the progra
     2) Add `gurobi_root/win64/lib` and `gurobi_root/win64/bin` as project library 
 10) The program can be started by running the SchedulingMain main function.
 
+
+## The configurations of each ongoing test
+### Reschedule step test
+This test must be curried by `MultiTelescopesMTSPPolicy` policy with `tsp` preoptimization policy.
+Change the `used_neighbour_num` in config file to set the number of neighbours that preoptimization policy 
+return. Set the `reschedule_everytime` to true for the case of single reschedule step, which means
+recalculate the schedule list after each observation is done. Set the `reschedule_everytime` to false
+for the case of multiple reschedule step and use `reschedule_freq` to set how many observations 
+will take after a reschedule. Use `teles_num` set the number of telescopes.
+### Affect of neighbour number 
+This test must use `tsp` preoptimization policy. Firstly fix the `reschedule_freq` (if not use
+`MultiTelescopesMTSPPolicy` policy, please set the `reschedule_everytime` to true). Use `teles_num` set the number of telescopes.
+Change the `used_neighbour_num` to set the number of neighbours.
+### 
+
 ## How to change the policy being used
 In the config file which is in the root directory, change the policy_class property to optimisation.<class name of the policy>, for eg: for policy with class name LargestSlewPolicy, change the policy_class property to optimisation.LargestSlewPolicy.
 
