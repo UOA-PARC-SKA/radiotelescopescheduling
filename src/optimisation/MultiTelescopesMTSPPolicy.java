@@ -6,6 +6,7 @@ import observation.interference.SkyState;
 import simulation.Clock;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 
@@ -52,6 +53,10 @@ public class MultiTelescopesMTSPPolicy extends DispatchPolicy {
             // Create empty model
             GRBModel model = new GRBModel(env);
 
+            //model.set(GRB.IntParam.NumericFocus, 1);
+            //model.set(GRB.IntParam.MIPFocus, 1);
+            //model.set(GRB.DoubleParam.NoRelHeurTime, 1);
+
             // Create variables
             GRBVar[][][] x = new GRBVar[n][n][m];
 
@@ -78,12 +83,26 @@ public class MultiTelescopesMTSPPolicy extends DispatchPolicy {
 
 
             int cc = 0;
+
+            for(int k = 0; k<m; k++){
+                for(int i = 0; i<=m; i++) {
+                    x[i][n - 1][k].set(GRB.DoubleAttr.LB, 0);
+                    x[i][n-1][k].set(GRB.DoubleAttr.UB, 0);
+                }
+            }
+
             // Add constraint
             for(int k = 0; k<m; k++){
                 expr = new GRBLinExpr();
                 for(int i = 1; i<n-1; i++)
                     expr.addTerm(1.0, x[i][n-1][k]);
                 model.addConstr(expr, GRB.EQUAL, 1, "c"+String.valueOf(cc++));
+            }
+            for(int k = 0; k<m; k++){
+                for(int i = 0; i<n; i++) {
+                    x[n - 1][i][k].set(GRB.DoubleAttr.LB, 0);
+                    x[n - 1][i][k].set(GRB.DoubleAttr.UB, 0);
+                }
             }
 
 
@@ -93,6 +112,12 @@ public class MultiTelescopesMTSPPolicy extends DispatchPolicy {
                 for(int j = 1; j<n-1; j++)
                     expr.addTerm(1.0, x[0][j][k]);
                 model.addConstr(expr, GRB.EQUAL, 1, "c"+String.valueOf(cc++));
+            }
+            for(int k = 0; k<m; k++){
+                for(int j = 0; j<n; j++) {
+                    x[j][0][k].set(GRB.DoubleAttr.UB, 0);
+                    x[j][0][k].set(GRB.DoubleAttr.LB, 0);
+                }
             }
 
             // Add constraint
@@ -222,22 +247,22 @@ public class MultiTelescopesMTSPPolicy extends DispatchPolicy {
         for(int j = 0; j < n; j++){
             if(j<=m){
                 cost[0][j] = 0.0;
-                cost[n-1][j] = 1000000.0;
+                cost[n-1][j] = 100000.0;
             }
             else{
-                cost[0][j] = 10000.0;
-                cost[n-1][j] = 1000000.0;
+                cost[0][j] = 100000.0;
+                cost[n-1][j] = 100000.0;
             }
         }
         for(int i = 0; i < n-1; i++){
             if(i<=m){
-                cost[i][0] = 10000;
-                cost[i][n-1] = 1000000;
+                cost[i][0] = 0;
+                cost[i][n-1] = 100000.0;
             }
 
             else{
-                cost[i][0] = 10000;
-                cost[i][n-1] = 10000;
+                cost[i][0] = 100000.0;
+                cost[i][n-1] = 100000.0;
             }
         }
 
@@ -245,7 +270,7 @@ public class MultiTelescopesMTSPPolicy extends DispatchPolicy {
             for(int j = 1; j<n-1; j++){
                 HorizonCoordinates current = points.get(i-1).getHorizonCoordinates(telescopes[0].getLocation(), Clock.getScheduleClock()[0].getTime());
                 HorizonCoordinates next = points.get(j-1).getHorizonCoordinates(telescopes[0].getLocation(), Clock.getScheduleClock()[0].getTime());
-                cost[i][j] = Telescope.calculateShortestSlewTimeBetween(current, next);
+                cost[i][j] = Telescope.calculateShortestSlewTimeBetween(current, next)/100.0;
             }
 
         return cost;
@@ -260,7 +285,7 @@ public class MultiTelescopesMTSPPolicy extends DispatchPolicy {
         tour[0] = 0;
         for(int k = 1; k<tour.length; k++){
             for(int j = 0; j<n; j++)
-                if(sol[tour[k-1]][j] == 1){
+                if(sol[tour[k-1]][j] > 0.5){
                     tour[k] = j;
                     break;
                 }
