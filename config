@@ -24,4 +24,4 @@ preoptimisation=tsp
 used_neighbour_num = 30
 teles_num=3
 reschedule_everytime=false
-reschedule_freq=3
+reschedule_freq=4

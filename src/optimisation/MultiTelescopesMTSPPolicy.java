@@ -189,6 +189,10 @@ public class MultiTelescopesMTSPPolicy extends DispatchPolicy {
 
 
 
+            if (model.get(GRB.IntAttr.Status) != GRB.Status.OPTIMAL) {
+                System.out.println("The status code is:");
+                System.out.println(model.get(GRB.IntAttr.Status));
+            }
             if (model.get(GRB.IntAttr.SolCount) > 0) {
                 int[][] tour = new int[m][];
                 double[][] x_for_each_k = new double[n][n];
@@ -223,6 +227,11 @@ public class MultiTelescopesMTSPPolicy extends DispatchPolicy {
                 System.out.print("Con't find proper solution");
                 System.exit(1);
             }
+
+            model.dispose();
+            env.dispose();
+            // added this here in hope to fix the JVM error
+            System.gc();
 
         }catch (GRBException e) {
             System.out.println("Error code: " + e.getErrorCode() + ". " +
