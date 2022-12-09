@@ -279,7 +279,7 @@ public class MultiTelescopesMTSPPolicy extends DispatchPolicy {
             for(int j = 1; j<n-1; j++){
                 HorizonCoordinates current = points.get(i-1).getHorizonCoordinates(telescopes[0].getLocation(), Clock.getScheduleClock()[0].getTime());
                 HorizonCoordinates next = points.get(j-1).getHorizonCoordinates(telescopes[0].getLocation(), Clock.getScheduleClock()[0].getTime());
-                cost[i][j] = Telescope.calculateShortestSlewTimeBetween(current, next)/100.0;
+                cost[i][j] = Telescope.calculateShortestSlewTimeBetween(current, next)/100.0;// divided by 100 in order to make the solver running faster
             }
 
         return cost;

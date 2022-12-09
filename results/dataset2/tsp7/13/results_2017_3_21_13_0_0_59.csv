@@ -1,0 +1,24 @@
+Start time,  21/03/2017 13:00:00,1490097600000
+End time,  22/03/2017 16:00:41,1490194841000
+Duration,  1 day, 3 hours, 0 minute, 41 seconds,97241000
+Slew time, 0 day, 0 hour, 12 minutes, 25 seconds,745000.0
+Integration time, 0 day, 1 hour, 33 minutes, 16 seconds,5596000.0
+Waiting time, 1 day, 1 hour, 15 minutes, 0 second,9.09E7
+Relative slew time, 0.007661377402535968
+Relative integration time, 0.05754774220750507
+Relative waiting time, 0.934790880389959
+Start, End, Name, RA, DEC, Slew (to here), Expected Int, Actual Int, This Int, Wait time, Scint timescale, Attempt no, # sats cons, Obs result, Interruption, Comment 
+21/03/2017 13:00:00,21/03/2017 13:05:43,J0843+0719,2.2844774567868544,0.12764077633515641,43.0,284,incomplete,300.0,0,600,1,0,4,0,Aborted: Scintillation too low within first five minutes.
+21/03/2017 13:05:43,21/03/2017 13:17:44,J0625+10,1.6831518973920316,0.17918713653808452,34.0,402,687.0,687.0,0,20,1,0,3,0,Completed incrementally checking scint every 20 seconds.
+21/03/2017 13:17:44,21/03/2017 13:18:42,J0623+0340,1.6745531692218207,0.0640283732367742,7.0,82,51.0,51.0,0,180,1,0,1,0,Completed: Shortened interval; scintillation of 1.6097960234514161
+21/03/2017 13:18:42,21/03/2017 13:25:41,J0621+0336,1.6632421266719581,0.06305254025943692,0.0,427,419.0,419.0,0,180,1,0,3,0,Completed incrementally checking scint every 180 seconds.
+21/03/2017 13:25:41,21/03/2017 14:18:59,J1142+0119,3.0630528372500483,0.022980168484592004,257.0,1106,2941.0,2941.0,0,60,1,0,3,0,Completed incrementally checking scint every 60 seconds.
+21/03/2017 14:18:59,21/03/2017 14:27:03,J1627+1419,4.3079641222725975,0.24997332767584454,49.0,311,435.0,435.0,0,180,1,0,3,0,Completed incrementally checking scint every 180 seconds.
+21/03/2017 14:58:03,21/03/2017 15:33:39,J1738+0333,4.620320378054876,0.06201187154863972,13.0,613,263.0,263.0,1860,5400,1,0,1,0,Completed: Shortened interval; scintillation of 2.328682051262293
+21/03/2017 15:02:39,21/03/2017 15:05:38,J1736+05,4.611596216082018,0.10122909661567112,89.0,186,incomplete,90.0,0,60,1,0,3,2,Aborted: Checked scintillation repeatedly; interrupted by satellite IRIDIUM 83 [+]
+21/03/2017 15:05:38,21/03/2017 15:08:49,J1739+0612,4.622065719044209,0.10834810070908354,0.0,366,191.0,191.0,0,180,1,0,3,0,Completed incrementally checking scint every 180 seconds.
+21/03/2017 15:08:49,21/03/2017 15:09:59,J1736+05,4.611596216082018,0.10122909661567112,1.0,186,159.0,69.0,45480,60,2,0,3,0,Completed incrementally checking scint every 60 seconds.Waited for more observables to rise above the horizon. Waited for more observables to rise above the horizon. Waited for more observables to rise above the horizon. Waited for more observables to rise above the horizon. Waited for more observables to rise above the horizon. Waited for more observables to rise above the horizon. Waited for more observables to rise above the horizon. Waited for more observables to rise above the horizon. 
+22/03/2017 03:48:59,22/03/2017 03:51:28,B1911+11,5.036010839171565,0.19840369641622319,89.0,844,incomplete,0.0,60,600,2,0,3,1,Waited for more observables to rise above the horizon. Aborted: Checked scintillation repeatedly; observed until object set. 
+22/03/2017 03:50:28,22/03/2017 03:54:27,J1904+0738,4.992189475922752,0.133477399760666,89.0,182,150.0,150.0,0,60,2,0,3,0,Completed incrementally checking scint every 60 seconds.
+22/03/2017 03:54:27,22/03/2017 03:55:01,J2038+35,5.40179403492245,0.6108652381980153,34.0,1643,incomplete,0.0,0,5400,2,0,1,1,Aborted: High scintillation; observed until object set.
+22/03/2017 03:57:01,22/03/2017 03:59:41,J1855+0205,4.9554294239393,0.036537498263139075,40.0,5293,incomplete,0.0,43500,20,2,0,3,1,Waited for more observables to rise above the horizon. Aborted: Checked scintillation repeatedly; observed until object set. Waited for more observables to rise above the horizon. Waited for more observables to rise above the horizon. Waited for more observables to rise above the horizon. Waited for more observables to rise above the horizon. Waited for more observables to rise above the horizon. 

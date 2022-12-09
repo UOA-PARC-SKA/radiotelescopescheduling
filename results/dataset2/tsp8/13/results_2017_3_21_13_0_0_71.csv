@@ -1,0 +1,19 @@
+Start time,  21/03/2017 13:00:00,1490097600000
+End time,  22/03/2017 17:21:06,1490199666000
+Duration,  1 day, 4 hours, 21 minutes, 6 seconds,102066000
+Slew time, 0 day, 0 hour, 8 minutes, 5 seconds,485000.0
+Integration time, 0 day, 1 hour, 20 minutes, 1 second,4801000.0
+Waiting time, 1 day, 2 hours, 53 minutes, 0 second,9.678E7
+Relative slew time, 0.004751827249034938
+Relative integration time, 0.0470381909744675
+Relative waiting time, 0.9482099817764975
+Start, End, Name, RA, DEC, Slew (to here), Expected Int, Actual Int, This Int, Wait time, Scint timescale, Attempt no, # sats cons, Obs result, Interruption, Comment 
+21/03/2017 13:00:00,21/03/2017 13:30:09,B0943+10,2.5574600417681577,0.1721815788460517,42.0,1368,1767.0,1767.0,0,20,1,0,3,0,Completed incrementally checking scint every 20 seconds.
+21/03/2017 13:30:09,21/03/2017 13:51:53,J0627+0649,1.6925060331513266,0.11923570698986471,64.0,1709,incomplete,1240.0,0,1800,1,0,1,2,Aborted: High scintillation; interrupted by satellite IRIDIUM 95 [+]
+21/03/2017 13:51:53,21/03/2017 14:04:13,J0621+0336,1.6632421266719581,0.06305254025943692,7.0,427,733.0,733.0,0,180,1,0,3,0,Completed incrementally checking scint every 180 seconds.
+21/03/2017 14:04:13,21/03/2017 14:09:13,J0627+0649,1.6925060331513266,0.11923570698986471,3.0,1709,1537.0,297.0,0,1800,2,0,2,0,Completed: Nominal time; scintillation good.
+21/03/2017 14:09:13,21/03/2017 14:14:06,B0626+24,1.6977492494792945,0.42345226793254537,13.0,609,incomplete,280.0,7080,1800,3,0,2,2,Aborted: Normal scintillation; interrupted by satellite IRIDIUM 33 [-]Waited for more observables to rise above the horizon. Waited for more observables to rise above the horizon. Waited for more observables to rise above the horizon. 
+21/03/2017 17:36:06,21/03/2017 19:04:32,J1710+49,4.496331763398225,0.8610290976505359,89.0,231,177.0,177.0,39540,180,1,0,3,0,Completed incrementally checking scint every 180 seconds.Waited for more observables to rise above the horizon. Waited for more observables to rise above the horizon. 
+22/03/2017 03:42:32,22/03/2017 04:13:42,J1929+1955,5.1020025599486605,0.3476497581177131,89.0,327,1201.0,161.0,2280,20,3,0,3,0,Completed incrementally checking scint every 20 seconds.Waited for more observables to rise above the horizon. 
+22/03/2017 04:01:42,22/03/2017 04:09:37,B1933+15,5.131378538382623,0.2724458962363148,89.0,575,683.0,146.0,240,60,3,0,3,0,Completed incrementally checking scint every 60 seconds.
+22/03/2017 04:08:37,22/03/2017 04:13:06,J1910+0225,5.01857492722209,0.04229320628527147,89.0,575,incomplete,0.0,47640,600,3,0,2,1,Waited for more observables to rise above the horizon. Aborted: Normal scintillation; observed until object set.Waited for more observables to rise above the horizon. Waited for more observables to rise above the horizon. Waited for more observables to rise above the horizon. Waited for more observables to rise above the horizon. 
