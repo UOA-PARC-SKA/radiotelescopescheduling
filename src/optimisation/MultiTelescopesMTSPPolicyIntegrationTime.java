@@ -40,18 +40,19 @@ public class MultiTelescopesMTSPPolicyIntegrationTime extends MultiTelescopesMTS
                 cost[i][n-1] = 100000;
             }
         }
-        for(int k = 1; k<=m; k++) // Give a much larger to the cost of the path that from start to the end directly
-            cost[k][n-1]=10000000; // in case one telescope do nothing.
 
         for(int i = 1; i< n-1; i++)
             for(int j = 1; j<n-1; j++){
-                if(j==1||j==2||j==3){
-                    cost[i][j] = 0;
+                if (j - 1<m) {
+                    cost[i][j]=0;
+                    continue;
                 }
-                else {
-                    Target target = (Target) points.get(j-1);
-                    cost[i][j] = target.findObservableByObservationTime().getRemainingIntegrationTime();
-                }
+                Target target = (Target) points.get(j-1);
+                HorizonCoordinates current = points.get(i-1).getHorizonCoordinates(telescopes[0].getLocation(), Clock.getScheduleClock()[0].getTime());
+                HorizonCoordinates next = points.get(j-1).getHorizonCoordinates(telescopes[0].getLocation(), Clock.getScheduleClock()[0].getTime());
+                double observeTime = target.findObservableByObservationTime().getRemainingIntegrationTime();
+                double slewTime = Telescope.calculateShortestSlewTimeBetween(current, next);
+                cost[i][j] = (observeTime+slewTime)/1000.0;
             }
 
 
