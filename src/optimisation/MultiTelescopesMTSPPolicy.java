@@ -84,6 +84,7 @@ public class MultiTelescopesMTSPPolicy extends DispatchPolicy {
 
             int cc = 0;
 
+            //virtual depot and starting points of telescopes should not go to the end directly
             for(int k = 0; k<m; k++){
                 for(int i = 0; i<=m; i++) {
                     x[i][n - 1][k].set(GRB.DoubleAttr.LB, 0);
@@ -98,6 +99,7 @@ public class MultiTelescopesMTSPPolicy extends DispatchPolicy {
                     expr.addTerm(1.0, x[i][n-1][k]);
                 model.addConstr(expr, GRB.EQUAL, 1, "c"+String.valueOf(cc++));
             }
+            //no out degree of the end point
             for(int k = 0; k<m; k++){
                 for(int i = 0; i<n; i++) {
                     x[n - 1][i][k].set(GRB.DoubleAttr.LB, 0);
@@ -113,6 +115,7 @@ public class MultiTelescopesMTSPPolicy extends DispatchPolicy {
                     expr.addTerm(1.0, x[0][j][k]);
                 model.addConstr(expr, GRB.EQUAL, 1, "c"+String.valueOf(cc++));
             }
+            // no in degree of the virtual depot
             for(int k = 0; k<m; k++){
                 for(int j = 0; j<n; j++) {
                     x[j][0][k].set(GRB.DoubleAttr.UB, 0);
