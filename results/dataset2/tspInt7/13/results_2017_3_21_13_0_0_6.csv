@@ -1,0 +1,17 @@
+Start time,  21/03/2017 13:00:00,1490097600000
+End time,  22/03/2017 16:04:51,1490195091000
+Duration,  1 day, 3 hours, 4 minutes, 51 seconds,97491000
+Slew time, 0 day, 0 hour, 9 minutes, 14 seconds,554000.0
+Integration time, 0 day, 1 hour, 51 minutes, 37 seconds,6697000.0
+Waiting time, 1 day, 1 hour, 4 minutes, 0 second,9.024E7
+Relative slew time, 0.005682575827512283
+Relative integration time, 0.06869352042752665
+Relative waiting time, 0.9256239037449611
+Start, End, Name, RA, DEC, Slew (to here), Expected Int, Actual Int, This Int, Wait time, Scint timescale, Attempt no, # sats cons, Obs result, Interruption, Comment 
+21/03/2017 13:00:00,21/03/2017 13:03:52,J0815+0939,2.160483158072796,0.16867007335377535,48.0,298,184.0,184.0,0,1800,1,0,1,0,Completed: Shortened interval; scintillation of 1.6164999203093446
+21/03/2017 13:03:52,21/03/2017 13:12:24,J0711+0931,1.8832233528712716,0.16621837056840444,17.0,659,495.0,495.0,0,180,1,0,3,0,Completed incrementally checking scint every 180 seconds.
+21/03/2017 13:12:24,21/03/2017 13:33:38,J0627+0649,1.6925060331513266,0.11923570698986471,12.0,1709,1542.0,1262.0,0,1800,2,0,1,0,Completed: Shortened interval; scintillation of 1.0719462567216549
+21/03/2017 13:33:38,21/03/2017 14:16:24,J1238+21,3.30908390247795,0.3816991440880299,262.0,751,2304.0,2304.0,0,600,1,0,3,0,Completed incrementally checking scint every 600 seconds.
+21/03/2017 14:16:24,21/03/2017 14:20:18,J1627+1419,4.3079641222725975,0.24997332767584454,37.0,311,197.0,197.0,15420,180,1,0,3,0,Completed incrementally checking scint every 180 seconds.Waited for more observables to rise above the horizon. Waited for more observables to rise above the horizon. Waited for more observables to rise above the horizon. Waited for more observables to rise above the horizon. 
+21/03/2017 18:48:18,21/03/2017 19:00:57,B1753+52,4.687875831040429,0.9079217313284935,89.0,455,incomplete,10.0,30540,600,1,0,2,2,Waited for more observables to rise above the horizon. Aborted: Normal scintillation; interrupted by satellite GPS BIIF-7  (PRN 09)Waited for more observables to rise above the horizon. Waited for more observables to rise above the horizon. 
+22/03/2017 03:41:57,22/03/2017 04:54:51,J2006+3102,5.262967637336735,0.5416483889460069,89.0,3754,3342.0,2245.0,44280,600,3,0,3,0,Completed incrementally checking scint every 600 seconds.Waited for more observables to rise above the horizon. Waited for more observables to rise above the horizon. Waited for more observables to rise above the horizon. Waited for more observables to rise above the horizon. 

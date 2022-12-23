@@ -1,0 +1,25 @@
+Start time,  21/03/2017 13:00:00,1490097600000
+End time,  22/03/2017 16:04:52,1490195092000
+Duration,  1 day, 3 hours, 4 minutes, 52 seconds,97492000
+Slew time, 0 day, 0 hour, 19 minutes, 58 seconds,1198000.0
+Integration time, 0 day, 1 hour, 2 minutes, 54 seconds,3774000.0
+Waiting time, 1 day, 1 hour, 42 minutes, 0 second,9.252E7
+Relative slew time, 0.012288187748738359
+Relative integration time, 0.03871086858408895
+Relative waiting time, 0.9490009436671727
+Start, End, Name, RA, DEC, Slew (to here), Expected Int, Actual Int, This Int, Wait time, Scint timescale, Attempt no, # sats cons, Obs result, Interruption, Comment 
+21/03/2017 13:00:00,21/03/2017 13:10:30,J0943+41,2.543817384781735,0.7182029871956666,74.0,450,556.0,556.0,0,20,1,0,3,0,Completed incrementally checking scint every 20 seconds.
+21/03/2017 13:10:30,21/03/2017 13:19:47,B1257+12,3.4036521463529263,0.22134882305275824,307.0,352,250.0,250.0,0,5400,1,0,1,0,Completed: Shortened interval; scintillation of 1.4073438093308983
+21/03/2017 13:19:47,21/03/2017 13:27:44,J1238+21,3.30908390247795,0.3816991440880299,12.0,751,465.0,465.0,0,600,1,0,3,0,Completed incrementally checking scint every 600 seconds.
+21/03/2017 13:27:44,21/03/2017 13:30:00,J0740+41,2.011491962923465,0.7167485461523381,66.0,473,incomplete,70.0,0,1800,1,0,1,2,Aborted: High scintillation; interrupted by satellite IRIDIUM 60 [+]
+21/03/2017 13:30:00,21/03/2017 13:42:56,J0635+0533,1.724821633283396,0.09691910299060733,36.0,1039,incomplete,740.0,0,60,1,0,3,2,Aborted: Checked scintillation repeatedly; interrupted by satellite IRIDIUM 55 [+]
+21/03/2017 13:42:56,21/03/2017 13:46:08,J0533+0402,1.4548642856722165,0.07039737056551017,13.0,170,179.0,179.0,0,20,1,0,3,0,Completed incrementally checking scint every 20 seconds.
+21/03/2017 15:30:08,21/03/2017 17:21:23,J1720+2150,4.537950593853073,0.38112560950327723,218.0,507,217.0,217.0,8340,5400,1,0,1,0,Completed: Shortened interval; scintillation of 2.336337835932444Waited for more observables to rise above the horizon. Waited for more observables to rise above the horizon. Waited for more observables to rise above the horizon. 
+21/03/2017 17:36:23,21/03/2017 19:06:34,J1710+49,4.496331763398225,0.8610290976505359,89.0,231,282.0,282.0,5040,180,1,0,3,0,Completed incrementally checking scint every 180 seconds.
+21/03/2017 17:42:34,21/03/2017 17:45:54,J1900+30,4.975497365122835,0.5390158506575821,89.0,234,111.0,111.0,35940,600,1,0,1,0,Completed: Shortened interval; scintillation of 2.1175236994745923Waited for more observables to rise above the horizon. Waited for more observables to rise above the horizon. Waited for more observables to rise above the horizon. Waited for more observables to rise above the horizon. 
+22/03/2017 03:45:54,22/03/2017 03:48:23,J1928+1746,5.09945595730928,0.3102304322500038,89.0,2072,incomplete,0.0,60,20,3,0,3,1,Waited for more observables to rise above the horizon. Aborted: Checked scintillation repeatedly; observed until object set. 
+22/03/2017 03:47:23,22/03/2017 03:53:52,J1932+1916,5.115247332771065,0.33645584655320687,89.0,620,incomplete,300.0,0,1800,2,0,4,0,Aborted: Scintillation too low within first five minutes.
+22/03/2017 03:56:52,22/03/2017 04:00:12,J2038+35,5.40179403492245,0.6108652381980153,20.0,1643,incomplete,0.0,180,5400,2,0,2,1,Waited for more observables to rise above the horizon. Aborted: Normal scintillation; observed until object set.
+22/03/2017 03:57:12,22/03/2017 04:02:57,B1914+09,5.046353696679909,0.1720408859157937,89.0,326,383.0,256.0,0,60,3,0,3,0,Completed incrementally checking scint every 60 seconds.
+22/03/2017 04:02:57,22/03/2017 04:07:58,J1917+0834,5.051917551808085,0.14978139296817103,1.0,549,incomplete,300.0,0,1800,4,0,4,0,Aborted: Scintillation too low within first five minutes.
+22/03/2017 04:07:58,22/03/2017 04:08:52,J1907+0249,5.007788137946295,0.049358880873761855,6.0,402,338.0,48.0,42960,5400,4,0,1,0,Completed: Shortened interval; scintillation of 2.316187538515049Waited for more observables to rise above the horizon. Waited for more observables to rise above the horizon. 

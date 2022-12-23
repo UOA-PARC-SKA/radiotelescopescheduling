@@ -36,8 +36,8 @@ public class MultiTelescopesMTSPPolicy extends DispatchPolicy {
 
 
         double[][] cost = constructCostMatrix(points);
-        for(double[] i : cost)
-            System.out.println(Arrays.toString(i));
+        //for(double[] i : cost)
+            //System.out.println(Arrays.toString(i));
 
         double ub = 0;
         for(int i = 0; i< n; i++)
