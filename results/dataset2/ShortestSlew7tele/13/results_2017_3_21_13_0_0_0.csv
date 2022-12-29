@@ -1,0 +1,25 @@
+Start time,  21/03/2017 13:00:00,1490097600000
+End time,  22/03/2017 16:05:00,1490195100000
+Duration,  1 day, 3 hours, 5 minutes, 0 second,97500000
+Slew time, 0 day, 0 hour, 19 minutes, 4 seconds,1144000.0
+Integration time, 0 day, 1 hour, 32 minutes, 56 seconds,5576000.0
+Waiting time, 1 day, 1 hour, 13 minutes, 0 second,9.078E7
+Relative slew time, 0.011733333333333333
+Relative integration time, 0.05718974358974359
+Relative waiting time, 0.931076923076923
+Start, End, Name, RA, DEC, Slew (to here), Expected Int, Actual Int, This Int, Wait time, Scint timescale, Attempt no, # sats cons, Obs result, Interruption, Comment 
+21/03/2017 13:00:00,21/03/2017 13:12:20,J1046+0304,2.821850516285997,0.05355688253848934,38.0,768,702.0,702.0,0,1800,1,0,1,0,Completed: Shortened interval; scintillation of 1.0935313210968012
+21/03/2017 13:12:20,21/03/2017 13:20:00,B1133+16,3.0371090778789545,0.27665640609401493,15.0,192,445.0,445.0,0,20,1,0,3,0,Completed incrementally checking scint every 20 seconds.
+21/03/2017 13:20:00,21/03/2017 13:25:25,J0848+16,2.3076888813973357,0.29176087329171874,52.0,547,273.0,273.0,0,5400,1,0,1,0,Completed: Shortened interval; scintillation of 2.000052329891077
+21/03/2017 13:25:25,21/03/2017 13:34:23,B1541+09,4.117437145251993,0.16559460443815205,257.0,512,281.0,281.0,0,1800,1,0,1,0,Completed: Shortened interval; scintillation of 1.8235376411963864
+21/03/2017 13:34:23,21/03/2017 13:36:51,J1012+5307,2.672785151988384,0.9270733295670593,79.0,118,69.0,69.0,0,1800,1,0,1,0,Completed: Shortened interval; scintillation of 1.7162507027882334
+21/03/2017 13:36:51,21/03/2017 13:46:44,J0711+0931,1.8832233528712716,0.16621837056840444,54.0,659,539.0,539.0,0,180,1,0,3,0,Completed incrementally checking scint every 180 seconds.
+21/03/2017 13:46:44,21/03/2017 13:51:55,J0627+0649,1.6925060331513266,0.11923570698986471,11.0,1709,incomplete,300.0,0,1800,1,0,1,2,Aborted: High scintillation; interrupted by satellite IRIDIUM 95 [+]
+21/03/2017 13:51:55,21/03/2017 13:54:08,B0523+11,1.4221850534626992,0.19644204329971776,15.0,118,118.0,118.0,7500,1800,1,0,2,0,Completed: Nominal time; scintillation good.Waited for more observables to rise above the horizon. 
+21/03/2017 16:28:08,21/03/2017 17:06:07,J1842+1332,4.897827304527,0.23620849764178256,89.0,450,450.0,450.0,1740,600,1,0,2,0,Completed: Nominal time; scintillation good.
+21/03/2017 16:49:07,21/03/2017 17:11:33,J1843+2024,4.901915738299797,0.356311875676729,89.0,364,537.0,537.0,5640,20,1,0,3,0,Completed incrementally checking scint every 20 seconds.Waited for more observables to rise above the horizon. Waited for more observables to rise above the horizon. Waited for more observables to rise above the horizon. Waited for more observables to rise above the horizon. 
+21/03/2017 19:22:33,21/03/2017 20:32:00,J1941+43,5.1574479396432436,0.7571820071568733,89.0,477,418.0,418.0,3660,180,1,0,3,0,Completed incrementally checking scint every 180 seconds.
+21/03/2017 19:31:00,21/03/2017 19:37:55,B2000+40,5.247916354199848,0.7129374742865041,89.0,326,326.0,326.0,28860,600,1,0,2,0,Completed: Nominal time; scintillation good.Waited for more observables to rise above the horizon. Waited for more observables to rise above the horizon. Waited for more observables to rise above the horizon. Waited for more observables to rise above the horizon. Waited for more observables to rise above the horizon. 
+22/03/2017 03:39:55,22/03/2017 03:53:39,J2002+30,5.248932281268614,0.5337798629015991,89.0,427,675.0,675.0,60,20,2,0,3,0,Completed incrementally checking scint every 20 seconds.
+22/03/2017 03:56:39,22/03/2017 04:04:49,J1901+0435,4.980893341393584,0.08010576452972863,89.0,382,227.0,161.0,240,1800,3,0,1,0,Completed: Shortened interval; scintillation of 1.7378874741045676
+22/03/2017 04:00:49,22/03/2017 04:07:00,J1916+0852,5.0457905007469055,0.15492705993536332,89.0,322,282.0,282.0,43080,1800,2,0,1,0,Completed: Shortened interval; scintillation of 1.1400832811568398Waited for more observables to rise above the horizon. Waited for more observables to rise above the horizon. 
