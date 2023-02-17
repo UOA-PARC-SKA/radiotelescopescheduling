@@ -1,0 +1,27 @@
+Start time,  21/03/2017 13:00:00,1490097600000
+End time,  22/03/2017 16:04:31,1490195071000
+Duration,  1 day, 3 hours, 4 minutes, 31 seconds,97471000
+Slew time, 0 day, 0 hour, 23 minutes, 20 seconds,1400000.0
+Integration time, 0 day, 3 hours, 4 minutes, 11 seconds,1.1051E7
+Waiting time, 0 day, 23 hours, 37 minutes, 0 second,8.502E7
+Relative slew time, 0.014363246504088396
+Relative integration time, 0.11337731222620061
+Relative waiting time, 0.872259441269711
+Start, End, Name, RA, DEC, Slew (to here), Expected Int, Actual Int, This Int, Wait time, Scint timescale, Attempt no, # sats cons, Obs result, Interruption, Comment 
+21/03/2017 13:00:00,21/03/2017 13:51:08,J1022+1001,2.718204916782272,0.17507964958762018,43.0,3754,3025.0,3025.0,0,600,1,0,3,0,Completed incrementally checking scint every 600 seconds.
+21/03/2017 13:51:08,21/03/2017 13:56:10,J0633+0632,1.7180010320107069,0.11419737777167009,80.0,263,222.0,222.0,0,5400,1,0,1,0,Completed: Shortened interval; scintillation of 1.1821480517561995
+21/03/2017 13:56:10,21/03/2017 13:58:22,J0538+2817,1.476625428940753,0.493681703887056,24.0,127,108.0,108.0,0,180,1,0,1,0,Completed: Shortened interval; scintillation of 1.1713730982213626
+21/03/2017 13:58:22,21/03/2017 14:10:41,B1541+09,4.117437145251993,0.16559460443815205,227.0,512,512.0,512.0,0,1800,1,0,2,0,Completed: Nominal time; scintillation good.
+21/03/2017 14:10:41,21/03/2017 14:15:56,J1342+2822D,3.5873933777804443,0.4952662640742576,36.0,374,279.0,279.0,0,180,1,0,3,0,Completed incrementally checking scint every 180 seconds.
+21/03/2017 14:15:56,21/03/2017 14:21:27,J1342+2822A,3.5874515554221773,0.49524687152701324,1.0,844,incomplete,330.0,0,60,1,0,3,2,Aborted: Checked scintillation repeatedly; interrupted by satellite IRIDIUM 36 [-]
+21/03/2017 14:21:27,21/03/2017 14:34:38,J0943+41,2.543817384781735,0.7182029871956666,52.0,450,739.0,739.0,0,20,1,0,3,0,Completed incrementally checking scint every 20 seconds.
+21/03/2017 14:34:38,21/03/2017 14:46:43,J1046+0304,2.821850516285997,0.05355688253848934,358.0,768,367.0,367.0,4380,1800,1,0,1,0,Completed: Shortened interval; scintillation of 2.0918552979146554Waited for more observables to rise above the horizon. 
+21/03/2017 16:12:43,21/03/2017 16:45:42,J1544+4937,4.11930335455354,0.8662420785732818,89.0,1709,incomplete,1110.0,780,600,1,0,3,2,Waited for more observables to rise above the horizon. Aborted: Checked scintillation repeatedly; interrupted by satellite GSAT0212 (PRN E03)
+21/03/2017 17:36:42,21/03/2017 18:44:42,J1710+49,4.496331763398225,0.8610290976505359,89.0,231,151.0,151.0,3840,180,1,0,3,0,Completed incrementally checking scint every 180 seconds.
+21/03/2017 17:40:42,21/03/2017 17:53:42,J1544+4937,4.11930335455354,0.8662420785732818,84.0,1709,1806.0,696.0,0,600,2,0,3,0,Completed incrementally checking scint every 600 seconds.
+21/03/2017 17:53:42,21/03/2017 17:59:20,J1900+30,4.975497365122835,0.5390158506575821,38.0,234,incomplete,300.0,0,600,1,0,4,0,Aborted: Scintillation too low within first five minutes.
+21/03/2017 17:59:20,21/03/2017 18:07:14,B1918+26,5.06424546681339,0.4685161844053578,5.0,644,469.0,469.0,0,5400,1,0,1,0,Completed: Shortened interval; scintillation of 1.3736963057681424
+21/03/2017 18:10:14,21/03/2017 18:17:04,J1900+30,4.975497365122835,0.5390158506575821,7.0,234,523.0,223.0,180,600,2,0,1,0,Completed: Shortened interval; scintillation of 1.047006331108421
+21/03/2017 18:38:04,21/03/2017 19:21:19,J1800+50,4.716752303514675,0.8808094958398051,89.0,477,1066.0,1066.0,1440,60,1,0,3,0,Completed incrementally checking scint every 60 seconds.
+21/03/2017 18:57:19,21/03/2017 19:06:23,B1753+52,4.687875831040429,0.9079217313284935,89.0,455,455.0,455.0,31380,600,1,0,2,0,Completed: Nominal time; scintillation good.Waited for more observables to rise above the horizon. 
+22/03/2017 03:51:23,22/03/2017 04:11:31,J1949+2306,5.188523526975002,0.40344012880370594,89.0,2597,2735.0,999.0,43020,20,4,0,3,0,Completed incrementally checking scint every 20 seconds.Waited for more observables to rise above the horizon. Waited for more observables to rise above the horizon. 

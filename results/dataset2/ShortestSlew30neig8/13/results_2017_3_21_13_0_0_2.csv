@@ -1,0 +1,17 @@
+Start time,  21/03/2017 13:00:00,1490097600000
+End time,  22/03/2017 16:04:22,1490195062000
+Duration,  1 day, 3 hours, 4 minutes, 22 seconds,97462000
+Slew time, 0 day, 0 hour, 9 minutes, 3 seconds,543000.0
+Integration time, 0 day, 1 hour, 44 minutes, 19 seconds,6259000.0
+Waiting time, 1 day, 1 hour, 11 minutes, 0 second,9.066E7
+Relative slew time, 0.0055714021875192385
+Relative integration time, 0.06421990108965546
+Relative waiting time, 0.9302086967228254
+Start, End, Name, RA, DEC, Slew (to here), Expected Int, Actual Int, This Int, Wait time, Scint timescale, Attempt no, # sats cons, Obs result, Interruption, Comment 
+21/03/2017 13:00:00,21/03/2017 13:02:31,J0843+0719,2.2844774567868544,0.12764077633515641,43.0,284,108.0,108.0,0,600,1,0,1,0,Completed: Shortened interval; scintillation of 2.63779072518229
+21/03/2017 13:02:31,21/03/2017 13:15:03,J0711+0931,1.8832233528712716,0.16621837056840444,24.0,659,728.0,728.0,0,180,1,0,3,0,Completed incrementally checking scint every 180 seconds.
+21/03/2017 13:15:03,21/03/2017 13:34:28,J0635+0533,1.724821633283396,0.09691910299060733,13.0,1039,1152.0,1152.0,0,60,1,0,3,0,Completed incrementally checking scint every 60 seconds.
+21/03/2017 13:34:28,21/03/2017 13:44:31,J1342+2822D,3.5873933777804443,0.4952662640742576,254.0,374,349.0,349.0,0,180,1,0,3,0,Completed incrementally checking scint every 180 seconds.
+21/03/2017 13:44:31,21/03/2017 13:53:34,B1541+09,4.117437145251993,0.16559460443815205,31.0,512,512.0,512.0,39420,1800,1,0,2,0,Completed: Nominal time; scintillation good.Waited for more observables to rise above the horizon. Waited for more observables to rise above the horizon. Waited for more observables to rise above the horizon. Waited for more observables to rise above the horizon. Waited for more observables to rise above the horizon. Waited for more observables to rise above the horizon. 
+22/03/2017 03:39:34,22/03/2017 06:37:23,J2002+30,5.248932281268614,0.5337798629015991,89.0,427,440.0,440.0,10140,20,2,0,3,0,Completed incrementally checking scint every 20 seconds.
+22/03/2017 03:48:23,22/03/2017 04:39:22,J1928+1746,5.09945595730928,0.3102304322500038,89.0,2072,2970.0,2970.0,41100,20,2,0,3,0,Completed incrementally checking scint every 20 seconds.Waited for more observables to rise above the horizon. 

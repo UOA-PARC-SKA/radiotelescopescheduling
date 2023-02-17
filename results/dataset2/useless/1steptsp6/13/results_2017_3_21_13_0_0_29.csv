@@ -1,0 +1,24 @@
+Start time,  21/03/2017 13:00:00,1490097600000
+End time,  22/03/2017 16:04:26,1490195066000
+Duration,  1 day, 3 hours, 4 minutes, 26 seconds,97466000
+Slew time, 0 day, 0 hour, 23 minutes, 34 seconds,1414000.0
+Integration time, 0 day, 1 hour, 54 minutes, 52 seconds,6892000.0
+Waiting time, 1 day, 0 hour, 46 minutes, 0 second,8.916E7
+Relative slew time, 0.014507623171157122
+Relative integration time, 0.07071183797426794
+Relative waiting time, 0.9147805388545749
+Start, End, Name, RA, DEC, Slew (to here), Expected Int, Actual Int, This Int, Wait time, Scint timescale, Attempt no, # sats cons, Obs result, Interruption, Comment 
+21/03/2017 13:00:00,21/03/2017 13:16:10,J0751+1807,2.055791112963893,0.3163826354449581,58.0,1039,912.0,912.0,0,1800,1,0,1,0,Completed: Shortened interval; scintillation of 1.1391336375002283
+21/03/2017 13:16:10,21/03/2017 13:24:13,J0625+10,1.6831518973920316,0.17918713653808452,27.0,402,456.0,456.0,0,20,1,0,3,0,Completed incrementally checking scint every 20 seconds.
+21/03/2017 13:24:13,21/03/2017 13:27:14,J0533+0402,1.4548642856722165,0.07039737056551017,14.0,170,167.0,167.0,0,20,1,0,3,0,Completed incrementally checking scint every 20 seconds.
+21/03/2017 13:27:14,21/03/2017 13:35:42,J1313+0931,3.4617878492785863,0.1663686628095484,231.0,334,277.0,277.0,0,1800,1,0,1,0,Completed: Shortened interval; scintillation of 1.2055678703721429
+21/03/2017 13:35:42,21/03/2017 13:42:44,J0623+0340,1.6745531692218207,0.0640283732367742,122.0,82,incomplete,300.0,0,180,1,0,4,0,Aborted: Scintillation too low within first five minutes.
+21/03/2017 13:42:44,21/03/2017 13:53:45,B1541+09,4.117437145251993,0.16559460443815205,214.0,512,447.0,447.0,0,1800,1,0,1,0,Completed: Shortened interval; scintillation of 1.1441719469321925
+21/03/2017 13:53:45,21/03/2017 14:01:30,J0557+1550,1.5599934063134906,0.2763731100675954,141.0,4182,4001.0,324.0,12840,600,2,0,3,0,Completed incrementally checking scint every 600 seconds.Waited for more observables to rise above the horizon. Waited for more observables to rise above the horizon. Waited for more observables to rise above the horizon. 
+21/03/2017 17:41:30,21/03/2017 17:51:58,J1900+30,4.975497365122835,0.5390158506575821,89.0,234,179.0,179.0,2520,600,1,0,1,0,Completed: Shortened interval; scintillation of 1.308118739812736Waited for more observables to rise above the horizon. 
+21/03/2017 19:37:58,21/03/2017 21:20:18,J1941+43,5.1574479396432436,0.7571820071568733,88.0,477,1502.0,1492.0,5280,180,2,0,3,0,Completed incrementally checking scint every 180 seconds.Waited for more observables to rise above the horizon. 
+21/03/2017 20:37:18,21/03/2017 21:02:10,B1953+50,5.215535675103295,0.8900950934890015,89.0,166,143.0,143.0,3240,5400,1,0,1,0,Completed: Shortened interval; scintillation of 1.1571713766163163Waited for more observables to rise above the horizon. Waited for more observables to rise above the horizon. 
+22/03/2017 00:36:10,22/03/2017 04:03:18,J2021+4026,5.329798476057163,0.7059134451932209,74.0,402,534.0,234.0,12120,5400,2,0,1,0,Completed: Shortened interval; scintillation of 1.7167132735227673
+22/03/2017 03:32:18,22/03/2017 06:24:47,B1852+10,4.950141367193965,0.18811740454412218,89.0,581,incomplete,0.0,10260,600,3,0,2,1,Waited for more observables to rise above the horizon. Aborted: Normal scintillation; observed until object set.
+22/03/2017 03:39:47,22/03/2017 03:47:16,J1929+1955,5.1020025599486605,0.3476497581177131,89.0,327,incomplete,0.0,360,20,2,0,3,1,Waited for more observables to rise above the horizon. Aborted: Checked scintillation repeatedly; observed until object set. 
+22/03/2017 03:50:16,22/03/2017 04:33:26,J1902+0723,4.983899671030144,0.12911073141628054,89.0,1961,1961.0,1961.0,42540,5400,2,0,2,0,Completed: Nominal time; scintillation good.Waited for more observables to rise above the horizon. Waited for more observables to rise above the horizon. Waited for more observables to rise above the horizon. Waited for more observables to rise above the horizon. Waited for more observables to rise above the horizon. Waited for more observables to rise above the horizon. 

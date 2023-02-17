@@ -1,0 +1,21 @@
+Start time,  21/03/2017 13:00:00,1490097600000
+End time,  22/03/2017 16:04:15,1490195055000
+Duration,  1 day, 3 hours, 4 minutes, 15 seconds,97455000
+Slew time, 0 day, 0 hour, 8 minutes, 48 seconds,528000.0
+Integration time, 0 day, 1 hour, 19 minutes, 27 seconds,4767000.0
+Waiting time, 1 day, 1 hour, 36 minutes, 0 second,9.216E7
+Relative slew time, 0.005417885177774358
+Relative integration time, 0.048914883792519626
+Relative waiting time, 0.9456672310297061
+Start, End, Name, RA, DEC, Slew (to here), Expected Int, Actual Int, This Int, Wait time, Scint timescale, Attempt no, # sats cons, Obs result, Interruption, Comment 
+21/03/2017 13:00:00,21/03/2017 13:13:26,J1046+0304,2.821850516285997,0.05355688253848934,38.0,768,768.0,768.0,0,1800,1,0,2,0,Completed: Nominal time; scintillation good.
+21/03/2017 13:13:26,21/03/2017 13:18:42,B1133+16,3.0371090778789545,0.27665640609401493,15.0,192,301.0,301.0,0,20,1,0,3,0,Completed incrementally checking scint every 20 seconds.
+21/03/2017 13:18:42,21/03/2017 13:26:46,J1238+21,3.30908390247795,0.3816991440880299,11.0,751,473.0,473.0,0,600,1,0,3,0,Completed incrementally checking scint every 600 seconds.
+21/03/2017 13:26:46,21/03/2017 13:31:17,J1342+2822D,3.5873933777804443,0.4952662640742576,12.0,374,259.0,259.0,0,180,1,0,3,0,Completed incrementally checking scint every 180 seconds.
+21/03/2017 13:31:17,21/03/2017 13:33:03,J1012+5307,2.672785151988384,0.9270733295670593,45.0,118,61.0,61.0,0,1800,1,0,1,0,Completed: Shortened interval; scintillation of 1.9296892472806706
+21/03/2017 13:33:03,21/03/2017 13:36:01,B0540+23,1.4973223286090653,0.40988572669405726,58.0,844,incomplete,120.0,0,600,1,0,3,2,Aborted: Checked scintillation repeatedly; interrupted by satellite GPS BIIF-5  (PRN 30)
+21/03/2017 13:36:01,21/03/2017 13:56:46,J0557+1550,1.5599934063134906,0.2763731100675954,6.0,4182,5859.0,1239.0,13140,600,2,0,3,0,Completed incrementally checking scint every 600 seconds.Waited for more observables to rise above the horizon. Waited for more observables to rise above the horizon. Waited for more observables to rise above the horizon. Waited for more observables to rise above the horizon. Waited for more observables to rise above the horizon. Waited for more observables to rise above the horizon. 
+21/03/2017 18:37:46,21/03/2017 19:52:26,J1800+50,4.716752303514675,0.8808094958398051,89.0,477,671.0,671.0,3720,60,1,0,3,0,Completed incrementally checking scint every 60 seconds.
+21/03/2017 18:50:26,21/03/2017 18:56:55,B1753+52,4.687875831040429,0.9079217313284935,89.0,455,incomplete,300.0,0,600,1,0,4,0,Aborted: Scintillation too low within first five minutes.
+22/03/2017 03:28:55,22/03/2017 12:08:06,J1946+2611,5.17823262937293,0.4572239041449545,76.0,1728,incomplete,355.0,32220,1800,2,0,1,1,Waited for more observables to rise above the horizon. Aborted: High scintillation; observed until object set.Waited for more observables to rise above the horizon. Waited for more observables to rise above the horizon. Waited for more observables to rise above the horizon. Waited for more observables to rise above the horizon. Waited for more observables to rise above the horizon. 
+22/03/2017 04:04:06,22/03/2017 04:12:15,J1913+0617,5.0309115688736545,0.10966485466697704,89.0,399,293.0,220.0,43080,600,4,0,1,0,Completed: Shortened interval; scintillation of 1.4154076591399525Waited for more observables to rise above the horizon. Waited for more observables to rise above the horizon. Waited for more observables to rise above the horizon. 

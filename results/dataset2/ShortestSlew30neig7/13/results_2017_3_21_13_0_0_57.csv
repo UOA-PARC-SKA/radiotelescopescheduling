@@ -1,0 +1,23 @@
+Start time,  21/03/2017 13:00:00,1490097600000
+End time,  22/03/2017 16:12:05,1490195525000
+Duration,  1 day, 3 hours, 12 minutes, 5 seconds,97925000
+Slew time, 0 day, 0 hour, 17 minutes, 6 seconds,1026000.0
+Integration time, 0 day, 1 hour, 24 minutes, 59 seconds,5099000.0
+Waiting time, 1 day, 1 hour, 30 minutes, 0 second,9.18E7
+Relative slew time, 0.0104774061781976
+Relative integration time, 0.05207046208833291
+Relative waiting time, 0.9374521317334695
+Start, End, Name, RA, DEC, Slew (to here), Expected Int, Actual Int, This Int, Wait time, Scint timescale, Attempt no, # sats cons, Obs result, Interruption, Comment 
+21/03/2017 13:00:00,21/03/2017 13:29:59,B0943+10,2.5574600417681577,0.1721815788460517,42.0,1368,1757.0,1757.0,0,20,1,0,3,0,Completed incrementally checking scint every 20 seconds.
+21/03/2017 13:29:59,21/03/2017 13:41:51,J0711+0931,1.8832233528712716,0.16621837056840444,53.0,659,659.0,659.0,0,180,1,0,3,0,Completed incrementally checking scint every 180 seconds.
+21/03/2017 13:41:51,21/03/2017 13:51:53,J0627+0649,1.6925060331513266,0.11923570698986471,12.0,1709,incomplete,590.0,0,1800,1,0,1,2,Aborted: High scintillation; interrupted by satellite IRIDIUM 95 [+]
+21/03/2017 13:51:53,21/03/2017 14:01:09,J1313+0931,3.4617878492785863,0.1663686628095484,245.0,334,311.0,311.0,0,1800,1,0,1,0,Completed: Shortened interval; scintillation of 1.0752546665317502
+21/03/2017 14:01:09,21/03/2017 14:09:56,J0740+41,2.011491962923465,0.7167485461523381,80.0,473,447.0,447.0,0,1800,1,0,1,0,Completed: Shortened interval; scintillation of 1.0582464862327987
+21/03/2017 14:09:56,21/03/2017 14:14:21,J0533+0402,1.4548642856722165,0.07039737056551017,48.0,170,217.0,217.0,0,20,1,0,3,0,Completed incrementally checking scint every 20 seconds.
+21/03/2017 14:14:21,21/03/2017 14:21:04,J0557+1550,1.5599934063134906,0.2763731100675954,12.0,4182,incomplete,391.0,11340,600,2,0,3,1,Aborted: Checked scintillation repeatedly; observed until object set. Waited for more observables to rise above the horizon. Waited for more observables to rise above the horizon. Waited for more observables to rise above the horizon. Waited for more observables to rise above the horizon. Waited for more observables to rise above the horizon. Waited for more observables to rise above the horizon. Waited for more observables to rise above the horizon. 
+21/03/2017 17:36:04,21/03/2017 17:46:30,J1710+49,4.496331763398225,0.8610290976505359,89.0,231,177.0,177.0,36480,180,1,0,3,0,Completed incrementally checking scint every 180 seconds.Waited for more observables to rise above the horizon. Waited for more observables to rise above the horizon. Waited for more observables to rise above the horizon. Waited for more observables to rise above the horizon. 
+22/03/2017 03:43:30,22/03/2017 03:53:35,J1918+1541,5.053288144325266,0.27379949603397263,89.0,692,756.0,456.0,120,600,3,0,1,0,Completed: Shortened interval; scintillation of 1.515924932915391Waited for more observables to rise above the horizon. 
+22/03/2017 03:56:35,22/03/2017 04:01:04,J1901+0355,4.980792257741073,0.0686442842946181,89.0,231,incomplete,0.0,180,60,3,0,3,1,Waited for more observables to rise above the horizon. Aborted: Checked scintillation repeatedly; observed until object set. 
+22/03/2017 04:05:04,22/03/2017 04:13:33,J1905+0154A,4.997124903437131,0.033321244302658405,89.0,785,incomplete,0.0,420,180,2,0,3,1,Waited for more observables to rise above the horizon. Aborted: Checked scintillation repeatedly; observed until object set. 
+22/03/2017 04:06:33,22/03/2017 04:08:02,J1907+0249,5.007788137946295,0.049358880873761855,89.0,402,incomplete,0.0,12540,5400,3,0,1,1,Aborted: High scintillation; observed until object set.Waited for more observables to rise above the horizon. Waited for more observables to rise above the horizon. Waited for more observables to rise above the horizon. 
+22/03/2017 16:01:02,23/03/2017 00:28:05,J1851+0118,4.938713096696012,0.02297532034778091,89.0,1703,6165.0,94.0,30720,600,4,0,3,0,Completed incrementally checking scint every 600 seconds.Waited for more observables to rise above the horizon. 
