@@ -2,8 +2,6 @@
 
 **Original Repository (this code can also be found in the original branch): https://bitbucket.org/imoser/radiotelescopescheduling/src/master/** 
 
-**Google Colab Notebook: https://colab.research.google.com/drive/1YuAPVRLRgBWOwnkx5G_33pv4AK4MlYJS?usp=sharing**
-
 **NOTE: This branch is for the multiple telescopes simulation exclusively. Not compatible with single telescopes optimization policy. For the single telescope version, please checkout to stable branch. Currently, only `MultiTelescopesMTSPPolicy` policy and `TravellingSalesmanPreoptimisation` is available. GUI are not available, so GUI must be set to false in the config file. The number of telescopes can be set by the teles_num item in config**
 
 ## List of files and directories
@@ -60,7 +58,7 @@ recalculate the schedule list after each observation is done. Set the `reschedul
 for the case of multiple reschedule step and use `reschedule_freq` to set how many observations 
 will take after a reschedule. Use `teles_num` set the number of telescopes.
 ### Affect of neighbour number 
-This test must use `tsp` preoptimization policy. Firstly fix the `reschedule_freq` (if not use
+Firstly fix the `reschedule_freq` (if not use
 `MultiTelescopesMTSPPolicy` policy, please set the `reschedule_everytime` to true). Use `teles_num` set the number of telescopes.
 Change the `used_neighbour_num` to set the number of neighbours.
 ### 
