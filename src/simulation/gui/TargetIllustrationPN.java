@@ -220,8 +220,13 @@ public class TargetIllustrationPN extends JPanel implements Observer
 						int[] coords1 = doPointScaling(xy1[0], xy1[1]);
 						int[] coords2 = doPointScaling(xy2[0], xy2[1]);
 
+						int centerX1 = coords1[0] + GRAPH_POINT_WIDTH/2;
+						int centerY1 = coords1[1] + GRAPH_POINT_WIDTH/2;
+						int centerX2 = coords2[0] + GRAPH_POINT_WIDTH/2;
+						int centerY2 = coords2[1] + GRAPH_POINT_WIDTH/2;
+
 						g2.setColor(primaryColor);
-						g2.drawLine(coords1[0], coords1[1], coords2[0], coords2[1]);
+						g2.drawLine(centerX1, centerY1, centerX2, centerY2);
 					}
 
 					// Draw observation point
@@ -238,35 +243,32 @@ public class TargetIllustrationPN extends JPanel implements Observer
 				g2.setColor(primaryColor);
 				g2.fillOval(coords[0], coords[1], GRAPH_POINT_WIDTH + 2, GRAPH_POINT_WIDTH + 2);
 
-// grey line neighbours
-//				HorizonCoordinates hcCurrent = currentTarget.getHorizonCoordinates(telescope.getLocation(), gc);
-//				if (hcCurrent.getAltitude() > 0) {
-//					g2.fillOval(coords[0], coords[1], GRAPH_POINT_WIDTH, GRAPH_POINT_WIDTH);
-//					List<Connection> connections = currentTarget.getNeighbours();
-//					for (Connection conn : connections)
-//					{
-//						HorizonCoordinates hc1 = conn.getFirst().getHorizonCoordinates(telescope.getLocation(), gc);
-//						HorizonCoordinates hc2 = conn.getOtherTarget(conn.getFirst()).getHorizonCoordinates(telescope.getLocation(), gc);
-//						if (hc1.getAltitude() < 0 || hc2.getAltitude() < 0)
-//							continue;
-//						double[] xy1 = getXY(hc1);
-//						double[] xy2 = getXY(hc2);
-//						int x1 = (int) (xy1[0] * xScale  + (getWidth()/2));
-//						int y1 = (int) ((0 - xy1[1]) * yScale  + (getHeight()/2));
-//						int x2 = (int) (xy2[0] * xScale  + (getWidth()/2));
-//						int y2 = (int) ((0 - xy2[1]) * yScale  + (getHeight()/2));
-//
-//						if (resized)
-//						{
-//							x1 = (int) ((x1-startRect.x) * aspectRatio);
-//							y1 = (int) ((y1-startRect.y) * aspectRatio);
-//							x2 = (int) ((x2-startRect.x) * aspectRatio);
-//							y2 = (int) ((y2-startRect.y) * aspectRatio);
-//						}
-//						g2.setColor(Color.lightGray);
-//						g2.drawLine(x1, y1, x2, y2);
-//					}
-//				}
+				// Neighbours connection line
+				HorizonCoordinates hcCurrent = currentTarget.getHorizonCoordinates(telescope.getLocation(), gc);
+				if (hcCurrent.getAltitude() > 0) {
+					g2.fillOval(coords[0], coords[1], GRAPH_POINT_WIDTH, GRAPH_POINT_WIDTH);
+					List<Connection> connections = currentTarget.getNeighbours();
+					Color transparentPrimary = new Color(primaryColor.getRed(), primaryColor.getGreen(), primaryColor.getBlue(),30);
+					for (Connection conn : connections)
+					{
+						HorizonCoordinates hc1 = conn.getFirst().getHorizonCoordinates(telescope.getLocation(), gc);
+						HorizonCoordinates hc2 = conn.getOtherTarget(conn.getFirst()).getHorizonCoordinates(telescope.getLocation(), gc);
+						if (hc1.getAltitude() < 0 || hc2.getAltitude() < 0)
+							continue;
+						double[] xy1 = getXY(hc1);
+						double[] xy2 = getXY(hc2);
+						int[] coords1 = doPointScaling(xy1[0], xy1[1]);
+						int[] coords2 = doPointScaling(xy2[0], xy2[1]);
+
+						int centerX1 = coords1[0] + GRAPH_POINT_WIDTH/2;
+						int centerY1 = coords1[1] + GRAPH_POINT_WIDTH/2;
+						int centerX2 = coords2[0] + GRAPH_POINT_WIDTH/2;
+						int centerY2 = coords2[1] + GRAPH_POINT_WIDTH/2;
+
+						g2.setColor(transparentPrimary);
+						g2.drawLine(centerX1, centerY1, centerX2, centerY2);
+					}
+				}
 
 
 			}
