@@ -1,8 +1,7 @@
 package simulation.gui;
 
 
-import java.awt.CardLayout;
-import java.awt.Dimension;
+import java.awt.*;
 
 import javax.swing.*;
 
@@ -36,7 +35,6 @@ public class MainWindow extends JFrame
 	final static String TARGETS = "targetpanel";
 
 	private TargetIllustrationPN targetPN;
-	private final List<TargetIllustrationPN> targetPNs = new ArrayList<>();
 
 	public MainWindow(String title)
 	{
@@ -52,20 +50,39 @@ public class MainWindow extends JFrame
 	}
 
 	public void initialiseMainWindow(List<Target> targets, Schedule[] schedules, Telescope[] telescopes, SkyState sky) {
+		this.getContentPane().removeAll();
 		this.getContentPane().setLayout(new CardLayout());
-		JPanel emptyPN = new JPanel();
 
-		JTabbedPane tabbedPane = new JTabbedPane();
+		// Define colors for each telescope
+		Color[] colors = new Color[4]; //TODO
+		colors[0] = Color.RED;
+		colors[1] = Color.BLUE;
+		colors[2] = Color.GREEN;
+		colors[3] = Color.ORANGE;
+		// Add more colors if needed
 
+		// Main panel with BorderLayout
+		JPanel mainPanel = new JPanel(new BorderLayout());
+
+		// Create the illustration panel with all telescopes
+		targetPN = new TargetIllustrationPN(targets, schedules, telescopes, sky, colors);
+		mainPanel.add(targetPN, BorderLayout.CENTER);
+
+		// Control panel with checkboxes
+		JPanel controlPanel = new JPanel();
 		for (int i = 0; i < telescopes.length; i++) {
-			TargetIllustrationPN panel =
-					new TargetIllustrationPN(targets, schedules[i], telescopes[i], sky);
-			tabbedPane.addTab("Telescope " + (i+1), panel);
-			targetPNs.add(panel);
+			JCheckBox checkBox = new JCheckBox("Telescope " + (i + 1), true);
+			checkBox.setForeground(colors[i]);
+			final int idx = i;
+			checkBox.addItemListener(e -> {
+				targetPN.setTelescopeVisibility(idx, checkBox.isSelected());
+				targetPN.repaint();
+			});
+			controlPanel.add(checkBox);
 		}
 
-		this.getContentPane().add(EMPTY, emptyPN);
-		this.getContentPane().add(TARGETS, tabbedPane);
+		mainPanel.add(controlPanel, BorderLayout.SOUTH);
+		this.getContentPane().add(TARGETS, mainPanel);
 		openTargetPanel();
 	}
 	
@@ -78,10 +95,6 @@ public class MainWindow extends JFrame
 	public TargetIllustrationPN getIllustrationPN()
 	{
 		return targetPN;
-	}
-
-	public List<TargetIllustrationPN> getAllIllustrationPNs() {
-		return targetPNs;
 	}
 
 	private void openTargetPanel(  )

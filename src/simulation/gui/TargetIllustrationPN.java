@@ -29,14 +29,7 @@ import java.awt.Stroke;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
+import java.util.*;
 
 
 @SuppressWarnings("serial")
@@ -59,23 +52,28 @@ public class TargetIllustrationPN extends JPanel implements Observer
 	private double aspectRatio;
 	private double offsetX = 1, offsetY = 1;
 	private SkyState skyState = null;
-	private Telescope telescope = null;
-	private Schedule schedule = null;
+	private Schedule[] schedules;
+	private Telescope[] telescopes;
+	private Color[] colors;
+	private boolean[] visible;
 
 
 
 	private ShapeResizeHandler ada = new ShapeResizeHandler();
 	
 
-	public TargetIllustrationPN( List<Target> t,Schedule schedule, Telescope scope, SkyState sky) 
+	public TargetIllustrationPN( List<Target> t, Schedule[] schedules, Telescope[] telescopes, SkyState sky, Color[] colors )
 	{
 		this.gc = Clock.getSimulationClock().getTime();
 		addMouseListener(ada);
 		addMouseMotionListener(ada);
 		this.targets = t;
-		this.telescope = scope;
 		this.skyState = sky;
-		this.schedule = schedule;
+		this.schedules = schedules;
+		this.telescopes = telescopes;
+		this.colors = colors;
+		this.visible = new boolean[telescopes.length];
+		Arrays.fill(this.visible, true);
 		setDefaults();		
 	}
 
@@ -144,265 +142,225 @@ public class TargetIllustrationPN extends JPanel implements Observer
 
 
 	@Override
-	protected void paintComponent(Graphics g) 
-	{
+	protected void paintComponent(Graphics g) {
 
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D)g;
 		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+		// Setup coordinate system
 		xScale = ((double) getWidth() - 2 * BORDER_GAP)/(X_RANGE ) ;
 		yScale = ((double) getHeight() - 2 * BORDER_GAP) / (Y_RANGE );
-		if (resized)
-		{
+
+		// Draw grid lines
+		if (resized) {
 			int x1 = (int) (getWidth() * offsetX);
 			int y1 = (int) (getHeight() * offsetY);
 			g2.drawLine(BORDER_GAP, y1, getWidth() - BORDER_GAP, y1);
-			g2.drawLine(x1, getHeight() - BORDER_GAP, x1, BORDER_GAP);			
-		}
-		else
-		{
+			g2.drawLine(x1, getHeight() - BORDER_GAP, x1, BORDER_GAP);
+		} else {
 			g2.drawLine(BORDER_GAP, getHeight()/2, getWidth() - BORDER_GAP, getHeight()/2);
 			g2.drawLine(getWidth()/2, getHeight() - BORDER_GAP, getWidth()/2, BORDER_GAP);
 		}
 		halfScreenX = getWidth()/2;
 		halfScreenY = getHeight()/2;
 
-		if (gc == null)
-			return;
+		if (gc == null) return;
 
-		for (Target t : targets) 
-		{
-			HorizonCoordinates hc = t.getHorizonCoordinates(telescope.getLocation(), gc);
-
-			if(hc.getAltitude() < 0)
-				continue;
-			double[] xy = getXY(hc);
-
-			int x1 = (int) (xy[0] * xScale  + (getWidth()/2));
-			int y1 = (int) ((0 - xy[1]) * yScale  + (getHeight()/2));
-
-			if (resized)
-			{
-				x1 = (int) ((x1-startRect.x) * aspectRatio);
-				y1 = (int) ((y1-startRect.y) * aspectRatio);
-			}
-
-			int x = x1 - GRAPH_POINT_WIDTH / 2;
-			int y = y1 - GRAPH_POINT_WIDTH / 2;
-
-			g2.setColor(Color.lightGray);
-
-			g2.fillOval(x, y, GRAPH_POINT_WIDTH, GRAPH_POINT_WIDTH);
-
-			//if (p.getPulsarName().equals("J1614-38") || p.getPulsarName().equals("J1618-39") || p.getPulsarName().equals("J1638-42") || p.getPulsarName().equals("J1617-4216") )
-			//g2.drawString(t.getName(),x,y); 
-			g2.setColor(Color.lightGray);
-			g2.setStroke(GRAPH_STROKE);
-
-		}
-
-		List<ObservationState> states = schedule.getScheduleStates();
-		Pointable p = null;
-		Pointable other = null;
-		Connection c;
-		if(states.size() > 0)
-		{			
-			synchronized(states){
-				for (ObservationState state : states) 
-				{
-//					//only draw this state if it happened before the current simulation time
-					if (state.getStartTime() < gc.getTime().getTime())
-					{
-						p = state.getCurrentTarget();
-						HorizonCoordinates hc = p.getHorizonCoordinates(telescope.getLocation(), gc);
-
-						if(hc.getAltitude() < 0)
-							continue;
-						double[] xy = getXY(hc);
-
-						int[] coords = doPointScaling(xy[0], xy[1]);
-
-						g2.setColor(Color.GREEN);
-						g2.fillOval(coords[0], coords[1], GRAPH_POINT_WIDTH, GRAPH_POINT_WIDTH);
-						
-						//g2.setColor(Color.BLACK);
-						//g2.drawString(state.getCurrentObservable().getName(), coords[0], coords[1]);
-						g2.setColor(Color.GREEN);
-						if (state.getLinkToHere() != null)
-						{
-							c = state.getLinkToHere();
-							HorizonCoordinates hc1 = c.getFirst().getHorizonCoordinates(telescope.getLocation(), gc);
-							HorizonCoordinates hc2 = c.getOtherTarget(c.getFirst()).getHorizonCoordinates(telescope.getLocation(), gc);
-							if (hc1.getAltitude() > 0 || hc2.getAltitude() > 0)
-							{
-								double[] xy1 = getXY(hc1);
-								double[] xy2 = getXY(hc2);
-
-								int x1 = (int) (xy1[0] * xScale  + (getWidth()/2));
-								int y1 = (int) ((0 - xy1[1]) * yScale  + (getHeight()/2));
-								int x2 = (int) (xy2[0] * xScale  + (getWidth()/2));
-								int y2 = (int) ((0 - xy2[1]) * yScale  + (getHeight()/2));
-			
-								if (resized)
-								{
-									x1 = (int) ((x1-startRect.x) * aspectRatio);
-									y1 = (int) ((y1-startRect.y) * aspectRatio);
-									x2 = (int) ((x2-startRect.x) * aspectRatio);
-									y2 = (int) ((y2-startRect.y) * aspectRatio);
-			
-								}
-								g2.drawLine(x1, y1, x2, y2);   
-								    
-							}
-						}
-					}
-					else
-					{
-						other = state.getCurrentTarget();
-						HorizonCoordinates hc = other.getHorizonCoordinates(telescope.getLocation(), gc);
-
-						if(hc.getAltitude() < 0)
-							continue;
-						double[] xy = getXY(hc);
-
-						int[] coords = doPointScaling(xy[0], xy[1]);
-
-						g2.setColor(Color.BLUE);
-						g2.fillOval(coords[0], coords[1], GRAPH_POINT_WIDTH, GRAPH_POINT_WIDTH);
-					//	g2.setColor(Color.BLACK);
-					//	g2.drawString(state.getCurrentObservable().getName(), coords[0], coords[1]);
-					}
-				}	
-			}
-		}
-
-		if(skyState != null)
-		{
-			List<CelestialBody> planets = skyState.getCelestialBodies();
-			for (CelestialBody celestialBody : planets) 
-			{
-				HorizonCoordinates hc = celestialBody.getHorizonCoordinates(gc.getTime());
-				if(hc.getAltitude() < 0)
-					continue;
-				double[] xy = getXY(hc);
-				switch (celestialBody.getNovasID()) {
-				case CelestialBody.SUN:
-					g2.setColor(Color.YELLOW);
-					break;
-				case CelestialBody.MOON:
-					g2.setColor(Color.LIGHT_GRAY);
-					break;
-				default:
-					g2.setColor(Color.DARK_GRAY);
+		// Draw all targets first (base layer)
+		for (Target t : targets) {
+			for (int i = 0; i < telescopes.length; i++) {
+				if (!visible[i]) continue;
+				HorizonCoordinates hc = t.getHorizonCoordinates(telescopes[i].getLocation(), gc);
+				if (hc.getAltitude() >= 0) {
 					break;
 				}
+			}
+
+			// Draw target once using neutral color
+			HorizonCoordinates hc = t.getHorizonCoordinates(telescopes[0].getLocation(), gc);
+			double[] xy = getXY(hc);
+			int[] coords = doPointScaling(xy[0], xy[1]);
+			g2.setColor(Color.lightGray);
+			g2.fillOval(coords[0], coords[1], GRAPH_POINT_WIDTH, GRAPH_POINT_WIDTH);
+		}
+
+		// Draw schedule paths for each telescope
+		for (int i = 0; i < telescopes.length; i++) {
+			if (!visible[i]) continue;
+
+			Telescope telescope = telescopes[i];
+			Schedule schedule = schedules[i];
+			Color primaryColor = colors[i];
+			Color futureColor = new Color(
+					primaryColor.getRed(),
+					primaryColor.getGreen(),
+					primaryColor.getBlue(),
+					128
+			);
+
+			List<ObservationState> states = schedule.getScheduleStates();
+			Pointable currentTarget = null;
+
+			synchronized (states) {
+				for (ObservationState state : states) {
+					boolean isPast = state.getStartTime() < gc.getTime().getTime();
+					Pointable p = state.getCurrentTarget();
+					double[] xy = getXY(p.getHorizonCoordinates(telescope.getLocation(), gc));
+					int[] coords = doPointScaling(xy[0], xy[1]);
+
+					// Draw connection
+					if (isPast && state.getLinkToHere() != null) {
+						Connection c = state.getLinkToHere();
+						Pointable t1 = c.getFirst();
+						Pointable t2 = c.getOtherTarget(t1);
+
+						double[] xy1 = getXY(t1.getHorizonCoordinates(telescope.getLocation(), gc));
+						double[] xy2 = getXY(t2.getHorizonCoordinates(telescope.getLocation(), gc));
+						int[] coords1 = doPointScaling(xy1[0], xy1[1]);
+						int[] coords2 = doPointScaling(xy2[0], xy2[1]);
+
+						g2.setColor(primaryColor);
+						g2.drawLine(coords1[0], coords1[1], coords2[0], coords2[1]);
+					}
+
+					// Draw observation point
+					g2.setColor(isPast ? primaryColor : futureColor);
+					g2.fillOval(coords[0], coords[1], GRAPH_POINT_WIDTH, GRAPH_POINT_WIDTH);
+					if (isPast) currentTarget = p;
+				}
+			}
+
+			// Draw current target highlight
+			if (currentTarget != null) {
+				double[] xy = getXY(currentTarget.getHorizonCoordinates(telescope.getLocation(), gc));
+				int[] coords = doPointScaling(xy[0], xy[1]);
+				g2.setColor(primaryColor);
+				g2.fillOval(coords[0], coords[1], GRAPH_POINT_WIDTH + 2, GRAPH_POINT_WIDTH + 2);
+
+// grey line neighbours
+//				HorizonCoordinates hcCurrent = currentTarget.getHorizonCoordinates(telescope.getLocation(), gc);
+//				if (hcCurrent.getAltitude() > 0) {
+//					g2.fillOval(coords[0], coords[1], GRAPH_POINT_WIDTH, GRAPH_POINT_WIDTH);
+//					List<Connection> connections = currentTarget.getNeighbours();
+//					for (Connection conn : connections)
+//					{
+//						HorizonCoordinates hc1 = conn.getFirst().getHorizonCoordinates(telescope.getLocation(), gc);
+//						HorizonCoordinates hc2 = conn.getOtherTarget(conn.getFirst()).getHorizonCoordinates(telescope.getLocation(), gc);
+//						if (hc1.getAltitude() < 0 || hc2.getAltitude() < 0)
+//							continue;
+//						double[] xy1 = getXY(hc1);
+//						double[] xy2 = getXY(hc2);
+//						int x1 = (int) (xy1[0] * xScale  + (getWidth()/2));
+//						int y1 = (int) ((0 - xy1[1]) * yScale  + (getHeight()/2));
+//						int x2 = (int) (xy2[0] * xScale  + (getWidth()/2));
+//						int y2 = (int) ((0 - xy2[1]) * yScale  + (getHeight()/2));
+//
+//						if (resized)
+//						{
+//							x1 = (int) ((x1-startRect.x) * aspectRatio);
+//							y1 = (int) ((y1-startRect.y) * aspectRatio);
+//							x2 = (int) ((x2-startRect.x) * aspectRatio);
+//							y2 = (int) ((y2-startRect.y) * aspectRatio);
+//						}
+//						g2.setColor(Color.lightGray);
+//						g2.drawLine(x1, y1, x2, y2);
+//					}
+//				}
+
+
+			}
+		}
+
+		// Draw celestial bodies and satellites (shared across all telescopes)
+		if (skyState != null) {
+			// Planets
+			List<CelestialBody> planets = skyState.getCelestialBodies();
+			for (CelestialBody celestialBody : planets) {
+				HorizonCoordinates hc = celestialBody.getHorizonCoordinates(gc.getTime());
+				if (hc.getAltitude() < 0) continue;
+
+				double[] xy = getXY(hc);
 				int[] coords = doPointScaling(xy[0], xy[1]);
 				int r = scaleRadius(celestialBody.getRadius());
+
+				switch (celestialBody.getNovasID()) {
+					case CelestialBody.SUN:
+						g2.setColor(Color.YELLOW);
+						break;
+					case CelestialBody.MOON:
+						g2.setColor(Color.LIGHT_GRAY);
+						break;
+					default:
+						g2.setColor(Color.DARK_GRAY);
+						break;
+				}
 				g2.fillOval(coords[0]-r, coords[1]-r, 2*r, 2*r);
 				g2.setColor(Color.ORANGE);
 				g2.drawOval(coords[0]-r, coords[1]-r, 2*r, 2*r);
 			}
-			List<Satellite> badThingsThatMove = skyState.getSatellites();
-			for (Satellite satellite : badThingsThatMove) 
-			{
-				HorizonCoordinates hc = satellite.getHorizonCoordinates(gc);
-				
-				if(hc.getAltitude() < 0)
-					continue;
-				double[] xy = getXY(hc);
 
+			// Satellites
+			List<Satellite> satellites = skyState.getSatellites();
+			for (Satellite satellite : satellites) {
+				HorizonCoordinates hc = satellite.getHorizonCoordinates(gc);
+				if (hc.getAltitude() < 0) continue;
+
+				double[] xy = getXY(hc);
 				int[] coords = doPointScaling(xy[0], xy[1]);
 
-				if(satellite.getType().equals("beidou"))
-					g2.setColor(Color.MAGENTA);
-				else if (satellite.getType().equals("galileo"))
-					g2.setColor(Color.CYAN);
-				else if (satellite.getType().equals("glo-ops"))
-					g2.setColor(Color.ORANGE);
-				else if (satellite.getType().equals("gps-ops"))
-					g2.setColor(Color.YELLOW);
-				else //iridium
-					g2.setColor(Color.BLACK);
-				
-				g2.fillRect(coords[0]-GRAPH_POINT_WIDTH/2, coords[1]-GRAPH_POINT_WIDTH/2, GRAPH_POINT_WIDTH, GRAPH_POINT_WIDTH);
+				switch (satellite.getType()) {
+					case "beidou":
+						g2.setColor(Color.MAGENTA);
+						break;
+					case "galileo":
+						g2.setColor(Color.CYAN);
+						break;
+					case "glo-ops":
+						g2.setColor(Color.ORANGE);
+						break;
+					case "gps-ops":
+						g2.setColor(Color.YELLOW);
+						break;
+					default: // iridium
+						g2.setColor(Color.BLACK);
+						break;
+				}
+				g2.fillRect(coords[0]-GRAPH_POINT_WIDTH/2, coords[1]-GRAPH_POINT_WIDTH/2,
+						GRAPH_POINT_WIDTH, GRAPH_POINT_WIDTH);
 				g2.setColor(Color.BLACK);
-				g2.drawRect(coords[0]-GRAPH_POINT_WIDTH/2, coords[1]-GRAPH_POINT_WIDTH/2, GRAPH_POINT_WIDTH, GRAPH_POINT_WIDTH);	
+				g2.drawRect(coords[0]-GRAPH_POINT_WIDTH/2, coords[1]-GRAPH_POINT_WIDTH/2,
+						GRAPH_POINT_WIDTH, GRAPH_POINT_WIDTH);
 			}
-
-		}
-		//the last one (current position)
-		if(p != null)
-		{
-			g2.setColor(Color.red);
-			HorizonCoordinates hcCurrent = p.getHorizonCoordinates(telescope.getLocation(), gc);
-			if (hcCurrent.getAltitude() > 0)
-			{
-				double[] xy1 = getXY(hcCurrent );
-				int [] coords = doPointScaling(xy1[0], xy1[1]);
-
-				g2.fillOval(coords[0], coords[1], GRAPH_POINT_WIDTH, GRAPH_POINT_WIDTH);  
-				List<Connection> connections = p.getNeighbours();
-				for (Connection conn : connections) 
-				{
-					HorizonCoordinates hc1 = conn.getFirst().getHorizonCoordinates(telescope.getLocation(), gc);
-					HorizonCoordinates hc2 = conn.getOtherTarget(conn.getFirst()).getHorizonCoordinates(telescope.getLocation(), gc);
-					if (hc1.getAltitude() < 0 || hc2.getAltitude() < 0)
-						continue;
-					 xy1 = getXY(hc1);
-					double[] xy2 = getXY(hc2);
-					int x1 = (int) (xy1[0] * xScale  + (getWidth()/2));
-					int y1 = (int) ((0 - xy1[1]) * yScale  + (getHeight()/2));
-					int x2 = (int) (xy2[0] * xScale  + (getWidth()/2));
-					int y2 = (int) ((0 - xy2[1]) * yScale  + (getHeight()/2));
-
-					if (resized)
-					{
-						x1 = (int) ((x1-startRect.x) * aspectRatio);
-						y1 = (int) ((y1-startRect.y) * aspectRatio);
-						x2 = (int) ((x2-startRect.x) * aspectRatio);
-						y2 = (int) ((y2-startRect.y) * aspectRatio);
-					}
-					g2.setColor(Color.lightGray);
-					g2.drawLine(x1, y1, x2, y2);       
-				}	
-				
-			}
-			// this will show the pulsars which are followed by a wait. They are false positives. The observation algorithm is correct,
-			// does not observe after the target has set. 
-			//else
-			//	System.out.println("Current target "+p+" under horizon, alt "+hcCurrent.getAltitude()+" time "+gc.getTime().getTime());
 		}
 
+		// Draw time and legends
 		String time = Utilities.getDateAsString(gc.getTime());
-
-		g2.setColor(Color.black);		
-		g2.drawString(time,30,getHeight()-30); 
-		
-		g2.setColor(Color.MAGENTA);
-		g2.fillRect(10, 10, GRAPH_POINT_WIDTH, GRAPH_POINT_WIDTH);
-		
-		g2.setColor(Color.CYAN);
-		g2.fillRect(10, 30, GRAPH_POINT_WIDTH, GRAPH_POINT_WIDTH);
-		
-		g2.setColor(Color.ORANGE);
-		g2.fillRect(10, 50, GRAPH_POINT_WIDTH, GRAPH_POINT_WIDTH);
-
-		g2.setColor(Color.YELLOW);
-		g2.fillRect(10, 70, GRAPH_POINT_WIDTH, GRAPH_POINT_WIDTH);
-		
 		g2.setColor(Color.BLACK);
-		g2.fillRect(10, 90, GRAPH_POINT_WIDTH, GRAPH_POINT_WIDTH);
-			
-		g2.drawRect(10, 10, GRAPH_POINT_WIDTH, GRAPH_POINT_WIDTH);
-		g2.drawString("Beidou",25,15);
-		g2.drawRect(10, 30, GRAPH_POINT_WIDTH, GRAPH_POINT_WIDTH);
-		g2.drawString("Galileo",25,35);
-		g2.drawRect(10, 50, GRAPH_POINT_WIDTH, GRAPH_POINT_WIDTH);
-		g2.drawString("Glo-ops",25,55);
-		g2.drawRect(10, 70, GRAPH_POINT_WIDTH, GRAPH_POINT_WIDTH);
-		g2.drawString("Gps-ops",25,75);
-		g2.drawRect(10, 90, GRAPH_POINT_WIDTH, GRAPH_POINT_WIDTH);
-		g2.drawString("Iridium",25,95);
+		g2.drawString(time, 30, getHeight() - 30);
+
+		// Telescope color legend
+		int yPos = 10;
+		for (int i = 0; i < telescopes.length; i++) {
+			g2.setColor(colors[i]);
+			g2.fillRect(10, yPos, GRAPH_POINT_WIDTH, GRAPH_POINT_WIDTH);
+			g2.setColor(Color.BLACK);
+			g2.drawRect(10, yPos, GRAPH_POINT_WIDTH, GRAPH_POINT_WIDTH);
+			g2.drawString("Telescope " + (i+1), 25, yPos + GRAPH_POINT_WIDTH);
+			yPos += 20;
+		}
+
+		// Satellite legend
+		String[] satelliteTypes = {"Beidou", "Galileo", "Glo-ops", "Gps-ops", "Iridium"};
+		Color[] satelliteColors = {Color.MAGENTA, Color.CYAN, Color.ORANGE, Color.YELLOW, Color.BLACK};
+		for (int i = 0; i < satelliteTypes.length; i++) {
+			g2.setColor(satelliteColors[i]);
+			g2.fillRect(10, yPos, GRAPH_POINT_WIDTH, GRAPH_POINT_WIDTH);
+			g2.setColor(Color.BLACK);
+			g2.drawRect(10, yPos, GRAPH_POINT_WIDTH, GRAPH_POINT_WIDTH);
+			g2.drawString(satelliteTypes[i], 25, yPos + GRAPH_POINT_WIDTH);
+			yPos += 20;
+		}
 	}
 
 	private int scaleRadius(double radius) {
@@ -436,6 +394,10 @@ public class TargetIllustrationPN extends JPanel implements Observer
 		coords[0] = x1 - GRAPH_POINT_WIDTH / 2;
 		coords[1] = y1 - GRAPH_POINT_WIDTH / 2;
 		return coords;
+	}
+
+	public void setTelescopeVisibility(int index, boolean isVisible) {
+		visible[index] = isVisible;
 	}
 	
 //	@Override
@@ -695,12 +657,7 @@ public class TargetIllustrationPN extends JPanel implements Observer
 	}
 
 	@Override
-	public synchronized void update(Observable arg0, Object arg1) 
-	{
-
+	public synchronized void update(Observable arg0, Object arg1) {
 		this.repaint();
-
 	}
-
-
 }

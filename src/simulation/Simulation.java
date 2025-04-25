@@ -67,16 +67,14 @@ public class Simulation extends java.util.Observable
 		frame = new MainWindow("Radio Observations");
 		frame.initialiseMainWindow( scheduler.getAllTargets(), scheduler.getSchedules(), telescopes, scheduler.getSkyState());
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		for (TargetIllustrationPN targetPN : frame.getAllIllustrationPNs()) {
-			this.addObserver(targetPN);
-		}
+		this.addObserver(frame.getIllustrationPN());
 		frame.pack();
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 	}
 
 
-	public void run() 
+	public void run()
 	{	
 		scheduler.buildSchedule(props);
 		List<ObservationState>[] states = new List[NUMTELESCOPES];
