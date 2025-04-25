@@ -255,6 +255,7 @@ public class Scheduler
 	}
 
 
-
-
+	public Schedule[] getSchedules() {
+		return schedules;
+	}
 }

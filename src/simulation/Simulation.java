@@ -16,6 +16,7 @@ import optimisation.Scheduler;
 import observation.Connection;
 import observation.Telescope;
 import simulation.gui.MainWindow;
+import simulation.gui.TargetIllustrationPN;
 import util.Utilities;
 
 
@@ -51,7 +52,7 @@ public class Simulation extends java.util.Observable
 		this.simulationIntervalInSeconds = Integer.parseInt(props.getProperty("simulation_speed"));
 		this.clock.setSimulationSpeed(simulationIntervalInSeconds);
 		this.printResults= Boolean.parseBoolean(props.getProperty("print_results"));
-		this.showGui= false;//Boolean.parseBoolean(props.getProperty("show_gui"));
+		this.showGui= Boolean.parseBoolean(props.getProperty("show_gui"));
 		if(printResults){
 			results = new Results[NUMTELESCOPES];
 			for(int i=0; i<NUMTELESCOPES; i++)
@@ -59,20 +60,21 @@ public class Simulation extends java.util.Observable
 		}
 
 	}
-/*
+
 	public void createAndShowGUI() 
 	{
 		//Create and set up the window.
 		frame = new MainWindow("Radio Observations");
-		frame.initialiseMainWindow( scheduler.getAllTargets(), scheduler.getSchedule(), telescope, scheduler.getSkyState());
+		frame.initialiseMainWindow( scheduler.getAllTargets(), scheduler.getSchedules(), telescopes, scheduler.getSkyState());
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.addObserver(frame.getIllustrationPN());
+		for (TargetIllustrationPN targetPN : frame.getAllIllustrationPNs()) {
+			this.addObserver(targetPN);
+		}
 		frame.pack();
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 	}
 
- */
 
 	public void run() 
 	{	
@@ -91,7 +93,7 @@ public class Simulation extends java.util.Observable
 		
 		if(!showGui)
 			return;
-/*
+
 		java.awt.EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				createAndShowGUI();
@@ -100,7 +102,7 @@ public class Simulation extends java.util.Observable
 
 
 //		long endTime = Clock.getSimulationClock().getTime().getTimeInMillis() + 864400000;
-		while (scheduler.getSchedule().getEndTime()+6000 > Clock.getSimulationClock().getTime().getTimeInMillis()) 
+		while (scheduler.getSchedule(0).getEndTime()+6000 > Clock.getSimulationClock().getTime().getTimeInMillis())
 //		while (endTime > Clock.getSimulationClock().getTime().getTimeInMillis()) 
 
 		{
@@ -115,7 +117,7 @@ public class Simulation extends java.util.Observable
 			}
 			Clock.getSimulationClock().advanceBy(10);
 		}
- */
+
 	}
 
 	/*

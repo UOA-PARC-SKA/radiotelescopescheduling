@@ -4,17 +4,7 @@ package simulation.gui;
 import java.awt.CardLayout;
 import java.awt.Dimension;
 
-import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
-import javax.swing.JMenuBar;
-import javax.swing.JPanel;
-import javax.swing.ToolTipManager;
-
-
-
-
-
+import javax.swing.*;
 
 
 import observation.Connection;
@@ -28,6 +18,7 @@ import simulation.Simulation;
 import astrometrics.Location;
 
 import java.awt.event.*;
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -45,6 +36,7 @@ public class MainWindow extends JFrame
 	final static String TARGETS = "targetpanel";
 
 	private TargetIllustrationPN targetPN;
+	private final List<TargetIllustrationPN> targetPNs = new ArrayList<>();
 
 	public MainWindow(String title)
 	{
@@ -59,17 +51,21 @@ public class MainWindow extends JFrame
 
 	}
 
-	public void initialiseMainWindow(List<Target> t, Schedule schedule, Telescope scope, SkyState sky)
-	{
+	public void initialiseMainWindow(List<Target> targets, Schedule[] schedules, Telescope[] telescopes, SkyState sky) {
 		this.getContentPane().setLayout(new CardLayout());
 		JPanel emptyPN = new JPanel();
 
-		targetPN = 
-				new TargetIllustrationPN( t, schedule, scope, sky);
+		JTabbedPane tabbedPane = new JTabbedPane();
 
+		for (int i = 0; i < telescopes.length; i++) {
+			TargetIllustrationPN panel =
+					new TargetIllustrationPN(targets, schedules[i], telescopes[i], sky);
+			tabbedPane.addTab("Telescope " + (i+1), panel);
+			targetPNs.add(panel);
+		}
 
 		this.getContentPane().add(EMPTY, emptyPN);
-		this.getContentPane().add(TARGETS, targetPN);
+		this.getContentPane().add(TARGETS, tabbedPane);
 		openTargetPanel();
 	}
 	
@@ -82,6 +78,10 @@ public class MainWindow extends JFrame
 	public TargetIllustrationPN getIllustrationPN()
 	{
 		return targetPN;
+	}
+
+	public List<TargetIllustrationPN> getAllIllustrationPNs() {
+		return targetPNs;
 	}
 
 	private void openTargetPanel(  )

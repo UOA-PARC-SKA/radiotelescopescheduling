@@ -165,4 +165,8 @@ public class Telescope
 	{
 		azimuthLimits = al;
 	}
+
+	public String getName() {
+		return name;
+	}
 }
