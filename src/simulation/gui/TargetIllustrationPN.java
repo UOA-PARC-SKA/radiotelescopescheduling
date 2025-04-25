@@ -29,6 +29,7 @@ import java.awt.Stroke;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
+import java.awt.geom.AffineTransform;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -153,6 +154,7 @@ public class TargetIllustrationPN extends JPanel implements Observer
 		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
 		// Pan and zoom translations
+		AffineTransform originalTransform = g2.getTransform();
 		g2.translate(panX, panY);
 		g2.scale(zoom, zoom);
 
@@ -343,6 +345,9 @@ public class TargetIllustrationPN extends JPanel implements Observer
 						GRAPH_POINT_WIDTH, GRAPH_POINT_WIDTH);
 			}
 		}
+
+		// Restore original transform before drawing static elements
+		g2.setTransform(originalTransform);
 
 		// Draw time and legends
 		String time = Utilities.getDateAsString(gc.getTime());
