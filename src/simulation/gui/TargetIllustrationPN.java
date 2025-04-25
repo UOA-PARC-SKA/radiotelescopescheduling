@@ -28,6 +28,7 @@ import java.awt.RenderingHints;
 import java.awt.Stroke;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseWheelEvent;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -56,6 +57,8 @@ public class TargetIllustrationPN extends JPanel implements Observer
 	private Telescope[] telescopes;
 	private Color[] colors;
 	private boolean[] visible;
+	private int panX = 0, panY = 0;
+	private double zoom = 1.0;
 
 
 
@@ -67,6 +70,7 @@ public class TargetIllustrationPN extends JPanel implements Observer
 		this.gc = Clock.getSimulationClock().getTime();
 		addMouseListener(ada);
 		addMouseMotionListener(ada);
+		addMouseWheelListener(ada);
 		this.targets = t;
 		this.skyState = sky;
 		this.schedules = schedules;
@@ -74,7 +78,7 @@ public class TargetIllustrationPN extends JPanel implements Observer
 		this.colors = colors;
 		this.visible = new boolean[telescopes.length];
 		Arrays.fill(this.visible, true);
-		setDefaults();		
+		setDefaults();
 	}
 
 
@@ -147,6 +151,10 @@ public class TargetIllustrationPN extends JPanel implements Observer
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D)g;
 		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+		// Pan and zoom translations
+		g2.translate(panX, panY);
+		g2.scale(zoom, zoom);
 
 		// Setup coordinate system
 		xScale = ((double) getWidth() - 2 * BORDER_GAP)/(X_RANGE ) ;
@@ -618,24 +626,46 @@ public class TargetIllustrationPN extends JPanel implements Observer
 	//		this.repaint();
 	//	}
 
-	class ShapeResizeHandler extends MouseAdapter 
-	{
-		public void mousePressed(MouseEvent event) 
-		{
-			if(resized)
-				return;
-			startRect = event.getPoint();
+	class ShapeResizeHandler extends MouseAdapter {
+		private Point lastPoint;
+
+		public void mousePressed(MouseEvent e) {
+			lastPoint = e.getPoint();
 		}
 
-		public void mouseReleased(MouseEvent event) 
-		{
-			if(resized)
-				return;
-			endRect = event.getPoint();
-			resize();
-			resized = true;
+		public void mouseDragged(MouseEvent e) {
+			Point currPoint = e.getPoint();
+			panX += (currPoint.x - lastPoint.x);
+			panY += (currPoint.y - lastPoint.y);
+			lastPoint = currPoint;
 			repaint();
 		}
+
+		public void mouseWheelMoved(MouseWheelEvent e) {
+			double zoomFactor = e.getWheelRotation() > 0 ? 0.9 : 1.1;
+			zoom *= zoomFactor;
+			Point mousePos = e.getPoint();
+			panX = (int)(mousePos.x - (mousePos.x - panX) * zoomFactor);
+			panY = (int)(mousePos.y - (mousePos.y - panY) * zoomFactor);
+			repaint();
+		}
+
+//		public void mousePressed(MouseEvent event)
+//		{
+//			if(resized)
+//				return;
+//			startRect = event.getPoint();
+//		}
+//
+//		public void mouseReleased(MouseEvent event)
+//		{
+//			if(resized)
+//				return;
+//			endRect = event.getPoint();
+//			resize();
+//			resized = true;
+//			repaint();
+//		}
 
 		//		    public void mouseDragged(MouseEvent event) 
 		//		    {
@@ -645,17 +675,23 @@ public class TargetIllustrationPN extends JPanel implements Observer
 		//		      
 		//		    }
 
-		public void mouseClicked(MouseEvent event)
-		{
-			if (event.getClickCount() == 2)  // double click
-			{
-				if(!resized)
-					return;
-				resized = false;
-				setDefaults();
-				repaint();
-			}
-		}
+//		public void mouseClicked(MouseEvent event)
+//		{
+//			if (event.getClickCount() == 2)  // double click
+//			{
+//				if(!resized)
+//					return;
+//				resized = false;
+//				setDefaults();
+//				repaint();
+//			}
+//		}
+	}
+
+	public void resetView() {
+		zoom = 1.0;
+		panX = panY = 0;
+		repaint();
 	}
 
 	@Override

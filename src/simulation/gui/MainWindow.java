@@ -81,6 +81,13 @@ public class MainWindow extends JFrame
 			controlPanel.add(checkBox);
 		}
 
+		// Create the reset button
+		JButton resetButton = new JButton("Reset View");
+		resetButton.addActionListener(e -> {
+			targetPN.resetView();
+		});
+		controlPanel.add(resetButton);
+
 		mainPanel.add(controlPanel, BorderLayout.SOUTH);
 		this.getContentPane().add(TARGETS, mainPanel);
 		openTargetPanel();
