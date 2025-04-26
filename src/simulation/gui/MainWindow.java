@@ -54,11 +54,15 @@ public class MainWindow extends JFrame
 		this.getContentPane().setLayout(new CardLayout());
 
 		// Define colors for each telescope
-		Color[] colors = new Color[4]; //TODO
+		Color[] colors = new Color[8]; //TODO
 		colors[0] = Color.RED;
 		colors[1] = Color.BLUE;
 		colors[2] = Color.GREEN;
 		colors[3] = Color.ORANGE;
+		colors[4] = Color.MAGENTA;
+		colors[5] = Color.YELLOW;
+		colors[6] = Color.CYAN;
+		colors[7] = Color.PINK;
 		// Add more colors if needed
 
 		// Main panel with BorderLayout

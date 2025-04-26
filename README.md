@@ -2,7 +2,7 @@
 
 **Original Repository (this code can also be found in the original branch): https://bitbucket.org/imoser/radiotelescopescheduling/src/master/** 
 
-**NOTE: This branch is for the multiple telescopes simulation exclusively. Not compatible with single telescopes optimization policy. For the single telescope version, please checkout to stable branch. Currently, only `MultiTelescopesMTSPPolicy` policy and `TravellingSalesmanPreoptimisation` is available. GUI are not available, so GUI must be set to false in the config file. The number of telescopes can be set by the teles_num item in config**
+**NOTE: This branch is for the multiple telescopes simulation exclusively. Not compatible with single telescopes optimization policy. For the single telescope version, please checkout to stable branch. Currently, only `MultiTelescopesMTSPPolicy` policy and `TravellingSalesmanPreoptimisation` is available. GUI is available which supports up to 8 telescopes. The number of telescopes can be set by the teles_num item in config**
 
 ## List of files and directories
 
