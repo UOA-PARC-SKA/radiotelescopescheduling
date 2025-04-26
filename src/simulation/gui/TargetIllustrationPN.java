@@ -58,6 +58,7 @@ public class TargetIllustrationPN extends JPanel implements Observer
 	private Telescope[] telescopes;
 	private Color[] colors;
 	private boolean[] visible;
+	private boolean visibleNeighbours;
 	private int panX = 0, panY = 0;
 	private double zoom = 1.0;
 
@@ -254,33 +255,32 @@ public class TargetIllustrationPN extends JPanel implements Observer
 				g2.fillOval(coords[0], coords[1], GRAPH_POINT_WIDTH + 2, GRAPH_POINT_WIDTH + 2);
 
 				// Neighbours connection line
-				HorizonCoordinates hcCurrent = currentTarget.getHorizonCoordinates(telescope.getLocation(), gc);
-				if (hcCurrent.getAltitude() > 0) {
-					g2.fillOval(coords[0], coords[1], GRAPH_POINT_WIDTH, GRAPH_POINT_WIDTH);
-					List<Connection> connections = currentTarget.getNeighbours();
-					Color transparentPrimary = new Color(primaryColor.getRed(), primaryColor.getGreen(), primaryColor.getBlue(),30);
-					for (Connection conn : connections)
-					{
-						HorizonCoordinates hc1 = conn.getFirst().getHorizonCoordinates(telescope.getLocation(), gc);
-						HorizonCoordinates hc2 = conn.getOtherTarget(conn.getFirst()).getHorizonCoordinates(telescope.getLocation(), gc);
-						if (hc1.getAltitude() < 0 || hc2.getAltitude() < 0)
-							continue;
-						double[] xy1 = getXY(hc1);
-						double[] xy2 = getXY(hc2);
-						int[] coords1 = doPointScaling(xy1[0], xy1[1]);
-						int[] coords2 = doPointScaling(xy2[0], xy2[1]);
+				if (visibleNeighbours) {
+					HorizonCoordinates hcCurrent = currentTarget.getHorizonCoordinates(telescope.getLocation(), gc);
+					if (hcCurrent.getAltitude() > 0) {
+						g2.fillOval(coords[0], coords[1], GRAPH_POINT_WIDTH, GRAPH_POINT_WIDTH);
+						List<Connection> connections = currentTarget.getNeighbours();
+						Color transparentPrimary = new Color(primaryColor.getRed(), primaryColor.getGreen(), primaryColor.getBlue(), 30);
+						for (Connection conn : connections) {
+							HorizonCoordinates hc1 = conn.getFirst().getHorizonCoordinates(telescope.getLocation(), gc);
+							HorizonCoordinates hc2 = conn.getOtherTarget(conn.getFirst()).getHorizonCoordinates(telescope.getLocation(), gc);
+							if (hc1.getAltitude() < 0 || hc2.getAltitude() < 0)
+								continue;
+							double[] xy1 = getXY(hc1);
+							double[] xy2 = getXY(hc2);
+							int[] coords1 = doPointScaling(xy1[0], xy1[1]);
+							int[] coords2 = doPointScaling(xy2[0], xy2[1]);
 
-						int centerX1 = coords1[0] + GRAPH_POINT_WIDTH/2;
-						int centerY1 = coords1[1] + GRAPH_POINT_WIDTH/2;
-						int centerX2 = coords2[0] + GRAPH_POINT_WIDTH/2;
-						int centerY2 = coords2[1] + GRAPH_POINT_WIDTH/2;
+							int centerX1 = coords1[0] + GRAPH_POINT_WIDTH / 2;
+							int centerY1 = coords1[1] + GRAPH_POINT_WIDTH / 2;
+							int centerX2 = coords2[0] + GRAPH_POINT_WIDTH / 2;
+							int centerY2 = coords2[1] + GRAPH_POINT_WIDTH / 2;
 
-						g2.setColor(transparentPrimary);
-						g2.drawLine(centerX1, centerY1, centerX2, centerY2);
+							g2.setColor(transparentPrimary);
+							g2.drawLine(centerX1, centerY1, centerX2, centerY2);
+						}
 					}
 				}
-
-
 			}
 		}
 
@@ -358,9 +358,9 @@ public class TargetIllustrationPN extends JPanel implements Observer
 		int yPos = 10;
 		for (int i = 0; i < telescopes.length; i++) {
 			g2.setColor(colors[i]);
-			g2.fillRect(10, yPos, GRAPH_POINT_WIDTH, GRAPH_POINT_WIDTH);
+			g2.fillOval(10, yPos, GRAPH_POINT_WIDTH, GRAPH_POINT_WIDTH);
 			g2.setColor(Color.BLACK);
-			g2.drawRect(10, yPos, GRAPH_POINT_WIDTH, GRAPH_POINT_WIDTH);
+			g2.drawOval(10, yPos, GRAPH_POINT_WIDTH, GRAPH_POINT_WIDTH);
 			g2.drawString("Telescope " + (i+1), 25, yPos + GRAPH_POINT_WIDTH);
 			yPos += 20;
 		}
@@ -413,6 +413,10 @@ public class TargetIllustrationPN extends JPanel implements Observer
 
 	public void setTelescopeVisibility(int index, boolean isVisible) {
 		visible[index] = isVisible;
+	}
+
+	public void setNeighbourVisibility(boolean isVisible) {
+		visibleNeighbours = isVisible;
 	}
 	
 //	@Override
@@ -613,7 +617,6 @@ public class TargetIllustrationPN extends JPanel implements Observer
 
 		return xy;
 	}
-
 
 	//	public synchronized void update(GregorianCalendar gc, Pointable cur, Connection trodden)
 	//	{

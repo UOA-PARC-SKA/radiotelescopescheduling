@@ -85,6 +85,13 @@ public class MainWindow extends JFrame
 			controlPanel.add(checkBox);
 		}
 
+		JCheckBox checkBox = new JCheckBox("Show Neighbours", false);
+		checkBox.addItemListener(e -> {
+			targetPN.setNeighbourVisibility(checkBox.isSelected());
+			targetPN.repaint();
+		});
+		controlPanel.add(checkBox);
+
 		// Create the reset button
 		JButton resetButton = new JButton("Reset View");
 		resetButton.addActionListener(e -> {
