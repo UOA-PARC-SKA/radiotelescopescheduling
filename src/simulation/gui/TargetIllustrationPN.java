@@ -61,6 +61,7 @@ public class TargetIllustrationPN extends JPanel implements Observer
 	private boolean visibleNeighbours;
 	private int panX = 0, panY = 0;
 	private double zoom = 1.0;
+	private int visibleHistory = 100;
 
 
 
@@ -211,10 +212,16 @@ public class TargetIllustrationPN extends JPanel implements Observer
 			);
 
 			List<ObservationState> states = schedule.getScheduleStates();
+			int pastCount = 0;
 			Pointable currentTarget = null;
 
 			synchronized (states) {
-				for (ObservationState state : states) {
+				for (int j = states.size() - 1; j >= 0; j--) {
+					ObservationState state = states.get(j);
+					if (pastCount >= visibleHistory) {
+						break;
+					}
+
 					boolean isPast = state.getStartTime() < gc.getTime().getTime();
 					Pointable p = state.getCurrentTarget();
 					double[] xy = getXY(p.getHorizonCoordinates(telescope.getLocation(), gc));
@@ -222,6 +229,7 @@ public class TargetIllustrationPN extends JPanel implements Observer
 
 					// Draw connection
 					if (isPast && state.getLinkToHere() != null) {
+						pastCount++;
 						Connection c = state.getLinkToHere();
 						Pointable t1 = c.getFirst();
 						Pointable t2 = c.getOtherTarget(t1);
@@ -238,6 +246,7 @@ public class TargetIllustrationPN extends JPanel implements Observer
 
 						g2.setColor(primaryColor);
 						g2.drawLine(centerX1, centerY1, centerX2, centerY2);
+						g2.fillOval(coords1[0], coords1[1], GRAPH_POINT_WIDTH, GRAPH_POINT_WIDTH);
 					}
 
 					// Draw observation point
@@ -417,6 +426,11 @@ public class TargetIllustrationPN extends JPanel implements Observer
 
 	public void setNeighbourVisibility(boolean isVisible) {
 		visibleNeighbours = isVisible;
+	}
+
+	public void setVisibleHistory(int count) {
+		this.visibleHistory = Math.max(1, count); // Ensure at least 1
+		repaint();
 	}
 	
 //	@Override

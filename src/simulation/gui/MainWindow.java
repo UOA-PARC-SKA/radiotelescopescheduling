@@ -113,7 +113,6 @@ public class MainWindow extends JFrame
 		});
 
 		controlPanel.add(speedSlider);
-
 		controlPanel.add(Box.createRigidArea(new Dimension(20, 0)));
 
 		// Create the reset button
@@ -122,6 +121,24 @@ public class MainWindow extends JFrame
 			targetPN.resetView();
 		});
 		controlPanel.add(resetButton);
+		controlPanel.add(Box.createRigidArea(new Dimension(20, 0)));
+
+		// Past Observations
+		JLabel historyLabel = new JLabel("Number of past observations (1-100):");
+		JSpinner historySpinner = new JSpinner(new SpinnerNumberModel(100, 1, 100, 1));
+		historySpinner.setPreferredSize(new Dimension(50, 25));
+
+		historySpinner.addChangeListener(e -> {
+			int history = (Integer)historySpinner.getValue();
+			for (Component comp : mainPanel.getComponents()) {
+				if (comp instanceof TargetIllustrationPN) {
+					((TargetIllustrationPN)comp).setVisibleHistory(history);
+				}
+			}
+		});
+
+		controlPanel.add(historyLabel);
+		controlPanel.add(historySpinner);
 
 		JPanel southContainer = new JPanel(new BorderLayout());
 		southContainer.add(telescopePanel, BorderLayout.CENTER);
