@@ -2,14 +2,16 @@ package simulation;
 
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Observable;
 import java.util.TimeZone;
 
 
-public class Clock 
+public class Clock extends Observable
 {
 	private GregorianCalendar gc;
 	private int increment;
 	private int magnitude;
+	private double speedMultiplier;
 	private static Clock simulationClock = null;
 	private static Clock[] scheduleClocks = null;
 	
@@ -18,15 +20,24 @@ public class Clock
 		
 		increment = 100;
 		magnitude = GregorianCalendar.SECOND;
+		speedMultiplier = 1.0;
 	}
 	
 	public void setSimulationSpeed(int increment)
 	{
 		this.increment = increment;
 	}
-	
 
-	
+	public void setSpeedMultiplier(double multiplier) {
+		this.speedMultiplier = Math.max(0, Math.min(5.0, multiplier));
+		setChanged();
+		notifyObservers();
+	}
+
+	public double getSpeedMultiplier() {
+		return speedMultiplier;
+	}
+
 	public void start()
 	{
 		gc = new GregorianCalendar(TimeZone.getTimeZone("GMT"));
@@ -38,12 +49,15 @@ public class Clock
 		gc.setTime(date);
 	}
 	
-	public void advance()
+	public void advanceSimulationBy(int incr)
 	{
-		gc.add(magnitude, increment);
+		int adjustedIncr = (int)(incr * speedMultiplier);
+		gc.add(magnitude, adjustedIncr);
+		setChanged();
+		notifyObservers();
 	//	gc.add(magnitude, 0);
 	}
-	
+
 	public void advanceBy(int incr)
 	{
 	//	gc.add(magnitude, 0);

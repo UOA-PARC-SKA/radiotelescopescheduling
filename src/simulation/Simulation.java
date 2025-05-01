@@ -113,7 +113,7 @@ public class Simulation extends java.util.Observable
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			Clock.getSimulationClock().advanceBy(10);
+			Clock.getSimulationClock().advanceSimulationBy(10);
 		}
 
 	}

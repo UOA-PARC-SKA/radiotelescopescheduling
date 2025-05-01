@@ -6,19 +6,14 @@ import java.awt.*;
 import javax.swing.*;
 
 
-import observation.Connection;
-import observation.Pointable;
-import observation.Pulsar;
 import observation.Schedule;
 import observation.Target;
 import observation.Telescope;
 import observation.interference.SkyState;
-import simulation.Simulation;
-import astrometrics.Location;
+import simulation.Clock;
 
 import java.awt.event.*;
-import java.util.ArrayList;
-import java.util.GregorianCalendar;
+import java.util.Hashtable;
 import java.util.List;
 
 
@@ -43,7 +38,7 @@ public class MainWindow extends JFrame
 
 		createMenuBar();
 		this.setJMenuBar(menuBar);
-		this.setPreferredSize(new Dimension(750, 750));
+		this.setPreferredSize(new Dimension(1000, 1000));
 		ToolTipManager.sharedInstance().setDismissDelay(15000);
 		// set defaults to get the tabbed pane built.
 
@@ -73,7 +68,7 @@ public class MainWindow extends JFrame
 		mainPanel.add(targetPN, BorderLayout.CENTER);
 
 		// Control panel with checkboxes
-		JPanel controlPanel = new JPanel();
+		JPanel telescopePanel = new JPanel();
 		for (int i = 0; i < telescopes.length; i++) {
 			JCheckBox checkBox = new JCheckBox("Telescope " + (i + 1), true);
 			checkBox.setForeground(colors[i]);
@@ -82,7 +77,7 @@ public class MainWindow extends JFrame
 				targetPN.setTelescopeVisibility(idx, checkBox.isSelected());
 				targetPN.repaint();
 			});
-			controlPanel.add(checkBox);
+			telescopePanel.add(checkBox);
 		}
 
 		JCheckBox checkBox = new JCheckBox("Show Neighbours", false);
@@ -90,7 +85,36 @@ public class MainWindow extends JFrame
 			targetPN.setNeighbourVisibility(checkBox.isSelected());
 			targetPN.repaint();
 		});
-		controlPanel.add(checkBox);
+		telescopePanel.add(checkBox);
+
+		// Speed control with slider
+		JPanel controlPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+		controlPanel.add(new JLabel("Simulation Speed:"));
+
+		JSlider speedSlider = new JSlider(0, 500, 100);
+		speedSlider.setSnapToTicks(true);
+		speedSlider.setMajorTickSpacing(100);
+		speedSlider.setMinorTickSpacing(50);
+		speedSlider.setPaintTicks(true);
+		speedSlider.setPaintLabels(true);
+
+		Hashtable<Integer, JLabel> labelTable = new Hashtable<>();
+		labelTable.put(0, new JLabel("0x"));
+		labelTable.put(100, new JLabel("1x"));
+		labelTable.put(200, new JLabel("2x"));
+		labelTable.put(300, new JLabel("3x"));
+		labelTable.put(400, new JLabel("4x"));
+		labelTable.put(500, new JLabel("5x"));
+		speedSlider.setLabelTable(labelTable);
+
+		speedSlider.addChangeListener(e -> {
+			double speed = speedSlider.getValue() / 100.0;
+			Clock.getSimulationClock().setSpeedMultiplier(speed);
+		});
+
+		controlPanel.add(speedSlider);
+
+		controlPanel.add(Box.createRigidArea(new Dimension(20, 0)));
 
 		// Create the reset button
 		JButton resetButton = new JButton("Reset View");
@@ -99,9 +123,11 @@ public class MainWindow extends JFrame
 		});
 		controlPanel.add(resetButton);
 
-		mainPanel.add(controlPanel, BorderLayout.SOUTH);
+		JPanel southContainer = new JPanel(new BorderLayout());
+		southContainer.add(telescopePanel, BorderLayout.CENTER);
+		southContainer.add(controlPanel, BorderLayout.SOUTH);
+		mainPanel.add(southContainer, BorderLayout.SOUTH);
 		this.getContentPane().add(TARGETS, mainPanel);
-		openTargetPanel();
 	}
 	
 //	public void update (GregorianCalendar gc, Pointable cur, Connection trodden)
