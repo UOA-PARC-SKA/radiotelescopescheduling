@@ -328,13 +328,6 @@ public class ConcordeMTSPPolicy extends DispatchPolicy {
         return tour.stream().mapToInt(i -> i).toArray();
     }
 
-    // Method to handle observation completion (call this when a telescope finishes an observation)
-    public void onObservationComplete(int telescopeIndex) {
-        currentlyObserving.remove(telescopeIndex);
-        observationStartTimes.remove(telescopeIndex);
-        // Trigger re-planning if needed
-    }
-
     // Inner classes for partitioning and tracking
     private interface PulsarPartitioner {
         List<List<Target>> partition(List<Target> pulsars, Pointable[] currentPositions);
