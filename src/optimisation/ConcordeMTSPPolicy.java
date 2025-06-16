@@ -4,6 +4,7 @@ import astrometrics.EquatorialCoordinates;
 import astrometrics.Location;
 import observation.*;
 import observation.Observable;
+import optimisation.partitioners.*;
 import simulation.Clock;
 import simulation.Simulation;
 import util.exceptions.OutOfObservablesException;
@@ -32,7 +33,7 @@ public class ConcordeMTSPPolicy extends DispatchPolicy {
     public ConcordeMTSPPolicy() {
         currentlyObserving = new HashMap<>();
         observationStartTimes = new HashMap<>();
-        partitioner = new SimpleRoundRobinPartitioner();
+        partitioner = new PriorityWeightedPartitioner(); // TODO: use config
         waitingTargets = new ConcurrentHashMap<>();
     }
 
@@ -326,30 +327,5 @@ public class ConcordeMTSPPolicy extends DispatchPolicy {
         }
 
         return tour.stream().mapToInt(i -> i).toArray();
-    }
-
-    // Inner classes for partitioning and tracking
-    private interface PulsarPartitioner {
-        List<List<Target>> partition(List<Target> pulsars, Pointable[] currentPositions);
-    }
-
-    private class SimpleRoundRobinPartitioner implements PulsarPartitioner {
-        @Override
-        public List<List<Target>> partition(List<Target> pulsars, Pointable[] currentPositions) {
-            List<List<Target>> partitions = new ArrayList<>();
-
-            // Initialize empty partitions
-            for (int i = 0; i < Simulation.NUMTELESCOPES; i++) {
-                partitions.add(new ArrayList<>());
-            }
-
-            // Simple round-robin assignment
-            for (int i = 0; i < pulsars.size(); i++) {
-                int telescopeIndex = i % Simulation.NUMTELESCOPES;
-                partitions.get(telescopeIndex).add(pulsars.get(i));
-            }
-
-            return partitions;
-        }
     }
 }
