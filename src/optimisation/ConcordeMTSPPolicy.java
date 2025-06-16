@@ -102,11 +102,19 @@ public class ConcordeMTSPPolicy extends DispatchPolicy {
         createNeighborsForTelescope(telescopeIndex, current, targets);
 
         if (current.getNeighbours().isEmpty()) {
-            throw new OutOfObservablesException();
+            return handleNoTargetsForTelescope(telescopeIndex, current);
         }
 
         // Build distance matrix
         long[][] distanceMatrix = buildDistanceMatrix(telescopeIndex, current);
+
+        int size = distanceMatrix.length;
+        Connection nextConnection;
+
+        if (size < 3) {
+            nextConnection = current.getNeighbours().getFirst();
+            return nextConnection;
+        }
 
         // Write TSP file
         Path tspFile = writeTspFile(distanceMatrix, telescopeIndex);
@@ -119,7 +127,7 @@ public class ConcordeMTSPPolicy extends DispatchPolicy {
 
         // Get next connection (first move in tour)
         int nextIndex = tour[1]; // tour[0] is starting point
-        Connection nextConnection = current.getNeighbours().get(nextIndex - 1);
+        nextConnection = current.getNeighbours().get(nextIndex - 1);
 
         // Update telescope state
         Pointable nextTarget = nextConnection.getOtherTarget(current);
@@ -174,7 +182,14 @@ public class ConcordeMTSPPolicy extends DispatchPolicy {
     private Connection handleNoTargetsForTelescope(int telescopeIndex, Pointable current) {
         // Create or reuse a waiting target for this telescope
         Target waitingTarget = waitingTargets.computeIfAbsent(telescopeIndex, idx -> {
-            return new Target(new EquatorialCoordinates(0, 0));
+            Target t = new Target(new EquatorialCoordinates(0, 0));
+
+            Pulsar dummyPulsar = new Pulsar("Dummy-" + idx);
+            dummyPulsar.setExpectedIntegrationTime(1);  // Ensures it needs observing
+            dummyPulsar.setScintillationTimescale(1);   // Avoid scheduling delay
+            t.addObservable(dummyPulsar);
+
+            return t;
         });
 
         return new Connection(current, waitingTarget, 0);
