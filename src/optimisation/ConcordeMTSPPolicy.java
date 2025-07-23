@@ -4,7 +4,6 @@ import astrometrics.EquatorialCoordinates;
 import astrometrics.Location;
 import observation.*;
 import observation.Observable;
-import optimisation.partitioners.*;
 import simulation.Clock;
 import simulation.Simulation;
 import util.exceptions.OutOfObservablesException;
@@ -26,43 +25,27 @@ public class ConcordeMTSPPolicy extends DispatchPolicy {
     // Tracking in-progress observations
     private Map<Integer, Target> currentlyObserving;
     private Map<Integer, Long> observationStartTimes;
-    private PulsarPartitioner partitioner;
     private final Map<Integer, Target> waitingTargets;
 
     public ConcordeMTSPPolicy() {
         currentlyObserving = new HashMap<>();
         observationStartTimes = new HashMap<>();
-        partitioner = new ProximityBasedPartitioner(); // TODO: use config
         waitingTargets = new ConcurrentHashMap<>();
     }
 
     @Override
     public Connection[] findNextPaths(Pointable[] currents) {
-        return solveMTSP(currents);
-    }
 
-    private Connection[] solveMTSP(Pointable[] currents) {
-        // Step 1: Get available pulsars (excluding currently observing ones)
-        List<Target> availablePulsars = getAvailablePulsars();
-
-        if (availablePulsars.isEmpty()) {
-            // Handle when no pulsars are available - return idle connections
-            return handleNoPulsarsAvailable(currents);
-        }
-
-        // Step 2: Partition pulsars among telescopes
-        List<List<Target>> partitions = partitioner.partition(availablePulsars, currents);
-
-        // Step 3: Solve TSP for each partition
+        // Now solve TSP for each telescope based on its assigned neighbors
         Connection[] connections = new Connection[Simulation.NUMTELESCOPES];
 
         for (int i = 0; i < Simulation.NUMTELESCOPES; i++) {
-            if (partitions.get(i).isEmpty()) {
+            if (currents[i].getNeighbours().isEmpty()) {
                 // No targets for this telescope - create idle connection
                 connections[i] = handleNoTargetsForTelescope(i, currents[i]);
             } else {
                 try {
-                    connections[i] = solveSingleTSP(i, currents[i], partitions.get(i));
+                    connections[i] = solveSingleTSP(i, currents[i]);
                 } catch (Exception e) {
                     System.err.println("Error solving TSP for telescope " + i + ": " + e.getMessage());
                     connections[i] = handleNoTargetsForTelescope(i, currents[i]);
@@ -84,75 +67,31 @@ public class ConcordeMTSPPolicy extends DispatchPolicy {
     }
 
     /**
-     * Handle the case when no pulsars are available at all
-     */
-    private Connection[] handleNoPulsarsAvailable(Pointable[] currents) {
-        System.out.println("No pulsars available for observation. Creating idle connections.");
-        Connection[] connections = new Connection[Simulation.NUMTELESCOPES];
-
-        for (int i = 0; i < Simulation.NUMTELESCOPES; i++) {
-            connections[i] = createIdleConnection(currents[i]);
-            // Add idle time to telescope
-            addTelescopeIdleTime(i);
-        }
-
-        return connections;
-    }
-
-    /**
      * Handle the case when a specific telescope has no targets
      */
     private Connection handleNoTargetsForTelescope(int telescopeIndex, Pointable current) {
-        System.out.println("No targets available for telescope " + telescopeIndex + ". Creating idle connection.");
-        addTelescopeIdleTime(telescopeIndex);
-        return createIdleConnection(current);
+        // Create or reuse a waiting target for this telescope
+        Target waitingTarget = waitingTargets.computeIfAbsent(telescopeIndex, idx -> {
+            Target t = new Target(new EquatorialCoordinates(0, 0));
+
+            Pulsar dummyPulsar = new Pulsar("Dummy-" + idx);
+            dummyPulsar.setExpectedIntegrationTime(1);  // Ensures it needs observing
+            dummyPulsar.setScintillationTimescale(1);   // Avoid scheduling delay
+            t.addObservable(dummyPulsar);
+
+            return t;
+        });
+
+        return new Connection(current, waitingTarget, 0);
     }
 
-    /**
-     * Create an idle connection that keeps the telescope at its current position
-     */
-    private Connection createIdleConnection(Pointable current) {
-        if (!(current instanceof Target target)) {
-            throw new IllegalStateException("Cannot create idle connection: current Pointable is not a Target.");
-        }
-        return new Connection(target, target, 0.0); // A dummy self-loop
-    }
-
-
-    private List<Target> getAvailablePulsars() {
-        List<Target> available = new ArrayList<>();
-
-        for (Target target : observables) {
-            if (!target.hasCompleteObservation() && !isCurrentlyBeingObserved(target)) {
-                available.add(target);
-            }
-        }
-
-        return available;
-    }
-
-    private boolean isCurrentlyBeingObserved(Target target) {
-        return currentlyObserving.containsValue(target);
-    }
-
-    private Connection solveSingleTSP(int telescopeIndex, Pointable current, List<Target> targets) {
-        if (targets.isEmpty()) {
-            // Handle when no pulsars are available
+    private Connection solveSingleTSP(int telescopeIndex, Pointable current) throws Exception {
+        // Use pre-set neighbors instead of creating new ones
+        if (current.getNeighbours().isEmpty()) {
             return handleNoTargetsForTelescope(telescopeIndex, current);
         }
 
-        // Create neighbors for this telescope's targets
-        createNeighborsForTelescope(telescopeIndex, current, targets);
-
-        if (current.getNeighbours().isEmpty()) {
-            // Handle when the telescope has no neighbours
-            System.out.println("Telescope " + telescopeIndex + " has no valid neighbours. Creating idle connection.");
-            return createIdleConnection(current);
-        }
-
-        // Build distance matrix
         long[][] distanceMatrix = buildDistanceMatrix(telescopeIndex, current);
-
         int size = distanceMatrix.length;
         Connection nextConnection;
 
@@ -161,64 +100,26 @@ public class ConcordeMTSPPolicy extends DispatchPolicy {
             return nextConnection;
         }
 
-        try {
-            // Write TSP file
-            Path tspFile = writeTspFile(distanceMatrix, telescopeIndex);
+        Path tspFile = writeTspFile(distanceMatrix, telescopeIndex);
+        Path solFile = runConcorde(tspFile);
+        int[] tour = parseSolution(solFile);
 
-            // Solve with Concorde
-            Path solFile = runConcorde(tspFile);
+        int nextIndex = tour[1]; // tour[0] is starting point
+        nextConnection = current.getNeighbours().get(nextIndex - 1);
 
-            // Parse solution
-            int[] tour = parseSolution(solFile);
+        Pointable nextTarget = nextConnection.getOtherTarget(current);
+        TelescopeState newState = telescopes[telescopeIndex].getStateForShortestSlew(
+                nextTarget.getHorizonCoordinates(telescopes[telescopeIndex].getLocation(),
+                        Clock.getScheduleClock()[telescopeIndex].getTime())
+        );
 
-            // Get next connection (first move in tour)
-            int nextIndex = tour[1]; // tour[0] is starting point
-            nextConnection = current.getNeighbours().get(nextIndex - 1);
+        currentTelescopeStates[telescopeIndex] = newState;
+        telescopes[telescopeIndex].applyNewState(newState);
+        schedules[telescopeIndex].addLink(nextConnection, newState);
 
-            // Update telescope state
-            Pointable nextTarget = nextConnection.getOtherTarget(current);
-            TelescopeState newState = telescopes[telescopeIndex].getStateForShortestSlew(
-                    nextTarget.getHorizonCoordinates(telescopes[telescopeIndex].getLocation(),
-                            Clock.getScheduleClock()[telescopeIndex].getTime())
-            );
-
-            currentTelescopeStates[telescopeIndex] = newState;
-            telescopes[telescopeIndex].applyNewState(newState);
-            schedules[telescopeIndex].addLink(nextConnection, newState);
-
-            return nextConnection;
-
-        } catch (IOException e) {
-            System.err.println("IO error during TSP solving for telescope " + telescopeIndex + ": " + e.getMessage());
-            // Fall back to nearest neighbor
-            return findNearestNeighbor(current);
-        } catch (Exception e) {
-            System.err.println("Error during TSP solving for telescope " + telescopeIndex + ": " + e.getMessage());
-            // Fall back to nearest neighbor
-            return findNearestNeighbor(current);
-        }
+        return nextConnection;
     }
 
-    /**
-     * Fallback method to find nearest neighbor when TSP solving fails
-     */
-    private Connection findNearestNeighbor(Pointable current) {
-        if (current.getNeighbours().isEmpty()) {
-            return createIdleConnection(current);
-        }
-
-        Connection nearest = current.getNeighbours().get(0);
-        double minDistance = nearest.getDistance();
-
-        for (Connection conn : current.getNeighbours()) {
-            if (conn.getDistance() < minDistance) {
-                minDistance = conn.getDistance();
-                nearest = conn;
-            }
-        }
-
-        return nearest;
-    }
 
     private void createNeighborsForTelescope(int telescopeIndex, Pointable current, List<Target> targets) {
         current.clearNeighbours();
@@ -239,9 +140,7 @@ public class ConcordeMTSPPolicy extends DispatchPolicy {
                 current.addNeighbour(connection);
 
             } catch (Exception e) {
-                // Handle this target if there's an error calculating distance
-                System.err.println("Error calculating distance to target " + target + " for telescope " +
-                        telescopeIndex + ": " + e.getMessage());
+                // Skip this target if there's an error calculating distance
                 continue;
             }
         }
@@ -413,61 +312,5 @@ public class ConcordeMTSPPolicy extends DispatchPolicy {
         }
 
         return tour.stream().mapToInt(i -> i).toArray();
-    }
-
-    /**
-     * Clean up resources when observations are complete
-     */
-    public void cleanup() {
-        // Stop and remove Concorde container
-        try {
-            new ProcessBuilder("docker", "stop", "concorde").start().waitFor();
-            new ProcessBuilder("docker", "rm", "concorde").start().waitFor();
-        } catch (Exception e) {
-            System.err.println("Error cleaning up Concorde container: " + e.getMessage());
-        }
-
-        // Clear tracking maps
-        currentlyObserving.clear();
-        observationStartTimes.clear();
-        waitingTargets.clear();
-    }
-
-    /**
-     * Check if an observation has completed based on expected integration time
-     */
-    private boolean hasObservationCompleted(int telescopeIndex) {
-        if (!currentlyObserving.containsKey(telescopeIndex)) {
-            return true;
-        }
-
-        Target target = currentlyObserving.get(telescopeIndex);
-        Long startTime = observationStartTimes.get(telescopeIndex);
-
-        if (startTime == null) {
-            return true;
-        }
-
-        Observable obs = target.findObservableByObservationTime();
-        if (obs == null) {
-            return true;
-        }
-
-        long currentTime = Clock.getScheduleClock()[telescopeIndex].getTime().getTimeInMillis();
-        long elapsedTime = currentTime - startTime;
-
-        return elapsedTime >= obs.getExpectedIntegrationTime() * 1000; // Convert to milliseconds
-    }
-
-    /**
-     * Remove completed observations from tracking
-     */
-    public void updateObservationTracking() {
-        for (int i = 0; i < Simulation.NUMTELESCOPES; i++) {
-            if (hasObservationCompleted(i)) {
-                currentlyObserving.remove(i);
-                observationStartTimes.remove(i);
-            }
-        }
     }
 }

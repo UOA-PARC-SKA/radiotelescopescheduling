@@ -69,39 +69,6 @@ public class Scheduler
 //			policy.initialise(props, telescope, schedule, targets, skyState);
 	}
 
-
-
-/*
-	public Scheduler(Properties props, Telescope telescope) throws Exception
-	{
-		Satellite.setMinAngDist(Double.parseDouble(props.getProperty("satellite_closeness_limit")));
-		boolean useDB = Boolean.parseBoolean(props.getProperty("useDB"));
-		if (useDB)
-		{
-			MongoDBReader mdr = new MongoDBReader();
-			targets = mdr.retrieveAllTargets();
-		}else
-		{
-			TargetLocationReader fr = new TargetLocationReader();
-			targets = fr.getPulsarData(props.getProperty("dataset"));
-			fr.addObservationData(targets, props.getProperty("observations_dataset"));
-		}
-
-
-		schedule = new Schedule();
-		startSchedulingClock(props.getProperty("observation_start"));
-		skyState = new SkyState(props.getProperty("norad_file_path"));
-		skyState.createAllBadThingsThatMove(telescope);
-		observation = new Observation(props, telescope, skyState);
-
-		// policy = (DispatchPolicy) Class.forName(props.getProperty("policy_class")).newInstance();
-		policy = (DispatchPolicy) Class.forName(props.getProperty("policy_class")).newInstance();
-		policy.initialise(props, telescope, schedule, targets, skyState);
-	}
- */
-
-
-
 	public void buildSchedule(Properties props)
 	{
 		makeInitialState();
@@ -137,22 +104,21 @@ public class Scheduler
 					pointables[i] = schedules[i].getCurrentState().getCurrentTarget();
 				policy.addNeighbours(preoptimisation, neigCap, pointables);
 
-				if(schedules[0].getCurrentState().getCurrentTarget().getNeighbours().size()<Simulation.NUMTELESCOPES){
-					System.out.println("targets are not enough for all telescopes");
-					int num = schedules[0].getCurrentState().getCurrentTarget().getNeighbours().size();
-					for(int i = 0; i<num; i++){
-						Connection link = schedules[i].getCurrentState().getCurrentTarget().getNeighbours().get(i);
-						policy.addNeighbourtoScheduleState(i, link, Clock.getScheduleClock()[i]);
-						observations[i].observe(schedules[i].getCurrentState());
-					}
-					counter = -1;
-					continue;
+				// Check if we have enough targets AFTER addNeighbours creates the neighbor lists
+				int minNeighbors = Integer.MAX_VALUE;
+				for(int i=0; i< Simulation.NUMTELESCOPES; i++) {
+					minNeighbors = Math.min(minNeighbors, pointables[i].getNeighbours().size());
+				}
+
+				// If any telescope has insufficient neighbors, trigger waiting strategy
+				if(minNeighbors == 0) {
+					throw new OutOfObservablesException();
 				}
 
 			} catch (OutOfObservablesException e) {
+				// Now properly handle insufficient targets with waiting strategy
 
-				if(policy.hasNoMoreObservables())
-				{
+				if(policy.hasNoMoreObservables()) {
 					for(int i=0; i< Simulation.NUMTELESCOPES; i++)
 						schedules[i].setComplete(true);
 					complete = true;
@@ -180,19 +146,6 @@ public class Scheduler
 							counter = -1;
 							continue;
 						}
-
-						if(schedules[0].getCurrentState().getCurrentTarget().getNeighbours().size()<Simulation.NUMTELESCOPES){
-							System.out.println("targets are not enough for all telescopes");
-							int num = schedules[0].getCurrentState().getCurrentTarget().getNeighbours().size();
-							for(int i = 0; i<num; i++){
-								Connection link = schedules[i].getCurrentState().getCurrentTarget().getNeighbours().get(i);
-								policy.addNeighbourtoScheduleState(i, link, Clock.getScheduleClock()[i]);
-								observations[i].observe(schedules[i].getCurrentState());
-							}
-							counter = -1;
-							continue;
-						}
-
 					} catch (LastEntryException e1) {
 						break;
 					}

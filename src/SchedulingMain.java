@@ -71,7 +71,7 @@ public class SchedulingMain {
 		}
 	}
 
-/*
+/*c
 	public static void run24Hours() throws Exception
 	{
 		String timeString;
