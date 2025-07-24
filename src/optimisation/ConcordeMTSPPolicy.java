@@ -66,6 +66,32 @@ public class ConcordeMTSPPolicy extends DispatchPolicy {
         return connections;
     }
 
+    @Override
+    public void addNeighbours(String preoptimisation, int neigCap, Pointable[] currents) throws OutOfObservablesException {
+        try {
+            super.addNeighbours(preoptimisation, neigCap, currents);
+        } catch (OutOfObservablesException e) {
+            throw e;
+        }
+
+        boolean needsClearance = false;
+        for (Pointable current : currents) {
+            int neighborCount = current.getNeighbours().size();
+            if (neighborCount > 0 && neighborCount < Simulation.NUMTELESCOPES) {
+                current.clearNeighbours();
+                needsClearance = true;
+            }
+        }
+
+        if (needsClearance) {
+            for (Pointable current : currents) {
+                if (current.getNeighbours().isEmpty()) {
+                    throw new OutOfObservablesException();
+                }
+            }
+        }
+    }
+
     /**
      * Handle the case when a specific telescope has no targets
      */

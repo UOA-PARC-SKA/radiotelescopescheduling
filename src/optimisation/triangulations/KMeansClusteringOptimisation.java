@@ -81,7 +81,7 @@ public class KMeansClusteringOptimisation extends NNOptimisation {
     /**
      * Partition targets using K-means clustering algorithm
      */
-    private List<List<Target>> partitionKMeans(List<Target> targets, Pointable[] currentPositions) {
+    List<List<Target>> partitionKMeans(List<Target> targets, Pointable[] currentPositions) {
         if (targets.isEmpty()) {
             return createEmptyPartitions();
         }
@@ -237,7 +237,7 @@ public class KMeansClusteringOptimisation extends NNOptimisation {
     /**
      * Get list of targets that are available for observation
      */
-    private List<Target> getAvailableTargets(List<Target> targets, Pointable[] currents,
+    public List<Target> getAvailableTargets(List<Target> targets, Pointable[] currents,
                                              Clock[] clocks, Location loc) {
         List<Target> available = new ArrayList<>();
 
@@ -279,7 +279,7 @@ public class KMeansClusteringOptimisation extends NNOptimisation {
     /**
      * Calculate angular distance between two pointables
      */
-    private double calculateDistance(Pointable from, Target to, Location loc, Clock clock) {
+    double calculateDistance(Pointable from, Target to, Location loc, Clock clock) {
         try {
             return from.angularDistanceTo(to, loc, clock.getTime());
         } catch (WrongTypeException e) {

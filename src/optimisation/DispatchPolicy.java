@@ -46,6 +46,7 @@ public abstract class DispatchPolicy {
 	private KMeansClusteringOptimisation kco;
 	private LoadBalancingOptimisation lbo;
 	private RightAscensionOptimisation rao;
+	private KMeansClusteringEarlySettingOptimisation kceso;
 
 	//public abstract Connection findNextPath(Pointable pointable);
 
@@ -81,6 +82,7 @@ public abstract class DispatchPolicy {
 		kco = new KMeansClusteringOptimisation();
 		lbo = new LoadBalancingOptimisation();
 		rao = new RightAscensionOptimisation();
+		kceso = new KMeansClusteringEarlySettingOptimisation();
 	}
 
 	//Some are below the horizon, but still in the pool
@@ -333,6 +335,8 @@ public abstract class DispatchPolicy {
 			lbo.createLoadBalancedLinks(observables, currents, triangulationRatio, Clock.getScheduleClock(), telescopes[0].getLocation(), telescopes);
 		} else if (preoptimisation.equals("rightascension")) {
 			rao.createRightAscensionLinks(observables, currents, triangulationRatio, Clock.getScheduleClock(), telescopes[0].getLocation(), telescopes);
+		} else if (preoptimisation.equals("kmeansearlysetting")) {
+			kceso.createKMeansLinks(observables, currents, triangulationRatio, Clock.getScheduleClock(), telescopes[0].getLocation(), telescopes);
 		} else {
 			tspo.createTSPLinks(observables, currents, triangulationRatio, Clock.getScheduleClock(), telescopes[0].getLocation(), telescopes, neigCap);
 			}
