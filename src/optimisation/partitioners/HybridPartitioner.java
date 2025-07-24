@@ -19,7 +19,7 @@ public class HybridPartitioner implements PulsarPartitioner {
     public HybridPartitioner() {
         this.strategies = Arrays.asList(
                 new KMeansClusteringPartitioner(),
-                new ProximityBasedPartitioner(),
+                new RightAscensionsPartitioner(),
                 new PriorityWeightedPartitioner()
         );
         this.weights = Arrays.asList(0.4, 0.3, 0.3); // Weights for each strategy

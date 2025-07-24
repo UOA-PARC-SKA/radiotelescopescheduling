@@ -16,12 +16,7 @@ import observation.Telescope;
 import observation.TelescopeState;
 import observation.interference.SkyState;
 import observation.live.ObservationState;
-import optimisation.triangulations.DynamicNNOptimisation;
-import optimisation.triangulations.AllPulsarsAsNeighbours;
-import optimisation.triangulations.TravellingSalesmanPreoptimisation;
-import optimisation.triangulations.SimpleRoundRobinOptimisation;
-import optimisation.triangulations.KMeansClusteringOptimisation;
-import optimisation.triangulations.LoadBalancingOptimisation;
+import optimisation.triangulations.*;
 import simulation.Clock;
 import simulation.Simulation;
 import util.Utilities;
@@ -50,6 +45,7 @@ public abstract class DispatchPolicy {
 	private SimpleRoundRobinOptimisation srro;
 	private KMeansClusteringOptimisation kco;
 	private LoadBalancingOptimisation lbo;
+	private RightAscensionOptimisation rao;
 
 	//public abstract Connection findNextPath(Pointable pointable);
 
@@ -84,6 +80,7 @@ public abstract class DispatchPolicy {
 		srro = new SimpleRoundRobinOptimisation();
 		kco = new KMeansClusteringOptimisation();
 		lbo = new LoadBalancingOptimisation();
+		rao = new RightAscensionOptimisation();
 	}
 
 	//Some are below the horizon, but still in the pool
@@ -314,6 +311,8 @@ public abstract class DispatchPolicy {
 			kco.createKMeansLinks(observables, currents, triangulationRatio, Clock.getScheduleClock(), telescopes[0].getLocation(), telescopes);
 		} else if (preoptimisation.equals("loadbalance")) {
 			lbo.createLoadBalancedLinks(observables, currents, triangulationRatio, Clock.getScheduleClock(), telescopes[0].getLocation(), telescopes);
+		} else if (preoptimisation.equals("rightascension")) {
+			rao.createRightAscensionLinks(observables, currents, triangulationRatio, Clock.getScheduleClock(), telescopes[0].getLocation(), telescopes);
 		} else {
 			tspo.createTSPLinks(observables, currents, triangulationRatio, Clock.getScheduleClock(), telescopes[0].getLocation(), telescopes, neigCap);
 			}
