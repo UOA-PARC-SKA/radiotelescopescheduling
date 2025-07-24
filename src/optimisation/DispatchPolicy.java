@@ -113,60 +113,50 @@ public abstract class DispatchPolicy {
 				throw new LastEntryException();
 			}
 
-			// Count how many targets are actually suitable/observable right now
-			int suitableTargets = 0;
-			for (Target target : remaining) {
-				boolean observableByAny = false;
-				for (int i = 0; i < Simulation.NUMTELESCOPES; i++) {
-					try {
-						if (target.getHorizonCoordinates(telescopes[i].getLocation(),
-								Clock.getScheduleClock()[i].getTime()).getAltitude() > 0) {
-							observableByAny = true;
-							break;
-						}
-					} catch (Exception ex) {
-						// Skip this target if coordinates can't be calculated
-					}
-				}
-				if (observableByAny) {
-					suitableTargets++;
-				}
-			}
-
-			// If we have enough suitable targets, try to proceed
-			if (suitableTargets >= Simulation.NUMTELESCOPES) {
-				try {
-					Pointable[] pointables = new Pointable[Simulation.NUMTELESCOPES];
-					for (int i = 0; i < Simulation.NUMTELESCOPES; i++)
-						pointables[i] = schedules[i].getCurrentState().getCurrentTarget();
-					addNeighbours(preoptimisation, neigCap, pointables);
-					not_wait = false;
-					break;
-				} catch (OutOfObservablesException e1) {
-					// Even with enough targets, couldn't create neighbors - continue waiting
-				}
-			}
-
-			// Not enough suitable targets or couldn't create neighbors - wait more
+			//advance clock until more observables emerge, only delay the earliest clock
 			int earliest = 0;
-			for (int i = 0; i < Simulation.NUMTELESCOPES; i++) {
-				if (Clock.getScheduleClock()[i].getTime().getTime().getTime() <
+			for(int i=0; i< Simulation.NUMTELESCOPES; i++){
+				if(Clock.getScheduleClock()[i].getTime().getTime().getTime() <
 						Clock.getScheduleClock()[earliest].getTime().getTime().getTime())
 					earliest = i;
 			}
 			Clock.getScheduleClock()[earliest].advanceBy(waitTime);
 			waitingPeriod[earliest] += waitTime;
 
-			// Update remaining targets after time advance
-			remaining = getRemainingObservables();
+			try {
+				/*
+				if(preoptimisation.equals("all")) {
+					addAllNeighbours(schedule.getCurrentState().getCurrentTarget());
+				}
+				else if (preoptimisation.equals("tsp")) {
+					addTSPNeighbours(schedule.getCurrentState().getCurrentTarget());
+				}
+				else {
+					addDynamicNeighbours(schedule.getCurrentState().getCurrentTarget());
+				}
+
+				 */
+				Pointable[] pointables = new Pointable[Simulation.NUMTELESCOPES];
+				for(int i=0; i< Simulation.NUMTELESCOPES; i++)
+					pointables[i] = schedules[i].getCurrentState().getCurrentTarget();
+				addNeighbours(preoptimisation, neigCap, pointables);
+				not_wait = false;
+				break;
+			} catch (OutOfObservablesException e1) {
+				if(nextMovesEach(teleMarks)){
+					not_wait = true;
+					break;
+				}
+				else continue;
+			}
 		}
 
 		for(int i=0; i< Simulation.NUMTELESCOPES; i++){
-            if(waitingPeriod[i] != 0){
-                telescopes[i].applyWaitState();
-                schedules[i].getCurrentState().addWaitTime(waitingPeriod[i]);
-                schedules[i].getCurrentState().addComment("Waited for more observables to rise above the horizon.");
-            }
+			if(waitingPeriod[i] != 0){
+				telescopes[i].applyWaitState();
+				schedules[i].getCurrentState().addWaitTime(waitingPeriod[i]);
+				schedules[i].getCurrentState().addComment("Waited for more observables to rise above the horizon.");
+			}
 		}
 		return not_wait;
 	}
@@ -299,6 +289,36 @@ public abstract class DispatchPolicy {
 		schedules[telescope_num].addLink(link, newState);
 		schedules[telescope_num].addState(new ObservationState(newTarget, clock.getTime(), link, o, telescopes[telescope_num].getLocation()));
 	}
+
+
+/*
+	public void addDynamicNeighbours(Pointable current) throws OutOfObservablesException {
+		dno.createDynamicLinksByTriangles(observables, current, triangulationRatio, Clock.getScheduleClock(), telescope.getLocation());
+	}
+
+	public void addAllNeighbours(Pointable current) throws OutOfObservablesException {
+		allOb.createAllLinks(observables, current, triangulationRatio, Clock.getScheduleClock(), telescope.getLocation());
+	}
+
+	public void addTSPNeighbours(Pointable current) throws OutOfObservablesException {
+		tspo.createTSPLinks(observables, current, triangulationRatio, Clock.getScheduleClock(), telescope.getLocation(), telescope);
+	}
+
+	public void addNeighbours(String preoptimisation, Pointable current) throws OutOfObservablesException {
+		if (preoptimisation.equals("all")) {
+			allOb.createAllLinks(observables, current, triangulationRatio, Clock.getScheduleClock(), telescope.getLocation());
+		}
+		else if (preoptimisation.equals("tsp")) {
+			tspo.createTSPLinks(observables, current, triangulationRatio, Clock.getScheduleClock(), telescope.getLocation(), telescope);
+		}
+		else {
+			dno.createDynamicLinksByTriangles(observables, current, triangulationRatio, Clock.getScheduleClock(), telescope.getLocation());
+		}
+	}
+
+ */
+
+
 
 	public void addNeighbours(String preoptimisation, int neigCap, Pointable[] currents) throws OutOfObservablesException {
 		if (preoptimisation.equals("tsp")) {
