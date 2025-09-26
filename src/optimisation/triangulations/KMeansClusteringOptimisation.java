@@ -16,7 +16,7 @@ public class KMeansClusteringOptimisation extends NNOptimisation {
     private final double convergenceThreshold;
 
     public KMeansClusteringOptimisation() {
-        this(50, 1e-4);
+        this(100, 1e-4);
     }
 
     public KMeansClusteringOptimisation(int maxIterations, double convergenceThreshold) {

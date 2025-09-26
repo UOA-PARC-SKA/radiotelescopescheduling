@@ -99,6 +99,15 @@ public class Environment
 		int outcome = ObservationState.OBSERVATION_INTERRUPTION_NONE;
 	//	System.out.println("Nominal "+nominalTime + " remaining "+state.getCurrentObservable().getRemainingIntegrationTime());
 		int noTimescales = (int) Math.ceil( nominalTime/currentScintTimescale);
+
+		if (noTimescales <= 0) {
+			// Nothing to do — no time left to subdivide
+			state.setObservationResults(ObservationState.OBSERVATION_COMPLETE_SCINT_REPEAT,
+					ObservationState.OBSERVATION_INTERRUPTION_NONE);
+			state.setObservationCompleted("No integration time available for scintillation checking.", 0);
+			return;
+		}
+
 		//the last interval will likely be shorter than currentScintTimescale
 		double remainder = nominalTime - (currentScintTimescale * (noTimescales-1));
 		double[] scintIntervals = new double[noTimescales];
