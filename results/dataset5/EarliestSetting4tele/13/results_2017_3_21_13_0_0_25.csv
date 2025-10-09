@@ -1,0 +1,18 @@
+Start time,  21/03/2017 13:00:00,1490054400000
+End time,  21/03/2017 15:08:31,1490062111000
+Duration,  0 day, 2 hours, 8 minutes, 31 seconds,7711000
+Slew time, 0 day, 0 hour, 14 minutes, 39 seconds,879000.0
+Integration time, 0 day, 1 hour, 53 minutes, 52 seconds,6832000.0
+Waiting time, 0 day, 0 hour, 0 minute, 0 second,0.0
+Relative slew time, 0.11399299701724809
+Relative integration time, 0.8860070029827519
+Relative waiting time, 0.0
+Start, End, Name, RA, DEC, Slew (to here), Expected Int, Actual Int, This Int, Wait time, Scint timescale, Attempt no, # sats cons, Obs result, Interruption, Comment 
+21/03/2017 13:00:00,21/03/2017 13:12:37,J1555-3134,4.1682790954169535,-0.5508448196629737,116.0,455,641.0,641.0,0,60,1,0,3,0,Completed incrementally checking scint every 60 seconds.
+21/03/2017 13:12:37,21/03/2017 14:00:54,B1944+22,5.176711284041609,0.3970594959466233,277.0,2597,2620.0,2620.0,0,20,1,0,3,0,Completed incrementally checking scint every 20 seconds.
+21/03/2017 14:00:54,21/03/2017 14:10:49,J1907+0731,5.008716071331938,0.13129675630440343,28.0,450,567.0,567.0,0,60,1,0,3,0,Completed incrementally checking scint every 60 seconds.
+21/03/2017 14:10:49,21/03/2017 14:13:38,J1843-0744,4.900410900874316,-0.13482619990288083,19.0,598,incomplete,150.0,0,5400,1,0,1,2,Aborted: High scintillation; interrupted by satellite GPS BIIR-9  (PRN 21)
+21/03/2017 14:13:38,21/03/2017 14:29:54,J1700-4012,4.453393027696556,-0.7014352212208123,43.0,844,933.0,933.0,0,20,1,0,3,0,Completed incrementally checking scint every 20 seconds.
+21/03/2017 14:29:54,21/03/2017 14:42:32,J1550-5242,4.1453715035404235,-0.919754578843334,19.0,647,739.0,739.0,0,20,1,0,3,0,Completed incrementally checking scint every 20 seconds.
+21/03/2017 14:42:32,21/03/2017 14:49:59,J2330-2005,6.154240745652506,-0.3503766411484817,215.0,311,232.0,232.0,0,1800,1,0,1,0,Completed: Shortened interval; scintillation of 1.3428472934860298
+21/03/2017 14:49:59,21/03/2017 15:08:31,J1413-6141,3.7226323965327905,-1.0765142344932912,162.0,938,incomplete,950.0,0,180,1,0,3,2,Aborted: Checked scintillation repeatedly; interrupted by satellite IRIDIUM 36 [-]

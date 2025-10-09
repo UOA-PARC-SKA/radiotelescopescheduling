@@ -1,0 +1,19 @@
+Start time,  21/03/2017 13:00:00,1490054400000
+End time,  21/03/2017 14:37:05,1490060225000
+Duration,  0 day, 1 hour, 37 minutes, 5 seconds,5825000
+Slew time, 0 day, 0 hour, 8 minutes, 45 seconds,525000.0
+Integration time, 0 day, 1 hour, 28 minutes, 20 seconds,5300000.0
+Waiting time, 0 day, 0 hour, 0 minute, 0 second,0.0
+Relative slew time, 0.09012875536480687
+Relative integration time, 0.9098712446351931
+Relative waiting time, 0.0
+Start, End, Name, RA, DEC, Slew (to here), Expected Int, Actual Int, This Int, Wait time, Scint timescale, Attempt no, # sats cons, Obs result, Interruption, Comment 
+21/03/2017 13:00:00,21/03/2017 13:05:21,B2127+11F,5.628481616050499,0.21236250040409704,45.0,364,276.0,276.0,0,60,1,0,3,0,Completed incrementally checking scint every 60 seconds.
+21/03/2017 13:05:21,21/03/2017 13:15:21,J1822+0705,4.809723083886327,0.12371960328234248,55.0,545,545.0,545.0,0,5400,1,0,2,0,Completed: Nominal time; scintillation good.
+21/03/2017 13:15:21,21/03/2017 13:22:17,J1839-1238,4.885737117910226,-0.2202959430004054,17.0,399,399.0,399.0,0,1800,1,0,2,0,Completed: Nominal time; scintillation good.
+21/03/2017 13:22:17,21/03/2017 13:26:57,J1840-1122,4.88867203449156,-0.1983338832461434,1.0,415,519.0,279.0,0,20,2,0,3,0,Completed incrementally checking scint every 20 seconds.
+21/03/2017 13:26:57,21/03/2017 13:41:01,J1722-3712,4.550885665271917,-0.6492445436356896,38.0,4689,8366.0,806.0,0,180,2,0,3,0,Completed incrementally checking scint every 180 seconds.
+21/03/2017 13:41:01,21/03/2017 13:57:19,J1413-6141,3.7226323965327905,-1.0765142344932912,39.0,938,939.0,939.0,0,180,1,0,3,0,Completed incrementally checking scint every 180 seconds.
+21/03/2017 13:57:19,21/03/2017 14:22:57,J0034-0721,0.1489980528388499,-0.12802276588263942,153.0,575,1385.0,1385.0,0,180,1,0,3,0,Completed incrementally checking scint every 180 seconds.
+21/03/2017 14:22:57,21/03/2017 14:32:18,B2148+52,5.71869732874803,0.9214835456335908,62.0,307,499.0,499.0,0,60,1,0,3,0,Completed incrementally checking scint every 60 seconds.
+21/03/2017 14:32:18,21/03/2017 14:37:05,J1555-3134,4.1682790954169535,-0.5508448196629737,115.0,455,incomplete,172.0,0,60,1,0,3,1,Aborted: Checked scintillation repeatedly; observed until object set. 

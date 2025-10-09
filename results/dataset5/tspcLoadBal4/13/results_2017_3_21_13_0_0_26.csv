@@ -1,0 +1,18 @@
+Start time,  21/03/2017 13:00:00,1490054400000
+End time,  21/03/2017 14:36:35,1490060195000
+Duration,  0 day, 1 hour, 36 minutes, 35 seconds,5795000
+Slew time, 0 day, 0 hour, 7 minutes, 13 seconds,433000.0
+Integration time, 0 day, 1 hour, 29 minutes, 22 seconds,5362000.0
+Waiting time, 0 day, 0 hour, 0 minute, 0 second,0.0
+Relative slew time, 0.07471958584987058
+Relative integration time, 0.9252804141501294
+Relative waiting time, 0.0
+Start, End, Name, RA, DEC, Slew (to here), Expected Int, Actual Int, This Int, Wait time, Scint timescale, Attempt no, # sats cons, Obs result, Interruption, Comment 
+21/03/2017 13:00:00,21/03/2017 13:21:39,J1916+0844,5.045389147741,0.15245935829851576,55.0,1150,1244.0,1244.0,0,60,1,0,3,0,Completed incrementally checking scint every 60 seconds.
+21/03/2017 13:21:39,21/03/2017 13:32:03,J1843-0744,4.900410900874316,-0.13482619990288083,26.0,598,598.0,598.0,0,5400,1,0,2,0,Completed: Nominal time; scintillation good.
+21/03/2017 13:32:03,21/03/2017 13:37:48,J1930+17,5.108287832378736,0.30397817805567906,28.0,366,317.0,317.0,0,180,1,0,3,0,Completed incrementally checking scint every 180 seconds.
+21/03/2017 13:37:48,21/03/2017 13:46:37,J1555-3134,4.1682790954169535,-0.5508448196629737,75.0,455,454.0,454.0,0,60,1,0,3,0,Completed incrementally checking scint every 60 seconds.
+21/03/2017 13:46:37,21/03/2017 13:52:30,J1617-5055,4.265097454124627,-0.888599482067873,16.0,352,337.0,337.0,0,5400,1,0,1,0,Completed: Shortened interval; scintillation of 1.0456799305343587
+21/03/2017 13:52:30,21/03/2017 13:59:15,J1047-58,2.8271425000221484,-1.0242173827120056,41.0,486,364.0,364.0,0,60,1,0,3,0,Completed incrementally checking scint every 60 seconds.
+21/03/2017 13:59:15,21/03/2017 14:22:44,J0034-0721,0.1489980528388499,-0.12802276588263942,131.0,575,1278.0,1278.0,0,180,1,0,3,0,Completed incrementally checking scint every 180 seconds.
+21/03/2017 14:22:44,21/03/2017 14:36:35,B2148+52,5.71869732874803,0.9214835456335908,61.0,307,770.0,770.0,0,60,1,0,3,0,Completed incrementally checking scint every 60 seconds.

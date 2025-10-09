@@ -1,0 +1,18 @@
+Start time,  21/03/2017 13:00:00,1490054400000
+End time,  21/03/2017 14:01:06,1490058066000
+Duration,  0 day, 1 hour, 1 minute, 6 seconds,3666000
+Slew time, 0 day, 0 hour, 5 minutes, 54 seconds,354000.0
+Integration time, 0 day, 0 hour, 55 minutes, 12 seconds,3312000.0
+Waiting time, 0 day, 0 hour, 0 minute, 0 second,0.0
+Relative slew time, 0.09656301145662848
+Relative integration time, 0.9034369885433715
+Relative waiting time, 0.0
+Start, End, Name, RA, DEC, Slew (to here), Expected Int, Actual Int, This Int, Wait time, Scint timescale, Attempt no, # sats cons, Obs result, Interruption, Comment 
+21/03/2017 13:00:00,21/03/2017 13:08:56,B2127+11F,5.628481616050499,0.21236250040409704,45.0,364,491.0,491.0,0,60,1,0,3,0,Completed incrementally checking scint every 60 seconds.
+21/03/2017 13:08:56,21/03/2017 13:16:07,J1822+0705,4.809723083886327,0.12371960328234248,55.0,545,376.0,376.0,0,5400,1,0,1,0,Completed: Shortened interval; scintillation of 1.45125068955318
+21/03/2017 13:16:07,21/03/2017 13:19:55,J1839-1238,4.885737117910226,-0.2202959430004054,16.0,399,212.0,212.0,0,1800,1,0,1,0,Completed: Shortened interval; scintillation of 1.882721284320617
+21/03/2017 13:19:55,21/03/2017 13:20:11,J1840-1122,4.88867203449156,-0.1983338832461434,1.0,415,515.0,15.0,0,20,2,0,3,0,Completed incrementally checking scint every 20 seconds.
+21/03/2017 13:20:11,21/03/2017 13:37:31,J1648-3256,4.398671137882361,-0.5745972963415731,36.0,1293,1044.0,1004.0,0,600,2,0,3,0,Completed incrementally checking scint every 600 seconds.
+21/03/2017 13:37:31,21/03/2017 13:43:44,J1617-5055,4.265097454124627,-0.888599482067873,21.0,352,352.0,352.0,0,5400,1,0,2,0,Completed: Nominal time; scintillation good.
+21/03/2017 13:43:44,21/03/2017 13:54:52,J1047-58,2.8271425000221484,-1.0242173827120056,41.0,486,627.0,627.0,0,60,1,0,3,0,Completed incrementally checking scint every 60 seconds.
+21/03/2017 13:54:52,21/03/2017 14:01:06,J2330-2005,6.154240745652506,-0.3503766411484817,139.0,311,235.0,235.0,0,1800,1,0,1,0,Completed: Shortened interval; scintillation of 1.3205993127415812

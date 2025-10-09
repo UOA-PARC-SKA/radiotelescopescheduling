@@ -1,0 +1,17 @@
+Start time,  21/03/2017 13:00:00,1490054400000
+End time,  21/03/2017 14:43:40,1490060620000
+Duration,  0 day, 1 hour, 43 minutes, 40 seconds,6220000
+Slew time, 0 day, 0 hour, 6 minutes, 24 seconds,384000.0
+Integration time, 0 day, 1 hour, 37 minutes, 16 seconds,5836000.0
+Waiting time, 0 day, 0 hour, 0 minute, 0 second,0.0
+Relative slew time, 0.06173633440514469
+Relative integration time, 0.9382636655948553
+Relative waiting time, 0.0
+Start, End, Name, RA, DEC, Slew (to here), Expected Int, Actual Int, This Int, Wait time, Scint timescale, Attempt no, # sats cons, Obs result, Interruption, Comment 
+21/03/2017 13:00:00,21/03/2017 13:29:31,J1916+0844,5.045389147741,0.15245935829851576,55.0,1150,1716.0,1716.0,0,60,1,0,3,0,Completed incrementally checking scint every 60 seconds.
+21/03/2017 13:29:31,21/03/2017 13:36:20,J1843-0744,4.900410900874316,-0.13482619990288083,27.0,598,382.0,382.0,0,5400,1,0,1,0,Completed: Shortened interval; scintillation of 1.5648168011552717
+21/03/2017 13:36:20,21/03/2017 13:41:22,J1930+17,5.108287832378736,0.30397817805567906,29.0,366,273.0,273.0,0,180,1,0,3,0,Completed incrementally checking scint every 180 seconds.
+21/03/2017 13:41:22,21/03/2017 13:52:30,J1555-3134,4.1682790954169535,-0.5508448196629737,74.0,455,594.0,594.0,0,60,1,0,3,0,Completed incrementally checking scint every 60 seconds.
+21/03/2017 13:52:30,21/03/2017 13:57:40,J1617-5055,4.265097454124627,-0.888599482067873,16.0,352,294.0,294.0,0,5400,1,0,1,0,Completed: Shortened interval; scintillation of 1.1974770856779602
+21/03/2017 13:57:40,21/03/2017 14:30:53,J1413-6141,3.7226323965327905,-1.0765142344932912,19.0,938,1974.0,1974.0,0,180,1,0,3,0,Completed incrementally checking scint every 180 seconds.
+21/03/2017 14:30:53,21/03/2017 14:43:40,J0034-0721,0.1489980528388499,-0.12802276588263942,164.0,575,603.0,603.0,0,180,1,0,3,0,Completed incrementally checking scint every 180 seconds.

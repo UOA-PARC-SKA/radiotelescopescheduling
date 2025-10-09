@@ -1,0 +1,18 @@
+Start time,  21/03/2017 13:00:00,1490054400000
+End time,  21/03/2017 14:19:11,1490059151000
+Duration,  0 day, 1 hour, 19 minutes, 11 seconds,4751000
+Slew time, 0 day, 0 hour, 8 minutes, 8 seconds,488000.0
+Integration time, 0 day, 1 hour, 11 minutes, 3 seconds,4263000.0
+Waiting time, 0 day, 0 hour, 0 minute, 0 second,0.0
+Relative slew time, 0.10271521784887393
+Relative integration time, 0.8972847821511261
+Relative waiting time, 0.0
+Start, End, Name, RA, DEC, Slew (to here), Expected Int, Actual Int, This Int, Wait time, Scint timescale, Attempt no, # sats cons, Obs result, Interruption, Comment 
+21/03/2017 13:00:00,21/03/2017 13:18:28,J1916+0844,5.045389147741,0.15245935829851576,55.0,1150,1053.0,1053.0,0,60,1,0,3,0,Completed incrementally checking scint every 60 seconds.
+21/03/2017 13:18:28,21/03/2017 13:23:52,J1843-0744,4.900410900874316,-0.13482619990288083,25.0,598,299.0,299.0,0,5400,1,0,1,0,Completed: Shortened interval; scintillation of 1.9981897002361495
+21/03/2017 13:23:52,21/03/2017 13:34:55,J1648-3256,4.398671137882361,-0.5745972963415731,41.0,1293,622.0,622.0,0,600,1,0,3,0,Completed incrementally checking scint every 600 seconds.
+21/03/2017 13:34:55,21/03/2017 13:37:20,J1651-4246,4.414867793340869,-0.7463658139313195,10.0,163,135.0,135.0,0,5400,1,0,1,0,Completed: Shortened interval; scintillation of 1.2064507655696006
+21/03/2017 13:37:20,21/03/2017 13:50:57,J1550-5242,4.1453715035404235,-0.919754578843334,14.0,647,803.0,803.0,0,20,1,0,3,0,Completed incrementally checking scint every 20 seconds.
+21/03/2017 13:50:57,21/03/2017 14:03:47,B0021-72H,0.10520709468004791,-1.2577676711809487,51.0,751,719.0,719.0,0,1800,1,0,1,0,Completed: Shortened interval; scintillation of 1.0440171479356914
+21/03/2017 14:03:47,21/03/2017 14:10:02,B2148+52,5.71869732874803,0.9214835456335908,177.0,307,198.0,198.0,0,60,1,0,3,0,Completed incrementally checking scint every 60 seconds.
+21/03/2017 14:10:02,21/03/2017 14:19:11,J1555-3134,4.1682790954169535,-0.5508448196629737,115.0,455,524.0,434.0,0,60,2,0,3,0,Completed incrementally checking scint every 60 seconds.

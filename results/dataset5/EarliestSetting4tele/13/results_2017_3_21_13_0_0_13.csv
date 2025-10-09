@@ -1,0 +1,18 @@
+Start time,  21/03/2017 13:00:00,1490054400000
+End time,  21/03/2017 15:08:28,1490062108000
+Duration,  0 day, 2 hours, 8 minutes, 28 seconds,7708000
+Slew time, 0 day, 0 hour, 14 minutes, 39 seconds,879000.0
+Integration time, 0 day, 1 hour, 53 minutes, 49 seconds,6829000.0
+Waiting time, 0 day, 0 hour, 0 minute, 0 second,0.0
+Relative slew time, 0.1140373637778931
+Relative integration time, 0.8859626362221069
+Relative waiting time, 0.0
+Start, End, Name, RA, DEC, Slew (to here), Expected Int, Actual Int, This Int, Wait time, Scint timescale, Attempt no, # sats cons, Obs result, Interruption, Comment 
+21/03/2017 13:00:00,21/03/2017 13:14:41,J1555-3134,4.1682790954169535,-0.5508448196629737,116.0,455,765.0,765.0,0,60,1,0,3,0,Completed incrementally checking scint every 60 seconds.
+21/03/2017 13:14:41,21/03/2017 14:14:41,B1944+22,5.176711284041609,0.3970594959466233,278.0,2597,3322.0,3322.0,0,20,1,0,3,0,Completed incrementally checking scint every 20 seconds.
+21/03/2017 14:14:41,21/03/2017 14:24:47,J1907+0731,5.008716071331938,0.13129675630440343,30.0,450,576.0,576.0,0,60,1,0,3,0,Completed incrementally checking scint every 60 seconds.
+21/03/2017 14:24:47,21/03/2017 14:31:07,J1843-0744,4.900410900874316,-0.13482619990288083,18.0,598,362.0,362.0,0,5400,1,0,1,0,Completed: Shortened interval; scintillation of 1.6534482117697284
+21/03/2017 14:31:07,21/03/2017 14:47:17,J1700-4012,4.453393027696556,-0.7014352212208123,42.0,844,928.0,928.0,0,20,1,0,3,0,Completed incrementally checking scint every 20 seconds.
+21/03/2017 14:47:17,21/03/2017 14:53:24,J1617-5055,4.265097454124627,-0.888599482067873,15.0,352,352.0,352.0,0,5400,1,0,2,0,Completed: Nominal time; scintillation good.
+21/03/2017 14:53:24,21/03/2017 15:00:27,J2330-2005,6.154240745652506,-0.3503766411484817,229.0,311,194.0,194.0,0,1800,1,0,1,0,Completed: Shortened interval; scintillation of 1.60002814722909
+21/03/2017 15:00:27,21/03/2017 15:08:28,J1413-6141,3.7226323965327905,-1.0765142344932912,151.0,938,incomplete,330.0,0,180,1,0,3,2,Aborted: Checked scintillation repeatedly; interrupted by satellite IRIDIUM 36 [-]

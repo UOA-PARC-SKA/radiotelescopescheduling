@@ -1,0 +1,18 @@
+Start time,  21/03/2017 13:00:00,1490054400000
+End time,  21/03/2017 14:21:43,1490059303000
+Duration,  0 day, 1 hour, 21 minutes, 43 seconds,4903000
+Slew time, 0 day, 0 hour, 7 minutes, 3 seconds,423000.0
+Integration time, 0 day, 1 hour, 14 minutes, 40 seconds,4480000.0
+Waiting time, 0 day, 0 hour, 0 minute, 0 second,0.0
+Relative slew time, 0.08627370997348562
+Relative integration time, 0.9137262900265144
+Relative waiting time, 0.0
+Start, End, Name, RA, DEC, Slew (to here), Expected Int, Actual Int, This Int, Wait time, Scint timescale, Attempt no, # sats cons, Obs result, Interruption, Comment 
+21/03/2017 13:00:00,21/03/2017 13:12:43,B2127+11F,5.628481616050499,0.21236250040409704,45.0,364,718.0,718.0,0,60,1,0,3,0,Completed incrementally checking scint every 60 seconds.
+21/03/2017 13:12:43,21/03/2017 13:22:44,J1822+0705,4.809723083886327,0.12371960328234248,56.0,545,545.0,545.0,0,5400,1,0,2,0,Completed: Nominal time; scintillation good.
+21/03/2017 13:22:44,21/03/2017 13:27:55,J1839-1238,4.885737117910226,-0.2202959430004054,17.0,399,294.0,294.0,0,1800,1,0,1,0,Completed: Shortened interval; scintillation of 1.3564653440971826
+21/03/2017 13:27:55,21/03/2017 13:29:11,J1840-1122,4.88867203449156,-0.1983338832461434,1.0,415,525.0,75.0,0,20,2,0,3,0,Completed incrementally checking scint every 20 seconds.
+21/03/2017 13:29:11,21/03/2017 13:40:38,J1555-3134,4.1682790954169535,-0.5508448196629737,40.0,455,647.0,647.0,0,60,1,0,3,0,Completed incrementally checking scint every 60 seconds.
+21/03/2017 13:40:38,21/03/2017 14:00:25,J1413-6141,3.7226323965327905,-1.0765142344932912,36.0,938,1151.0,1151.0,0,180,1,0,3,0,Completed incrementally checking scint every 180 seconds.
+21/03/2017 14:00:25,21/03/2017 14:10:09,J0034-0721,0.1489980528388499,-0.12802276588263942,154.0,575,430.0,430.0,0,180,1,0,3,0,Completed incrementally checking scint every 180 seconds.
+21/03/2017 14:10:09,21/03/2017 14:21:43,J2024+48,5.340707511102648,0.8377580409572782,74.0,620,620.0,620.0,0,1800,1,0,2,0,Completed: Nominal time; scintillation good.

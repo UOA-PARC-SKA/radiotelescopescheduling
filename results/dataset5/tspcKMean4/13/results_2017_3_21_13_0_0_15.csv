@@ -1,0 +1,18 @@
+Start time,  21/03/2017 13:00:00,1490054400000
+End time,  21/03/2017 20:50:48,1490082648000
+Duration,  0 day, 7 hours, 50 minutes, 48 seconds,28248000
+Slew time, 0 day, 0 hour, 6 minutes, 1 second,361000.0
+Integration time, 0 day, 0 hour, 41 minutes, 47 seconds,2507000.0
+Waiting time, 0 day, 7 hours, 3 minutes, 0 second,2.538E7
+Relative slew time, 0.012779665817048995
+Relative integration time, 0.08874964599263664
+Relative waiting time, 0.8984706881903144
+Start, End, Name, RA, DEC, Slew (to here), Expected Int, Actual Int, This Int, Wait time, Scint timescale, Attempt no, # sats cons, Obs result, Interruption, Comment 
+21/03/2017 13:00:00,21/03/2017 13:04:34,B1859+01,4.981045185038507,0.03392832799414377,56.0,276,218.0,218.0,0,180,1,0,3,0,Completed incrementally checking scint every 180 seconds.
+21/03/2017 13:04:34,21/03/2017 13:09:48,J1843-0744,4.900410900874316,-0.13482619990288083,14.0,598,incomplete,300.0,0,5400,1,0,4,0,Aborted: Scintillation too low within first five minutes.
+21/03/2017 13:09:48,21/03/2017 13:13:50,J1648-3256,4.398671137882361,-0.5745972963415731,42.0,1293,incomplete,200.0,0,600,1,0,3,2,Aborted: Checked scintillation repeatedly; interrupted by satellite COSMOS 2459 (731)
+21/03/2017 13:13:50,21/03/2017 13:14:43,J1651-4246,4.414867793340869,-0.7463658139313195,10.0,163,43.0,43.0,0,5400,1,0,1,0,Completed: Shortened interval; scintillation of 3.8348647420603506
+21/03/2017 13:14:43,21/03/2017 13:15:47,J1550-5242,4.1453715035404235,-0.919754578843334,14.0,647,incomplete,50.0,0,20,1,0,3,2,Aborted: Checked scintillation repeatedly; interrupted by satellite IRIDIUM 29 [-]
+21/03/2017 13:15:47,21/03/2017 13:31:54,J1047-58,2.8271425000221484,-1.0242173827120056,35.0,486,932.0,932.0,0,60,1,0,3,0,Completed incrementally checking scint every 60 seconds.
+21/03/2017 13:31:54,21/03/2017 13:40:20,J0034-0721,0.1489980528388499,-0.12802276588263942,127.0,575,379.0,379.0,0,180,1,0,3,0,Completed incrementally checking scint every 180 seconds.
+21/03/2017 13:40:20,21/03/2017 13:47:48,B2148+52,5.71869732874803,0.9214835456335908,63.0,307,385.0,385.0,25380,60,1,0,3,0,Completed incrementally checking scint every 60 seconds.Waited for more observables to rise above the horizon. 

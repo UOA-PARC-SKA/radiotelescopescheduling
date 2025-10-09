@@ -1,0 +1,18 @@
+Start time,  21/03/2017 13:00:00,1490054400000
+End time,  21/03/2017 14:11:24,1490058684000
+Duration,  0 day, 1 hour, 11 minutes, 24 seconds,4284000
+Slew time, 0 day, 0 hour, 6 minutes, 28 seconds,388000.0
+Integration time, 0 day, 1 hour, 4 minutes, 56 seconds,3896000.0
+Waiting time, 0 day, 0 hour, 0 minute, 0 second,0.0
+Relative slew time, 0.09056956115779645
+Relative integration time, 0.9094304388422035
+Relative waiting time, 0.0
+Start, End, Name, RA, DEC, Slew (to here), Expected Int, Actual Int, This Int, Wait time, Scint timescale, Attempt no, # sats cons, Obs result, Interruption, Comment 
+21/03/2017 13:00:00,21/03/2017 13:09:58,J1907+0731,5.008716071331938,0.13129675630440343,55.0,450,543.0,543.0,0,60,1,0,3,0,Completed incrementally checking scint every 60 seconds.
+21/03/2017 13:09:58,21/03/2017 13:11:46,J1849-0614,4.929475723463675,-0.10863947373143037,18.0,612,incomplete,90.0,0,5400,1,0,1,2,Aborted: High scintillation; interrupted by satellite IRIDIUM 45 [+]
+21/03/2017 13:11:46,21/03/2017 13:18:55,J1700-3312,4.4544424796313695,-0.5792238733004015,43.0,222,386.0,386.0,0,20,1,0,3,0,Completed incrementally checking scint every 20 seconds.
+21/03/2017 13:18:55,21/03/2017 13:36:26,J1700-4012,4.453393027696556,-0.7014352212208123,8.0,844,1043.0,1043.0,0,20,1,0,3,0,Completed incrementally checking scint every 20 seconds.
+21/03/2017 13:36:26,21/03/2017 13:42:33,J1617-5055,4.265097454124627,-0.888599482067873,15.0,352,352.0,352.0,0,5400,1,0,2,0,Completed: Nominal time; scintillation good.
+21/03/2017 13:42:33,21/03/2017 13:52:36,J1047-58,2.8271425000221484,-1.0242173827120056,41.0,486,562.0,562.0,0,60,1,0,3,0,Completed incrementally checking scint every 60 seconds.
+21/03/2017 13:52:36,21/03/2017 13:59:54,J2330-2005,6.154240745652506,-0.3503766411484817,138.0,311,incomplete,300.0,0,1800,1,0,4,0,Aborted: Scintillation too low within first five minutes.
+21/03/2017 13:59:54,21/03/2017 14:11:24,J2024+48,5.340707511102648,0.8377580409572782,70.0,620,620.0,620.0,0,1800,1,0,2,0,Completed: Nominal time; scintillation good.

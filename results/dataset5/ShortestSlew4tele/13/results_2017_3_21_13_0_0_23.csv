@@ -1,0 +1,17 @@
+Start time,  21/03/2017 13:00:00,1490054400000
+End time,  21/03/2017 16:00:33,1490065233000
+Duration,  0 day, 3 hours, 0 minute, 33 seconds,10833000
+Slew time, 0 day, 0 hour, 9 minutes, 21 seconds,561000.0
+Integration time, 0 day, 1 hour, 44 minutes, 12 seconds,6252000.0
+Waiting time, 0 day, 1 hour, 7 minutes, 0 second,4020000.0
+Relative slew time, 0.051786208806424816
+Relative integration time, 0.5771254500138466
+Relative waiting time, 0.3710883411797286
+Start, End, Name, RA, DEC, Slew (to here), Expected Int, Actual Int, This Int, Wait time, Scint timescale, Attempt no, # sats cons, Obs result, Interruption, Comment 
+21/03/2017 13:00:00,21/03/2017 13:05:42,B1859+01,4.981045185038507,0.03392832799414377,56.0,276,286.0,286.0,0,180,1,0,3,0,Completed incrementally checking scint every 180 seconds.
+21/03/2017 13:05:42,21/03/2017 13:12:24,J1840-1122,4.88867203449156,-0.1983338832461434,18.0,415,384.0,384.0,0,20,1,0,3,0,Completed incrementally checking scint every 20 seconds.
+21/03/2017 13:12:24,21/03/2017 14:25:22,J1722-3712,4.550885665271917,-0.6492445436356896,39.0,4689,4339.0,4339.0,0,180,1,0,3,0,Completed incrementally checking scint every 180 seconds.
+21/03/2017 14:25:22,21/03/2017 14:30:43,J1640-4951,4.366490902578194,-0.87003645103187,21.0,179,incomplete,300.0,0,5400,1,0,4,0,Aborted: Scintillation too low within first five minutes.
+21/03/2017 14:30:43,21/03/2017 14:35:58,J1511-5835,3.97549642578225,-1.022336305629301,15.0,477,incomplete,300.0,0,5400,1,0,4,0,Aborted: Scintillation too low within first five minutes.
+21/03/2017 14:35:58,21/03/2017 14:42:02,J1930+17,5.108287832378736,0.30397817805567906,95.0,366,269.0,269.0,0,180,1,0,3,0,Completed incrementally checking scint every 180 seconds.
+21/03/2017 14:42:02,21/03/2017 14:53:33,B2148+52,5.71869732874803,0.9214835456335908,317.0,307,374.0,374.0,4020,60,1,0,3,0,Completed incrementally checking scint every 60 seconds.Waited for more observables to rise above the horizon. 

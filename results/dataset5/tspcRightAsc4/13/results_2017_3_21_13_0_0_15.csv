@@ -1,0 +1,18 @@
+Start time,  21/03/2017 13:00:00,1490054400000
+End time,  21/03/2017 15:13:13,1490062393000
+Duration,  0 day, 2 hours, 13 minutes, 13 seconds,7993000
+Slew time, 0 day, 0 hour, 20 minutes, 15 seconds,1215000.0
+Integration time, 0 day, 1 hour, 52 minutes, 58 seconds,6778000.0
+Waiting time, 0 day, 0 hour, 0 minute, 0 second,0.0
+Relative slew time, 0.15200800700613037
+Relative integration time, 0.8479919929938696
+Relative waiting time, 0.0
+Start, End, Name, RA, DEC, Slew (to here), Expected Int, Actual Int, This Int, Wait time, Scint timescale, Attempt no, # sats cons, Obs result, Interruption, Comment 
+21/03/2017 13:00:00,21/03/2017 13:15:29,B2127+11F,5.628481616050499,0.21236250040409704,45.0,364,884.0,884.0,0,60,1,0,3,0,Completed incrementally checking scint every 60 seconds.
+21/03/2017 13:15:29,21/03/2017 13:24:55,B2148+52,5.71869732874803,0.9214835456335908,355.0,307,211.0,211.0,0,60,1,0,3,0,Completed incrementally checking scint every 60 seconds.
+21/03/2017 13:24:55,21/03/2017 13:38:19,J1930+17,5.108287832378736,0.30397817805567906,401.0,366,403.0,403.0,0,180,1,0,3,0,Completed incrementally checking scint every 180 seconds.
+21/03/2017 13:38:19,21/03/2017 13:57:58,J1916+0844,5.045389147741,0.15245935829851576,12.0,1150,1167.0,1167.0,0,60,1,0,3,0,Completed incrementally checking scint every 60 seconds.
+21/03/2017 13:57:58,21/03/2017 14:04:45,J1822+0705,4.809723083886327,0.12371960328234248,14.0,545,393.0,393.0,0,5400,1,0,1,0,Completed: Shortened interval; scintillation of 1.3863049840355297
+21/03/2017 14:04:45,21/03/2017 14:09:21,J1840-1122,4.88867203449156,-0.1983338832461434,14.0,415,422.0,262.0,0,20,2,0,3,0,Completed incrementally checking scint every 20 seconds.
+21/03/2017 14:09:21,21/03/2017 15:03:50,B1944+22,5.176711284041609,0.3970594959466233,39.0,2597,3230.0,3230.0,0,20,1,0,3,0,Completed incrementally checking scint every 20 seconds.
+21/03/2017 15:03:50,21/03/2017 15:13:13,J2330-2005,6.154240745652506,-0.3503766411484817,335.0,311,228.0,228.0,0,1800,1,0,1,0,Completed: Shortened interval; scintillation of 1.3626978828838059

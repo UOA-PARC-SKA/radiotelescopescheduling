@@ -1,0 +1,18 @@
+Start time,  21/03/2017 13:00:00,1490054400000
+End time,  21/03/2017 14:21:38,1490059298000
+Duration,  0 day, 1 hour, 21 minutes, 38 seconds,4898000
+Slew time, 0 day, 0 hour, 12 minutes, 4 seconds,724000.0
+Integration time, 0 day, 1 hour, 9 minutes, 34 seconds,4174000.0
+Waiting time, 0 day, 0 hour, 0 minute, 0 second,0.0
+Relative slew time, 0.14781543487137608
+Relative integration time, 0.852184565128624
+Relative waiting time, 0.0
+Start, End, Name, RA, DEC, Slew (to here), Expected Int, Actual Int, This Int, Wait time, Scint timescale, Attempt no, # sats cons, Obs result, Interruption, Comment 
+21/03/2017 13:00:00,21/03/2017 13:05:53,J2024+48,5.340707511102648,0.8377580409572782,83.0,620,incomplete,270.0,0,1800,1,0,1,2,Aborted: High scintillation; interrupted by satellite GPS BIIF-3  (PRN 24)
+21/03/2017 13:05:53,21/03/2017 13:13:52,J1648-3256,4.398671137882361,-0.5745972963415731,99.0,1293,incomplete,380.0,0,600,1,0,3,2,Aborted: Checked scintillation repeatedly; interrupted by satellite COSMOS 2459 (731)
+21/03/2017 13:13:52,21/03/2017 13:22:55,J2024+48,5.340707511102648,0.8377580409572782,263.0,620,550.0,280.0,0,1800,2,0,2,0,Completed: Nominal time; scintillation good.
+21/03/2017 13:22:55,21/03/2017 13:36:44,J1648-3256,4.398671137882361,-0.5745972963415731,98.0,1293,1111.0,731.0,0,600,2,0,3,0,Completed incrementally checking scint every 600 seconds.
+21/03/2017 13:36:44,21/03/2017 13:41:26,J1839-1238,4.885737117910226,-0.2202959430004054,32.0,399,250.0,250.0,0,1800,1,0,1,0,Completed: Shortened interval; scintillation of 1.5946563431674123
+21/03/2017 13:41:26,21/03/2017 13:54:17,J1550-5242,4.1453715035404235,-0.919754578843334,58.0,647,713.0,713.0,0,20,1,0,3,0,Completed incrementally checking scint every 20 seconds.
+21/03/2017 13:54:17,21/03/2017 14:13:27,J1722-3712,4.550885665271917,-0.6492445436356896,21.0,4689,7079.0,1129.0,0,180,2,0,3,0,Completed incrementally checking scint every 180 seconds.
+21/03/2017 14:13:27,21/03/2017 14:21:38,B0021-72H,0.10520709468004791,-1.2577676711809487,70.0,751,421.0,421.0,0,1800,1,0,1,0,Completed: Shortened interval; scintillation of 1.7846733395257663

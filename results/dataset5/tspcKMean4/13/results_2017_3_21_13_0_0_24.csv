@@ -1,0 +1,18 @@
+Start time,  21/03/2017 13:00:00,1490054400000
+End time,  21/03/2017 15:17:04,1490062624000
+Duration,  0 day, 2 hours, 17 minutes, 4 seconds,8224000
+Slew time, 0 day, 0 hour, 4 minutes, 1 second,241000.0
+Integration time, 0 day, 2 hours, 13 minutes, 3 seconds,7983000.0
+Waiting time, 0 day, 0 hour, 0 minute, 0 second,0.0
+Relative slew time, 0.029304474708171206
+Relative integration time, 0.9706955252918288
+Relative waiting time, 0.0
+Start, End, Name, RA, DEC, Slew (to here), Expected Int, Actual Int, This Int, Wait time, Scint timescale, Attempt no, # sats cons, Obs result, Interruption, Comment 
+21/03/2017 13:00:00,21/03/2017 13:06:09,B2127+11F,5.628481616050499,0.21236250040409704,45.0,364,324.0,324.0,0,60,1,0,3,0,Completed incrementally checking scint every 60 seconds.
+21/03/2017 13:06:09,21/03/2017 13:13:22,J1822+0705,4.809723083886327,0.12371960328234248,55.0,545,378.0,378.0,0,5400,1,0,1,0,Completed: Shortened interval; scintillation of 1.441408085809371
+21/03/2017 13:13:22,21/03/2017 13:18:38,J1839-1238,4.885737117910226,-0.2202959430004054,16.0,399,incomplete,300.0,0,1800,1,0,4,0,Aborted: Scintillation too low within first five minutes.
+21/03/2017 13:18:38,21/03/2017 14:49:45,J1722-3712,4.550885665271917,-0.6492445436356896,37.0,4689,5430.0,5430.0,0,180,1,0,3,0,Completed incrementally checking scint every 180 seconds.
+21/03/2017 14:49:45,21/03/2017 14:53:07,J1640-4951,4.366490902578194,-0.87003645103187,23.0,179,179.0,179.0,0,5400,1,0,2,0,Completed: Nominal time; scintillation good.
+21/03/2017 14:53:07,21/03/2017 15:05:13,J1550-5242,4.1453715035404235,-0.919754578843334,7.0,647,719.0,719.0,0,20,1,0,3,0,Completed incrementally checking scint every 20 seconds.
+21/03/2017 15:05:13,21/03/2017 15:05:56,J1617-5055,4.265097454124627,-0.888599482067873,2.0,352,221.0,41.0,0,5400,2,0,2,0,Completed: Nominal time; scintillation good.
+21/03/2017 15:05:56,21/03/2017 15:17:04,J1849-0614,4.929475723463675,-0.10863947373143037,56.0,612,912.0,612.0,0,5400,2,0,2,0,Completed: Nominal time; scintillation good.

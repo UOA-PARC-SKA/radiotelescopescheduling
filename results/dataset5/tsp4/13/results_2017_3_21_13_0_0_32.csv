@@ -1,0 +1,17 @@
+Start time,  21/03/2017 13:00:00,1490054400000
+End time,  21/03/2017 20:50:13,1490082613000
+Duration,  0 day, 7 hours, 50 minutes, 13 seconds,28213000
+Slew time, 0 day, 0 hour, 8 minutes, 17 seconds,497000.0
+Integration time, 0 day, 1 hour, 56 minutes, 56 seconds,7016000.0
+Waiting time, 0 day, 5 hours, 45 minutes, 0 second,2.07E7
+Relative slew time, 0.01761599262751214
+Relative integration time, 0.24867968666926593
+Relative waiting time, 0.7337043207032219
+Start, End, Name, RA, DEC, Slew (to here), Expected Int, Actual Int, This Int, Wait time, Scint timescale, Attempt no, # sats cons, Obs result, Interruption, Comment 
+21/03/2017 13:00:00,21/03/2017 13:57:02,B1944+22,5.176711284041609,0.3970594959466233,62.0,2597,3360.0,3360.0,0,20,1,0,3,0,Completed incrementally checking scint every 20 seconds.
+21/03/2017 13:57:02,21/03/2017 14:35:02,J1916+0844,5.045389147741,0.15245935829851576,28.0,1150,2252.0,2252.0,0,60,1,0,3,0,Completed incrementally checking scint every 60 seconds.
+21/03/2017 14:35:02,21/03/2017 14:37:42,B1859+01,4.981045185038507,0.03392832799414377,14.0,276,146.0,146.0,0,180,1,0,3,0,Completed incrementally checking scint every 180 seconds.
+21/03/2017 14:37:42,21/03/2017 14:42:06,J1700-3312,4.4544424796313695,-0.5792238733004015,47.0,222,217.0,217.0,0,20,1,0,3,0,Completed incrementally checking scint every 20 seconds.
+21/03/2017 14:42:06,21/03/2017 14:43:35,J1651-4246,4.414867793340869,-0.7463658139313195,9.0,163,incomplete,80.0,0,5400,1,0,2,2,Aborted: Normal scintillation; interrupted by satellite GSAT0211 (PRN E02)
+21/03/2017 14:43:35,21/03/2017 15:00:11,J0034-0721,0.1489980528388499,-0.12802276588263942,195.0,575,801.0,801.0,0,180,1,0,3,0,Completed incrementally checking scint every 180 seconds.
+21/03/2017 15:00:11,21/03/2017 15:05:13,B0021-72H,0.10520709468004791,-1.2577676711809487,142.0,751,incomplete,160.0,20700,1800,1,0,1,2,Aborted: High scintillation; interrupted by satellite COSMOS 2459 (731)Waited for more observables to rise above the horizon. 

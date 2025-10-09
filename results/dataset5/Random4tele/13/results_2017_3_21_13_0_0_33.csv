@@ -1,0 +1,18 @@
+Start time,  21/03/2017 13:00:00,1490054400000
+End time,  21/03/2017 16:20:45,1490066445000
+Duration,  0 day, 3 hours, 20 minutes, 45 seconds,12045000
+Slew time, 0 day, 0 hour, 13 minutes, 20 seconds,800000.0
+Integration time, 0 day, 3 hours, 7 minutes, 25 seconds,1.1245E7
+Waiting time, 0 day, 0 hour, 0 minute, 0 second,0.0
+Relative slew time, 0.06641760066417601
+Relative integration time, 0.933582399335824
+Relative waiting time, 0.0
+Start, End, Name, RA, DEC, Slew (to here), Expected Int, Actual Int, This Int, Wait time, Scint timescale, Attempt no, # sats cons, Obs result, Interruption, Comment 
+21/03/2017 13:00:00,21/03/2017 13:16:49,J1700-4012,4.453393027696556,-0.7014352212208123,119.0,844,incomplete,890.0,0,20,1,0,3,2,Aborted: Checked scintillation repeatedly; interrupted by satellite IRIDIUM 29 [-]
+21/03/2017 13:16:49,21/03/2017 13:22:27,J1511-5835,3.97549642578225,-1.022336305629301,27.0,477,311.0,311.0,0,5400,1,0,1,0,Completed: Shortened interval; scintillation of 1.5353625853289463
+21/03/2017 13:22:27,21/03/2017 13:32:24,J1907+0731,5.008716071331938,0.13129675630440343,91.0,450,506.0,506.0,0,60,1,0,3,0,Completed incrementally checking scint every 60 seconds.
+21/03/2017 13:32:24,21/03/2017 13:41:34,J1840-1122,4.88867203449156,-0.1983338832461434,24.0,415,526.0,526.0,0,20,1,0,3,0,Completed incrementally checking scint every 20 seconds.
+21/03/2017 13:41:34,21/03/2017 13:54:38,J0034-0721,0.1489980528388499,-0.12802276588263942,224.0,575,560.0,560.0,0,180,1,0,3,0,Completed incrementally checking scint every 180 seconds.
+21/03/2017 13:54:38,21/03/2017 14:00:05,J1550-5242,4.1453715035404235,-0.919754578843334,163.0,647,884.0,164.0,0,20,2,0,3,0,Completed incrementally checking scint every 20 seconds.
+21/03/2017 14:00:05,21/03/2017 16:01:24,J1916+0844,5.045389147741,0.15245935829851576,81.0,1150,incomplete,7198.0,0,60,1,0,3,1,Aborted: Checked scintillation repeatedly; observed until object set. 
+21/03/2017 16:01:24,21/03/2017 16:20:45,J1722-3712,4.550885665271917,-0.6492445436356896,71.0,4689,incomplete,1090.0,0,180,2,0,3,2,Aborted: Checked scintillation repeatedly; interrupted by satellite COSMOS 2461 (735)

@@ -1,0 +1,18 @@
+Start time,  21/03/2017 13:00:00,1490054400000
+End time,  21/03/2017 14:27:34,1490059654000
+Duration,  0 day, 1 hour, 27 minutes, 34 seconds,5254000
+Slew time, 0 day, 0 hour, 6 minutes, 46 seconds,406000.0
+Integration time, 0 day, 1 hour, 20 minutes, 48 seconds,4848000.0
+Waiting time, 0 day, 0 hour, 0 minute, 0 second,0.0
+Relative slew time, 0.0772744575561477
+Relative integration time, 0.9227255424438523
+Relative waiting time, 0.0
+Start, End, Name, RA, DEC, Slew (to here), Expected Int, Actual Int, This Int, Wait time, Scint timescale, Attempt no, # sats cons, Obs result, Interruption, Comment 
+21/03/2017 13:00:00,21/03/2017 13:10:39,J1930+17,5.108287832378736,0.30397817805567906,60.0,366,579.0,579.0,0,180,1,0,3,0,Completed incrementally checking scint every 180 seconds.
+21/03/2017 13:10:39,21/03/2017 13:42:15,J1916+0844,5.045389147741,0.15245935829851576,11.0,1150,1885.0,1885.0,0,60,1,0,3,0,Completed incrementally checking scint every 60 seconds.
+21/03/2017 13:42:15,21/03/2017 13:52:08,J1843-0744,4.900410900874316,-0.13482619990288083,27.0,598,566.0,566.0,0,5400,1,0,1,0,Completed: Shortened interval; scintillation of 1.0572622227927688
+21/03/2017 13:52:08,21/03/2017 14:08:45,J1648-3256,4.398671137882361,-0.5745972963415731,40.0,1293,957.0,957.0,0,600,1,0,3,0,Completed incrementally checking scint every 600 seconds.
+21/03/2017 14:08:45,21/03/2017 14:10:47,J1640-4951,4.366490902578194,-0.87003645103187,18.0,179,104.0,104.0,0,5400,1,0,1,0,Completed: Shortened interval; scintillation of 1.7202912658526022
+21/03/2017 14:10:47,21/03/2017 14:15:39,J1617-5055,4.265097454124627,-0.888599482067873,3.0,352,289.0,289.0,0,5400,1,0,1,0,Completed: Shortened interval; scintillation of 1.2171924469653708
+21/03/2017 14:15:39,21/03/2017 14:23:02,B0021-72H,0.10520709468004791,-1.2577676711809487,50.0,751,393.0,393.0,0,1800,1,0,1,0,Completed: Shortened interval; scintillation of 1.9111917847827642
+21/03/2017 14:23:02,21/03/2017 14:27:34,J2024+48,5.340707511102648,0.8377580409572782,197.0,620,incomplete,75.0,0,1800,1,0,1,1,Aborted: High scintillation; observed until object set.

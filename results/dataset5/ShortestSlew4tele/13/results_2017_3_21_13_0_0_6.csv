@@ -1,0 +1,18 @@
+Start time,  21/03/2017 13:00:00,1490054400000
+End time,  21/03/2017 14:27:34,1490059654000
+Duration,  0 day, 1 hour, 27 minutes, 34 seconds,5254000
+Slew time, 0 day, 0 hour, 7 minutes, 28 seconds,448000.0
+Integration time, 0 day, 1 hour, 20 minutes, 6 seconds,4806000.0
+Waiting time, 0 day, 0 hour, 0 minute, 0 second,0.0
+Relative slew time, 0.0852683669585078
+Relative integration time, 0.9147316330414922
+Relative waiting time, 0.0
+Start, End, Name, RA, DEC, Slew (to here), Expected Int, Actual Int, This Int, Wait time, Scint timescale, Attempt no, # sats cons, Obs result, Interruption, Comment 
+21/03/2017 13:00:00,21/03/2017 13:26:54,J1916+0844,5.045389147741,0.15245935829851576,55.0,1150,1559.0,1559.0,0,60,1,0,3,0,Completed incrementally checking scint every 60 seconds.
+21/03/2017 13:26:54,21/03/2017 13:37:19,J1843-0744,4.900410900874316,-0.13482619990288083,27.0,598,598.0,598.0,0,5400,1,0,2,0,Completed: Nominal time; scintillation good.
+21/03/2017 13:37:19,21/03/2017 13:43:49,J1930+17,5.108287832378736,0.30397817805567906,28.0,366,362.0,362.0,0,180,1,0,3,0,Completed incrementally checking scint every 180 seconds.
+21/03/2017 13:43:49,21/03/2017 13:53:52,J1555-3134,4.1682790954169535,-0.5508448196629737,74.0,455,529.0,529.0,0,60,1,0,3,0,Completed incrementally checking scint every 60 seconds.
+21/03/2017 13:53:52,21/03/2017 13:56:35,J1640-4951,4.366490902578194,-0.87003645103187,14.0,179,149.0,149.0,0,5400,1,0,1,0,Completed: Shortened interval; scintillation of 1.198775877573956
+21/03/2017 13:56:35,21/03/2017 14:10:06,J1413-6141,3.7226323965327905,-1.0765142344932912,22.0,938,789.0,789.0,0,180,1,0,3,0,Completed incrementally checking scint every 180 seconds.
+21/03/2017 14:10:06,21/03/2017 14:24:52,J0034-0721,0.1489980528388499,-0.12802276588263942,156.0,575,730.0,730.0,0,180,1,0,3,0,Completed incrementally checking scint every 180 seconds.
+21/03/2017 14:24:52,21/03/2017 14:27:34,J2024+48,5.340707511102648,0.8377580409572782,72.0,620,incomplete,90.0,0,1800,1,0,1,1,Aborted: High scintillation; observed until object set.

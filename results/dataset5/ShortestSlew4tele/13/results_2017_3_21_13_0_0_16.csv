@@ -1,0 +1,18 @@
+Start time,  21/03/2017 13:00:00,1490054400000
+End time,  21/03/2017 14:06:04,1490058364000
+Duration,  0 day, 1 hour, 6 minutes, 4 seconds,3964000
+Slew time, 0 day, 0 hour, 7 minutes, 2 seconds,422000.0
+Integration time, 0 day, 0 hour, 59 minutes, 2 seconds,3542000.0
+Waiting time, 0 day, 0 hour, 0 minute, 0 second,0.0
+Relative slew time, 0.10645812310797174
+Relative integration time, 0.8935418768920282
+Relative waiting time, 0.0
+Start, End, Name, RA, DEC, Slew (to here), Expected Int, Actual Int, This Int, Wait time, Scint timescale, Attempt no, # sats cons, Obs result, Interruption, Comment 
+21/03/2017 13:00:00,21/03/2017 13:06:47,B2127+11F,5.628481616050499,0.21236250040409704,45.0,364,362.0,362.0,0,60,1,0,3,0,Completed incrementally checking scint every 60 seconds.
+21/03/2017 13:06:47,21/03/2017 13:13:50,J1822+0705,4.809723083886327,0.12371960328234248,55.0,545,368.0,368.0,0,5400,1,0,1,0,Completed: Shortened interval; scintillation of 1.47969929828559
+21/03/2017 13:13:50,21/03/2017 13:20:45,J1839-1238,4.885737117910226,-0.2202959430004054,16.0,399,399.0,399.0,0,1800,1,0,2,0,Completed: Nominal time; scintillation good.
+21/03/2017 13:20:45,21/03/2017 13:22:44,J1840-1122,4.88867203449156,-0.1983338832461434,1.0,415,578.0,118.0,0,20,2,0,3,0,Completed incrementally checking scint every 20 seconds.
+21/03/2017 13:22:44,21/03/2017 13:26:13,J1651-4246,4.414867793340869,-0.7463658139313195,46.0,163,163.0,163.0,0,5400,1,0,2,0,Completed: Nominal time; scintillation good.
+21/03/2017 13:26:13,21/03/2017 13:43:02,J1722-3712,4.550885665271917,-0.6492445436356896,8.0,4689,7321.0,1001.0,0,180,2,0,3,0,Completed incrementally checking scint every 180 seconds.
+21/03/2017 13:43:02,21/03/2017 13:56:49,B0021-72H,0.10520709468004791,-1.2577676711809487,76.0,751,751.0,751.0,0,1800,1,0,2,0,Completed: Nominal time; scintillation good.
+21/03/2017 13:56:49,21/03/2017 14:06:04,B2148+52,5.71869732874803,0.9214835456335908,175.0,307,380.0,380.0,0,60,1,0,3,0,Completed incrementally checking scint every 60 seconds.

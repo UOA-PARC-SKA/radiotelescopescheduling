@@ -1,0 +1,18 @@
+Start time,  21/03/2017 13:00:00,1490054400000
+End time,  21/03/2017 14:47:04,1490060824000
+Duration,  0 day, 1 hour, 47 minutes, 4 seconds,6424000
+Slew time, 0 day, 0 hour, 16 minutes, 18 seconds,978000.0
+Integration time, 0 day, 1 hour, 30 minutes, 46 seconds,5446000.0
+Waiting time, 0 day, 0 hour, 0 minute, 0 second,0.0
+Relative slew time, 0.15224159402241594
+Relative integration time, 0.847758405977584
+Relative waiting time, 0.0
+Start, End, Name, RA, DEC, Slew (to here), Expected Int, Actual Int, This Int, Wait time, Scint timescale, Attempt no, # sats cons, Obs result, Interruption, Comment 
+21/03/2017 13:00:00,21/03/2017 13:05:53,J2024+48,5.340707511102648,0.8377580409572782,83.0,620,incomplete,270.0,0,1800,1,0,2,2,Aborted: Normal scintillation; interrupted by satellite GPS BIIF-3  (PRN 24)
+21/03/2017 13:05:53,21/03/2017 13:13:52,J1648-3256,4.398671137882361,-0.5745972963415731,99.0,1293,incomplete,380.0,0,600,1,0,3,2,Aborted: Checked scintillation repeatedly; interrupted by satellite COSMOS 2459 (731)
+21/03/2017 13:13:52,21/03/2017 13:23:42,J2024+48,5.340707511102648,0.8377580409572782,263.0,620,597.0,327.0,0,1800,2,0,1,0,Completed: Shortened interval; scintillation of 1.0701606044084988
+21/03/2017 13:23:42,21/03/2017 13:45:31,J1648-3256,4.398671137882361,-0.5745972963415731,98.0,1293,1591.0,1211.0,0,600,2,0,3,0,Completed incrementally checking scint every 600 seconds.
+21/03/2017 13:45:31,21/03/2017 13:52:41,J1839-1238,4.885737117910226,-0.2202959430004054,31.0,399,399.0,399.0,0,1800,1,0,2,0,Completed: Nominal time; scintillation good.
+21/03/2017 13:52:41,21/03/2017 14:04:01,J1550-5242,4.1453715035404235,-0.919754578843334,57.0,647,623.0,623.0,0,20,1,0,3,0,Completed incrementally checking scint every 20 seconds.
+21/03/2017 14:04:01,21/03/2017 14:09:21,J2330-2005,6.154240745652506,-0.3503766411484817,182.0,311,138.0,138.0,0,1800,1,0,1,0,Completed: Shortened interval; scintillation of 2.25398798723972
+21/03/2017 14:09:21,21/03/2017 14:47:04,J1413-6141,3.7226323965327905,-1.0765142344932912,165.0,938,2098.0,2098.0,0,180,1,0,3,0,Completed incrementally checking scint every 180 seconds.
