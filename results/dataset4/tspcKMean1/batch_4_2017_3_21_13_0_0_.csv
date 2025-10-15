@@ -1,0 +1,14 @@
+Duration mean, 21.703611111111112, std dev, 0.0
+Rel slew mean, 0.02957777123622541, std dev, 0.0
+Rel wait mean, 0.022269719580714935, std dev, 0.0
+Rel obs mean, 0.9481525091830596, std dev, 0.0
+No, Duration, Slew time, Wait time, Obs time, Rel slew, Rel wait, Rel obs, Max attempts, Times max att, Obs result 1, Obs result 2, Obs result 3, Obs result 4, Interruption 1, Interruption 2 
+0, 21.703611111111112, 0.6419444444444444, 0.48333333333333334, 20.578333333333333, 0.02957777123622541, 0.022269719580714935, 0.9481525091830596, 3, 3, 36, 14, 56, 8, 1, 7, 
+
+Obs result 1, Max scintillation; shortened observation
+Obs result 2, Normal scintillation.
+Obs result 3, Short timescale; repeated check of scintillation.
+Obs result 4, Weak scintillation; aborted.
+
+Interruption 1, Object set.
+Interruption 2, Interference from satellite.
