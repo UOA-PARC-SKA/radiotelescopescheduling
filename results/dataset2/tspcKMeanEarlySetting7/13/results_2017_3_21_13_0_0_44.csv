@@ -1,0 +1,46 @@
+Start time,  21/03/2017 13:00:00,1490054400000
+End time,  22/03/2017 16:07:31,1490152051000
+Duration,  1 day, 3 hours, 7 minutes, 31 seconds,97651000
+Slew time, 0 day, 0 hour, 28 minutes, 42 seconds,1722000.0
+Integration time, 0 day, 11 hours, 41 minutes, 49 seconds,4.2109E7
+Waiting time, 0 day, 14 hours, 57 minutes, 0 second,5.382E7
+Relative slew time, 0.017634228016098145
+Relative integration time, 0.43121934235184484
+Relative waiting time, 0.5511464296320571
+Start, End, Name, RA, DEC, Slew (to here), Expected Int, Actual Int, This Int, Wait time, Scint timescale, Attempt no, # sats cons, Obs result, Interruption, Comment 
+21/03/2017 13:00:00,21/03/2017 13:09:55,B2127+11A,5.628559320435904,0.21235437444198796,45.0,456,550.0,550.0,0,60,1,0,3,0,Completed incrementally checking scint every 60 seconds.
+21/03/2017 13:09:55,21/03/2017 13:14:44,J1915+1410,5.042213739333153,0.24750465641163474,39.0,257,250.0,250.0,0,5400,1,0,1,0,Completed: Shortened interval; scintillation of 1.0268356423906762
+21/03/2017 13:14:44,21/03/2017 14:00:23,B1919+14,5.0675750459718305,0.24995587438332456,0.0,1410,2739.0,2739.0,0,180,1,0,3,0,Completed incrementally checking scint every 180 seconds.
+21/03/2017 14:00:23,21/03/2017 14:04:49,J2007+0809,5.267512765597136,0.142404322552304,4.0,284,262.0,262.0,0,60,1,0,3,0,Completed incrementally checking scint every 60 seconds.
+21/03/2017 14:04:49,21/03/2017 16:42:12,J1956+0838,5.222334917909262,0.1507615407872702,2.0,6023,incomplete,9441.0,0,600,1,0,3,1,Aborted: Checked scintillation repeatedly; observed until object set. 
+21/03/2017 16:42:12,21/03/2017 17:30:07,J2243+1518,5.947919775176239,0.2671571122704591,6.0,1703,2869.0,2869.0,0,180,1,0,3,0,Completed incrementally checking scint every 180 seconds.
+21/03/2017 17:30:07,21/03/2017 17:52:47,J2317+1439,6.096234120297008,0.2558422663572685,3.0,2597,1357.0,1357.0,0,5400,1,0,1,0,Completed: Shortened interval; scintillation of 1.9137671662146027
+21/03/2017 17:52:47,21/03/2017 18:45:07,J2307+2225,6.054931729380185,0.3914876292723677,10.0,4689,incomplete,3130.0,0,20,1,0,3,2,Aborted: Checked scintillation repeatedly; interrupted by satellite GPS BIIR-8  (PRN 16)
+21/03/2017 18:45:07,21/03/2017 18:53:54,J0006+1834,0.02652900463031381,0.3243355045254685,3.0,524,524.0,524.0,0,5400,1,0,2,0,Completed: Nominal time; scintillation good.
+21/03/2017 18:53:54,21/03/2017 19:12:44,J2307+2225,6.054931729380185,0.3914876292723677,14.0,4689,incomplete,1116.0,0,20,2,0,3,1,Aborted: Checked scintillation repeatedly; observed until object set. 
+21/03/2017 19:12:44,21/03/2017 19:21:00,J0843+0719,2.2844774567868544,0.12764077633515641,227.0,284,269.0,269.0,0,600,1,0,1,0,Completed: Shortened interval; scintillation of 1.0569692421372838
+21/03/2017 19:21:00,21/03/2017 19:23:59,J0815+0939,2.160483158072796,0.16867007335377535,7.0,298,172.0,172.0,0,1800,1,0,1,0,Completed: Shortened interval; scintillation of 1.7342359966227934
+21/03/2017 19:23:59,21/03/2017 19:30:46,J0848+16,2.3076888813973357,0.29176087329171874,10.0,547,397.0,397.0,0,5400,1,0,1,0,Completed: Shortened interval; scintillation of 1.3776918850765847
+21/03/2017 19:30:46,21/03/2017 19:48:16,J0751+1807,2.055791112963893,0.3163826354449581,11.0,1039,1039.0,1039.0,0,1800,1,0,2,0,Completed: Nominal time; scintillation good.
+21/03/2017 19:48:16,21/03/2017 19:52:54,B0823+26,2.2115782027959106,0.4646638064138933,8.0,1410,incomplete,270.0,0,20,1,0,3,2,Aborted: Checked scintillation repeatedly; interrupted by satellite IRIDIUM 2 [-]
+21/03/2017 19:52:54,21/03/2017 19:58:11,J0740+41,2.011491962923465,0.7167485461523381,17.0,473,incomplete,300.0,0,1800,1,0,4,0,Aborted: Scintillation too low within first five minutes.
+21/03/2017 19:58:11,21/03/2017 20:00:57,J0622+3749,1.6675537444228539,0.6600912801231532,12.0,154,154.0,154.0,0,5400,1,0,2,0,Completed: Nominal time; scintillation good.
+21/03/2017 20:00:57,21/03/2017 20:03:40,J0137+1654,0.4249789462143593,0.2951647501467888,69.0,104,94.0,94.0,0,180,1,0,1,0,Completed: Shortened interval; scintillation of 1.1025621349157388
+21/03/2017 20:03:40,21/03/2017 21:19:23,J1022+1001,2.718204916782272,0.17507964958762018,232.0,3754,4311.0,4311.0,0,600,1,0,3,0,Completed incrementally checking scint every 600 seconds.
+21/03/2017 21:19:23,21/03/2017 21:45:56,J1142+0119,3.0630528372500483,0.022980168484592004,7.0,1106,1586.0,1586.0,0,60,1,0,3,0,Completed incrementally checking scint every 60 seconds.
+21/03/2017 21:45:56,21/03/2017 21:58:59,J1046+0304,2.821850516285997,0.05355688253848934,15.0,768,768.0,768.0,0,1800,1,0,2,0,Completed: Nominal time; scintillation good.
+21/03/2017 21:58:59,21/03/2017 22:13:14,J0605+37,1.5926129424448257,0.6457718232379019,80.0,284,775.0,775.0,0,180,1,0,3,0,Completed incrementally checking scint every 180 seconds.
+21/03/2017 22:13:14,21/03/2017 22:24:20,J0623+0340,1.6745531692218207,0.0640283732367742,366.0,82,incomplete,300.0,0,180,1,0,4,0,Aborted: Scintillation too low within first five minutes.
+21/03/2017 22:24:20,21/03/2017 23:39:26,J0337+1715,0.9500282278657441,0.3011411841416568,38.0,5293,5328.0,4468.0,0,1800,2,0,3,0,Completed incrementally checking scint every 1800 seconds.
+21/03/2017 23:39:26,21/03/2017 23:46:37,J0453+1559,1.2817562530918758,0.27906508796776525,1.0,455,730.0,430.0,0,1800,2,0,1,0,Completed: Shortened interval; scintillation of 1.0578242472078185
+21/03/2017 23:46:37,21/03/2017 23:46:44,B0523+11,1.4221850534626992,0.19644204329971776,7.0,118,62.0,0.0,0,1800,2,0,2,0,Completed: Nominal time; scintillation good.
+21/03/2017 23:46:44,21/03/2017 23:53:16,J1313+0931,3.4617878492785863,0.1663686628095484,235.0,334,157.0,157.0,0,1800,1,0,1,0,Completed: Shortened interval; scintillation of 2.128847087425112
+21/03/2017 23:53:16,21/03/2017 23:59:13,B1257+12,3.4036521463529263,0.22134882305275824,5.0,352,352.0,352.0,0,5400,1,0,2,0,Completed: Nominal time; scintillation good.
+21/03/2017 23:59:13,22/03/2017 00:18:31,J1238+21,3.30908390247795,0.3816991440880299,11.0,751,1147.0,1147.0,0,600,1,0,3,0,Completed incrementally checking scint every 600 seconds.
+22/03/2017 00:18:31,22/03/2017 00:32:45,J1342+2822A,3.5874515554221773,0.49524687152701324,11.0,844,843.0,843.0,0,60,1,0,3,0,Completed incrementally checking scint every 60 seconds.
+22/03/2017 00:32:45,22/03/2017 00:43:19,J1342+2822B,3.587457889512921,0.4952863402087923,2.0,647,632.0,632.0,0,1800,1,0,1,0,Completed: Shortened interval; scintillation of 1.0238804877945809
+22/03/2017 00:43:19,22/03/2017 00:50:05,J1342+2822D,3.5873933777804443,0.4952662640742576,1.0,374,405.0,405.0,0,180,1,0,3,0,Completed incrementally checking scint every 180 seconds.
+22/03/2017 00:50:05,22/03/2017 00:55:38,J1518+0204E,4.008003183100644,0.03635132980959301,33.0,402,incomplete,300.0,0,1800,1,0,4,0,Aborted: Scintillation too low within first five minutes.
+22/03/2017 00:55:38,22/03/2017 00:58:15,J1012+5307,2.672785151988384,0.9270733295670593,81.0,118,76.0,76.0,0,1800,1,0,1,0,Completed: Shortened interval; scintillation of 1.5453596474868312
+22/03/2017 00:58:15,22/03/2017 01:06:35,J0740+41,2.011491962923465,0.7167485461523381,27.0,473,773.0,473.0,44340,1800,2,0,2,0,Completed: Nominal time; scintillation good.Waited for more observables to rise above the horizon. Waited for more observables to rise above the horizon. Waited for more observables to rise above the horizon. Waited for more observables to rise above the horizon. Waited for more observables to rise above the horizon. Waited for more observables to rise above the horizon. Waited for more observables to rise above the horizon. Waited for more observables to rise above the horizon. Waited for more observables to rise above the horizon. Waited for more observables to rise above the horizon. Waited for more observables to rise above the horizon. Waited for more observables to rise above the horizon. Waited for more observables to rise above the horizon. 
+22/03/2017 14:06:35,22/03/2017 14:51:31,J1821+1715,4.805000731984796,0.301297449287352,83.0,194,453.0,153.0,9480,180,2,0,1,0,Completed: Shortened interval; scintillation of 1.2661220940884292Waited for more observables to rise above the horizon. Waited for more observables to rise above the horizon. 

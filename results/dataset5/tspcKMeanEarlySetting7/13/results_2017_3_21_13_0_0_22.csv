@@ -1,0 +1,15 @@
+Start time,  21/03/2017 13:00:00,1490054400000
+End time,  21/03/2017 13:55:51,1490057751000
+Duration,  0 day, 0 hour, 55 minutes, 51 seconds,3351000
+Slew time, 0 day, 0 hour, 6 minutes, 23 seconds,383000.0
+Integration time, 0 day, 0 hour, 49 minutes, 28 seconds,2968000.0
+Waiting time, 0 day, 0 hour, 0 minute, 0 second,0.0
+Relative slew time, 0.11429424052521635
+Relative integration time, 0.8857057594747837
+Relative waiting time, 0.0
+Start, End, Name, RA, DEC, Slew (to here), Expected Int, Actual Int, This Int, Wait time, Scint timescale, Attempt no, # sats cons, Obs result, Interruption, Comment 
+21/03/2017 13:00:00,21/03/2017 13:11:03,J1907+0731,5.008716071331938,0.13129675630440343,55.0,450,608.0,608.0,0,60,1,0,3,0,Completed incrementally checking scint every 60 seconds.
+21/03/2017 13:11:03,21/03/2017 13:16:24,J1843-0744,4.900410900874316,-0.13482619990288083,21.0,598,incomplete,300.0,0,5400,1,0,4,0,Aborted: Scintillation too low within first five minutes.
+21/03/2017 13:16:24,21/03/2017 13:18:52,J1700-4012,4.453393027696556,-0.7014352212208123,48.0,844,incomplete,100.0,0,20,1,0,3,2,Aborted: Checked scintillation repeatedly; interrupted by satellite IRIDIUM 31 [+]
+21/03/2017 13:18:52,21/03/2017 13:42:10,J1413-6141,3.7226323965327905,-1.0765142344932912,33.0,938,1365.0,1365.0,0,180,1,0,3,0,Completed incrementally checking scint every 180 seconds.
+21/03/2017 13:42:10,21/03/2017 13:55:51,J2024+48,5.340707511102648,0.8377580409572782,226.0,620,595.0,595.0,0,1800,1,0,1,0,Completed: Shortened interval; scintillation of 1.042879447375984

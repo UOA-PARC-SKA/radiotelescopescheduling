@@ -1,0 +1,16 @@
+Start time,  21/03/2017 13:00:00,1490054400000
+End time,  21/03/2017 15:56:43,1490065003000
+Duration,  0 day, 2 hours, 56 minutes, 43 seconds,10603000
+Slew time, 0 day, 0 hour, 4 minutes, 3 seconds,243000.0
+Integration time, 0 day, 2 hours, 52 minutes, 40 seconds,1.036E7
+Waiting time, 0 day, 0 hour, 0 minute, 0 second,0.0
+Relative slew time, 0.022918042063566915
+Relative integration time, 0.977081957936433
+Relative waiting time, 0.0
+Start, End, Name, RA, DEC, Slew (to here), Expected Int, Actual Int, This Int, Wait time, Scint timescale, Attempt no, # sats cons, Obs result, Interruption, Comment 
+21/03/2017 13:00:00,21/03/2017 13:16:55,J1916+0844,5.045389147741,0.15245935829851576,55.0,1150,960.0,960.0,0,60,1,0,3,0,Completed incrementally checking scint every 60 seconds.
+21/03/2017 13:16:55,21/03/2017 13:22:20,J1843-0744,4.900410900874316,-0.13482619990288083,25.0,598,incomplete,300.0,0,5400,1,0,4,0,Aborted: Scintillation too low within first five minutes.
+21/03/2017 13:22:20,21/03/2017 15:19:22,J1722-3712,4.550885665271917,-0.6492445436356896,42.0,4689,incomplete,6980.0,0,180,1,0,3,2,Aborted: Checked scintillation repeatedly; interrupted by satellite BEIDOU-3 M2
+21/03/2017 15:19:22,21/03/2017 15:29:44,J1843-0744,4.900410900874316,-0.13482619990288083,24.0,598,898.0,598.0,0,5400,2,0,2,0,Completed: Nominal time; scintillation good.
+21/03/2017 15:29:44,21/03/2017 15:51:00,B1944+22,5.176711284041609,0.3970594959466233,32.0,2597,incomplete,1244.0,0,20,1,0,3,1,Aborted: Checked scintillation repeatedly; observed until object set. 
+21/03/2017 15:51:00,21/03/2017 15:56:43,J2330-2005,6.154240745652506,-0.3503766411484817,65.0,311,278.0,278.0,0,1800,1,0,1,0,Completed: Shortened interval; scintillation of 1.1203774278623813
