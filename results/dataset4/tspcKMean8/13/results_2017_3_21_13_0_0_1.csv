@@ -1,0 +1,25 @@
+Start time,  21/03/2017 13:00:00,1490054400000
+End time,  21/03/2017 16:26:30,1490066790000
+Duration,  0 day, 3 hours, 26 minutes, 30 seconds,12390000
+Slew time, 0 day, 0 hour, 4 minutes, 47 seconds,287000.0
+Integration time, 0 day, 3 hours, 21 minutes, 43 seconds,1.2103E7
+Waiting time, 0 day, 0 hour, 0 minute, 0 second,0.0
+Relative slew time, 0.023163841807909605
+Relative integration time, 0.9768361581920904
+Relative waiting time, 0.0
+Start, End, Name, RA, DEC, Slew (to here), Expected Int, Actual Int, This Int, Wait time, Scint timescale, Attempt no, # sats cons, Obs result, Interruption, Comment 
+21/03/2017 13:00:00,21/03/2017 13:04:01,B1855+02,4.964272134594528,0.03859655044817938,57.0,182,184.0,184.0,0,60,1,0,3,0,Completed incrementally checking scint every 60 seconds.
+21/03/2017 13:04:01,21/03/2017 13:21:04,J1825-0935,4.823699462370141,-0.1671526065319025,18.0,769,1005.0,1005.0,0,60,1,0,3,0,Completed incrementally checking scint every 60 seconds.
+21/03/2017 13:21:04,21/03/2017 14:11:56,J1843-0702,4.901643830546746,-0.1224901157870487,2.0,4689,incomplete,3050.0,0,1800,2,0,3,2,Aborted: Checked scintillation repeatedly; interrupted by satellite GPS BIIR-9  (PRN 21)
+21/03/2017 14:11:56,21/03/2017 14:20:21,J1720-2933,4.540337113439018,-0.5156662541479846,40.0,620,465.0,465.0,0,180,1,0,3,0,Completed incrementally checking scint every 180 seconds.
+21/03/2017 14:20:21,21/03/2017 14:24:45,J1722-3712,4.550885665271917,-0.6492445436356896,7.0,236,257.0,257.0,0,180,1,0,3,0,Completed incrementally checking scint every 180 seconds.
+21/03/2017 14:24:45,21/03/2017 14:45:02,J1703-3241,4.465318717031329,-0.5701990666265474,6.0,1211,1511.0,1211.0,0,1800,2,0,2,0,Completed: Nominal time; scintillation good.
+21/03/2017 14:45:02,21/03/2017 14:48:47,J1644-4559,4.384360237958581,-0.8025145104090204,15.0,455,incomplete,210.0,0,180,1,0,3,2,Aborted: Checked scintillation repeatedly; interrupted by satellite COSMOS 2434 (721)
+21/03/2017 14:48:47,21/03/2017 14:51:56,J1637-4642,4.351234543254198,-0.8149960386291855,1.0,222,188.0,188.0,0,180,1,0,1,0,Completed: Shortened interval; scintillation of 1.183550761266882
+21/03/2017 14:51:56,21/03/2017 14:57:40,J1622-4347,4.286969338534202,-0.7640595740370931,4.0,612,340.0,340.0,0,5400,1,0,1,0,Completed: Shortened interval; scintillation of 1.7978786819172432
+21/03/2017 14:57:40,21/03/2017 15:27:48,J1515-5720,3.9931169790221768,-1.0004178791063387,18.0,3388,incomplete,1790.0,0,600,1,0,3,2,Aborted: Checked scintillation repeatedly; interrupted by satellite IRIDIUM 7 [+]
+21/03/2017 15:27:48,21/03/2017 15:30:26,J1341-6220,3.5853884308022166,-1.0878215439778092,15.0,193,143.0,143.0,0,60,1,0,3,0,Completed incrementally checking scint every 60 seconds.
+21/03/2017 15:30:26,21/03/2017 15:30:42,J1412-6145,3.718110539329081,-1.0776011867663389,3.0,613,313.0,13.0,0,1800,2,0,1,0,Completed: Shortened interval; scintillation of 1.3491754367146083
+21/03/2017 15:30:42,21/03/2017 15:57:44,J1016-5819,2.6886869849024815,-1.0178122667640273,28.0,1410,1594.0,1594.0,0,180,1,0,3,0,Completed incrementally checking scint every 180 seconds.
+21/03/2017 15:57:44,21/03/2017 16:00:12,J0820-4114,2.1827851206988833,-0.7194809560590714,28.0,545,incomplete,120.0,0,600,1,0,2,2,Aborted: Normal scintillation; interrupted by satellite GPS BIIRM-8 (PRN 05)
+21/03/2017 16:00:12,21/03/2017 16:26:30,J0624-0424,1.6769725591753457,-0.07654989858563074,45.0,1039,1533.0,1533.0,0,60,1,0,3,0,Completed incrementally checking scint every 60 seconds.
