@@ -1,0 +1,18 @@
+Start time,  21/03/2017 13:00:00,1490054400000
+End time,  21/03/2017 14:58:21,1490061501000
+Duration,  0 day, 1 hour, 58 minutes, 21 seconds,7101000
+Slew time, 0 day, 0 hour, 8 minutes, 39 seconds,519000.0
+Integration time, 0 day, 1 hour, 49 minutes, 42 seconds,6582000.0
+Waiting time, 0 day, 0 hour, 0 minute, 0 second,0.0
+Relative slew time, 0.07308829742289819
+Relative integration time, 0.9269117025771019
+Relative waiting time, 0.0
+Start, End, Name, RA, DEC, Slew (to here), Expected Int, Actual Int, This Int, Wait time, Scint timescale, Attempt no, # sats cons, Obs result, Interruption, Comment 
+21/03/2017 13:00:00,21/03/2017 13:09:23,J1047-58,2.8271425000221484,-1.0242173827120056,187.0,486,376.0,376.0,0,60,1,0,3,0,Completed incrementally checking scint every 60 seconds.
+21/03/2017 13:09:23,21/03/2017 13:24:25,J1413-6141,3.7226323965327905,-1.0765142344932912,18.0,938,884.0,884.0,0,180,1,0,3,0,Completed incrementally checking scint every 180 seconds.
+21/03/2017 13:24:25,21/03/2017 13:29:30,J1511-5835,3.97549642578225,-1.022336305629301,5.0,477,incomplete,300.0,0,5400,1,0,4,0,Aborted: Scintillation too low within first five minutes.
+21/03/2017 13:29:30,21/03/2017 13:45:17,J1550-5242,4.1453715035404235,-0.919754578843334,7.0,647,940.0,940.0,0,20,1,0,3,0,Completed incrementally checking scint every 20 seconds.
+21/03/2017 13:45:17,21/03/2017 13:50:01,J1617-5055,4.265097454124627,-0.888599482067873,2.0,352,282.0,282.0,0,5400,1,0,1,0,Completed: Shortened interval; scintillation of 1.2468360850724192
+21/03/2017 13:50:01,21/03/2017 14:04:11,J0034-0721,0.1489980528388499,-0.12802276588263942,170.0,575,680.0,680.0,0,180,1,0,3,0,Completed incrementally checking scint every 180 seconds.
+21/03/2017 14:04:11,21/03/2017 14:53:26,B1944+22,5.176711284041609,0.3970594959466233,97.0,2597,2858.0,2858.0,0,20,1,0,3,0,Completed incrementally checking scint every 20 seconds.
+21/03/2017 14:53:26,21/03/2017 14:58:21,J1822+0705,4.809723083886327,0.12371960328234248,33.0,545,562.0,262.0,0,5400,2,0,1,0,Completed: Shortened interval; scintillation of 2.0804264899514204

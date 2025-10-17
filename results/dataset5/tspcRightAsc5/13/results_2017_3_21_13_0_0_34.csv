@@ -1,0 +1,17 @@
+Start time,  21/03/2017 13:00:00,1490054400000
+End time,  21/03/2017 13:40:35,1490056835000
+Duration,  0 day, 0 hour, 40 minutes, 35 seconds,2435000
+Slew time, 0 day, 0 hour, 7 minutes, 42 seconds,462000.0
+Integration time, 0 day, 0 hour, 32 minutes, 53 seconds,1973000.0
+Waiting time, 0 day, 0 hour, 0 minute, 0 second,0.0
+Relative slew time, 0.18973305954825462
+Relative integration time, 0.8102669404517454
+Relative waiting time, 0.0
+Start, End, Name, RA, DEC, Slew (to here), Expected Int, Actual Int, This Int, Wait time, Scint timescale, Attempt no, # sats cons, Obs result, Interruption, Comment 
+21/03/2017 13:00:00,21/03/2017 13:04:33,B2148+52,5.71869732874803,0.9214835456335908,85.0,307,188.0,188.0,0,60,1,0,3,0,Completed incrementally checking scint every 60 seconds.
+21/03/2017 13:04:33,21/03/2017 13:05:48,J2024+48,5.340707511102648,0.8377580409572782,15.0,620,incomplete,60.0,0,1800,1,0,1,2,Aborted: High scintillation; interrupted by satellite GPS BIIF-3  (PRN 24)
+21/03/2017 13:05:48,21/03/2017 13:09:29,B1859+01,4.981045185038507,0.03392832799414377,43.0,276,178.0,178.0,0,180,1,0,3,0,Completed incrementally checking scint every 180 seconds.
+21/03/2017 13:09:29,21/03/2017 13:12:47,J1840-1122,4.88867203449156,-0.1983338832461434,18.0,415,incomplete,180.0,0,20,2,0,3,2,Aborted: Checked scintillation repeatedly; interrupted by satellite BEIDOU I2-S
+21/03/2017 13:12:47,21/03/2017 13:18:45,J1617-5055,4.265097454124627,-0.888599482067873,58.0,352,incomplete,300.0,0,5400,2,0,4,0,Aborted: Scintillation too low within first five minutes.
+21/03/2017 13:18:45,21/03/2017 13:34:15,J0034-0721,0.1489980528388499,-0.12802276588263942,163.0,575,767.0,767.0,0,180,1,0,3,0,Completed incrementally checking scint every 180 seconds.
+21/03/2017 13:34:15,21/03/2017 13:40:35,J2024+48,5.340707511102648,0.8377580409572782,80.0,620,incomplete,300.0,0,1800,2,0,4,0,Aborted: Scintillation too low within first five minutes.
