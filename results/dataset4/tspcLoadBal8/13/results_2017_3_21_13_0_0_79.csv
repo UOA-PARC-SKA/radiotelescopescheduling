@@ -1,0 +1,23 @@
+Start time,  21/03/2017 13:00:00,1490054400000
+End time,  21/03/2017 15:07:12,1490062032000
+Duration,  0 day, 2 hours, 7 minutes, 12 seconds,7632000
+Slew time, 0 day, 0 hour, 5 minutes, 14 seconds,314000.0
+Integration time, 0 day, 2 hours, 1 minute, 58 seconds,7318000.0
+Waiting time, 0 day, 0 hour, 0 minute, 0 second,0.0
+Relative slew time, 0.04114255765199162
+Relative integration time, 0.9588574423480084
+Relative waiting time, 0.0
+Start, End, Name, RA, DEC, Slew (to here), Expected Int, Actual Int, This Int, Wait time, Scint timescale, Attempt no, # sats cons, Obs result, Interruption, Comment 
+21/03/2017 13:00:00,21/03/2017 13:06:24,J1829-1751,4.842062362318582,-0.3115223637474246,83.0,307,301.0,301.0,0,180,1,0,3,0,Completed incrementally checking scint every 180 seconds.
+21/03/2017 13:06:24,21/03/2017 13:16:04,J1758-2846,4.704782980948603,-0.5020633518834133,18.0,562,562.0,562.0,0,600,1,0,2,0,Completed: Nominal time; scintillation good.
+21/03/2017 13:16:04,21/03/2017 13:18:22,J1513-5908,3.987758818218554,-1.0320277311146804,45.0,153,93.0,93.0,0,1800,1,0,1,0,Completed: Shortened interval; scintillation of 1.6502179556016796
+21/03/2017 13:18:22,21/03/2017 14:06:10,J1515-5720,3.9931169790221768,-1.0004178791063387,1.0,3388,2867.0,2867.0,0,600,1,0,3,0,Completed incrementally checking scint every 600 seconds.
+21/03/2017 14:06:10,21/03/2017 14:14:48,J1612-5805,4.2431729189492815,-1.0136038416051558,1.0,517,517.0,517.0,0,5400,1,0,2,0,Completed: Nominal time; scintillation good.
+21/03/2017 14:14:48,21/03/2017 14:19:39,J1558-5419,4.183077887588718,-0.9478786204844982,4.0,389,287.0,287.0,0,600,1,0,1,0,Completed: Shortened interval; scintillation of 1.3535452515290973
+21/03/2017 14:19:39,21/03/2017 14:22:53,J1600-5044,4.192646727934829,-0.885362090230896,2.0,192,192.0,192.0,0,1800,1,0,2,0,Completed: Nominal time; scintillation good.
+21/03/2017 14:22:53,21/03/2017 14:35:03,J1602-5100,4.198884025627092,-0.8901082222434858,0.0,864,incomplete,730.0,0,180,1,0,3,2,Aborted: Checked scintillation repeatedly; interrupted by satellite COSMOS 2434 (721)
+21/03/2017 14:35:03,21/03/2017 14:37:41,J1638-4417,4.357957769699036,-0.7728725171323023,8.0,3073,incomplete,150.0,0,1800,1,0,3,2,Aborted: Checked scintillation repeatedly; interrupted by satellite GSAT0211 (PRN E02)
+21/03/2017 14:37:41,21/03/2017 14:37:55,J1555-3134,4.1682790954169535,-0.5508448196629737,14.0,518,incomplete,0.0,0,60,1,0,3,1,Aborted: Checked scintillation repeatedly; observed until object set. 
+21/03/2017 14:37:55,21/03/2017 14:46:39,J1632-4621,4.332039048530504,-0.8087244888503525,14.0,1709,incomplete,510.0,0,20,3,0,3,2,Aborted: Checked scintillation repeatedly; interrupted by satellite COSMOS 2434 (721)
+21/03/2017 14:46:39,21/03/2017 14:50:58,J1016-5857,2.6893458466951095,-1.028812931595243,54.0,640,205.0,205.0,0,1800,1,0,1,0,Completed: Shortened interval; scintillation of 3.126774599376815
+21/03/2017 14:50:58,21/03/2017 15:07:12,J0452-1759,1.2765705904504334,-0.3137550713449015,70.0,548,904.0,904.0,0,180,1,0,3,0,Completed incrementally checking scint every 180 seconds.
