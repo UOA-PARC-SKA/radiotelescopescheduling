@@ -1,0 +1,14 @@
+Start time,  21/03/2017 13:00:00,1490054400000
+End time,  21/03/2017 13:25:28,1490055928000
+Duration,  0 day, 0 hour, 25 minutes, 28 seconds,1528000
+Slew time, 0 day, 0 hour, 2 minutes, 19 seconds,139000.0
+Integration time, 0 day, 0 hour, 23 minutes, 9 seconds,1389000.0
+Waiting time, 0 day, 0 hour, 0 minute, 0 second,0.0
+Relative slew time, 0.09096858638743456
+Relative integration time, 0.9090314136125655
+Relative waiting time, 0.0
+Start, End, Name, RA, DEC, Slew (to here), Expected Int, Actual Int, This Int, Wait time, Scint timescale, Attempt no, # sats cons, Obs result, Interruption, Comment 
+21/03/2017 13:00:00,21/03/2017 13:20:23,J1916+0844,5.045389147741,0.15245935829851576,55.0,1150,1168.0,1168.0,0,60,1,0,3,0,Completed incrementally checking scint every 60 seconds.
+21/03/2017 13:20:23,21/03/2017 13:22:57,B1859+01,4.981045185038507,0.03392832799414377,13.0,276,141.0,141.0,0,180,1,0,3,0,Completed incrementally checking scint every 180 seconds.
+21/03/2017 13:22:57,21/03/2017 13:24:59,J1700-3312,4.4544424796313695,-0.5792238733004015,52.0,222,incomplete,70.0,0,20,1,0,3,2,Aborted: Checked scintillation repeatedly; interrupted by satellite IRIDIUM 33 [-]
+21/03/2017 13:24:59,21/03/2017 13:25:28,J1640-4951,4.366490902578194,-0.87003645103187,19.0,179,incomplete,10.0,0,5400,1,0,2,2,Aborted: Normal scintillation; interrupted by satellite COSMOS 2465 (737)

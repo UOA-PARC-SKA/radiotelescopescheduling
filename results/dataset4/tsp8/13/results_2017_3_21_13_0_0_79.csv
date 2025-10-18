@@ -1,0 +1,21 @@
+Start time,  21/03/2017 13:00:00,1490054400000
+End time,  21/03/2017 14:51:03,1490061063000
+Duration,  0 day, 1 hour, 51 minutes, 3 seconds,6663000
+Slew time, 0 day, 0 hour, 6 minutes, 10 seconds,370000.0
+Integration time, 0 day, 1 hour, 44 minutes, 53 seconds,6293000.0
+Waiting time, 0 day, 0 hour, 0 minute, 0 second,0.0
+Relative slew time, 0.05553054179798889
+Relative integration time, 0.9444694582020111
+Relative waiting time, 0.0
+Start, End, Name, RA, DEC, Slew (to here), Expected Int, Actual Int, This Int, Wait time, Scint timescale, Attempt no, # sats cons, Obs result, Interruption, Comment 
+21/03/2017 13:00:00,21/03/2017 13:08:34,J1136-5525,3.0370307053233345,-0.9671630542779921,194.0,364,320.0,320.0,0,20,1,0,3,0,Completed incrementally checking scint every 20 seconds.
+21/03/2017 13:08:34,21/03/2017 13:19:42,J1356-5521,3.651414818181579,-0.9659769091257897,15.0,507,653.0,653.0,0,60,1,0,3,0,Completed incrementally checking scint every 60 seconds.
+21/03/2017 13:19:42,21/03/2017 13:53:37,J1632-4621,4.332039048530504,-0.8087244888503525,20.0,1709,2015.0,2015.0,0,20,1,0,3,0,Completed incrementally checking scint every 20 seconds.
+21/03/2017 13:53:37,21/03/2017 13:55:09,J1637-4642,4.351234543254198,-0.8149960386291855,4.0,222,88.0,88.0,0,180,1,0,1,0,Completed: Shortened interval; scintillation of 2.5101501964577455
+21/03/2017 13:55:09,21/03/2017 14:01:49,J1530-5327,4.059844552428529,-0.9326055350885045,11.0,389,389.0,389.0,0,600,1,0,2,0,Completed: Nominal time; scintillation good.
+21/03/2017 14:01:49,21/03/2017 14:03:23,J1843-0702,4.901643830546746,-0.1224901157870487,63.0,4689,3521.0,31.0,0,1800,2,0,3,0,Completed incrementally checking scint every 1800 seconds.
+21/03/2017 14:03:23,21/03/2017 14:20:21,J1703-3241,4.465318717031329,-0.5701990666265474,37.0,1211,1211.0,981.0,0,1800,2,0,2,0,Completed: Nominal time; scintillation good.
+21/03/2017 14:20:21,21/03/2017 14:26:47,J1746-3239,4.655298315165276,-0.5695794747420894,4.0,450,382.0,382.0,0,180,1,0,3,0,Completed incrementally checking scint every 180 seconds.
+21/03/2017 14:26:47,21/03/2017 14:37:18,J1622-4347,4.286969338534202,-0.7640595740370931,19.0,612,612.0,612.0,0,5400,1,0,2,0,Completed: Nominal time; scintillation good.
+21/03/2017 14:37:18,21/03/2017 14:50:20,J1643-4505,4.379101633644374,-0.7866295901474666,2.0,1728,incomplete,780.0,0,600,1,0,3,2,Aborted: Checked scintillation repeatedly; interrupted by satellite COSMOS 2434 (721)
+21/03/2017 14:50:20,21/03/2017 14:51:03,J1648-4458,4.399175101703874,-0.7846903354230284,1.0,719,492.0,42.0,0,600,2,0,1,0,Completed: Shortened interval; scintillation of 1.8489754147398236
