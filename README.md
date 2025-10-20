@@ -2,8 +2,6 @@
 
 **Original Repository (this code can also be found in the original branch): https://bitbucket.org/imoser/radiotelescopescheduling/src/master/** 
 
-**NOTE: This branch is for the multiple telescopes simulation exclusively. Not compatible with single telescopes optimization policy. For the single telescope version, please checkout to stable branch. The specialised policies available are `MultiTelescopesMTSPPolicy` and `ConcordeMTSPPolicy`. For pre-optimisations, `TravellingSalesmanPreoptimisation` is available. Additionally, the `KMeansClusteringEarlySettingOptimisation`, `KMeansClusteringOptimisation`, `LoadBalancingOptimisation`, `RightAscensionOptimisation`, and `SimpleRoundRobinOptimisation` is only compatible with the `ConcordeMTSPPolicy`. GUI is available which supports up to 8 telescopes. The number of telescopes can be set by the teles_num item in config**
-
 ## List of files and directories
 
 ### results directory
@@ -11,7 +9,7 @@ Folder where the results are output. Each observation is output as a .csv file c
 
 ### data directory
 Contains the five data set files: <br>
-<b>Dataset 1:</b> name_ra_dec_minP_minS.txt <br>
+<b>Dataset 1:</b> dataset1.txt <br>
 <b>Dataset 2:</b> dataset2.txt <br>
 <b>Dataset 3:</b> dataset3.txt <br>
 <b>Dataset 4:</b> dataset4.txt <br>
@@ -64,14 +62,16 @@ return. Set the `reschedule_everytime` to true for the case of single reschedule
 recalculate the schedule list after each observation is done. Set the `reschedule_everytime` to false
 for the case of multiple reschedule step and use `reschedule_freq` to set how many observations 
 will take after a reschedule. Use `teles_num` set the number of telescopes.
+
 ### Effect of neighbour number 
 Firstly fix the `reschedule_freq` (if not use
 `MultiTelescopesMTSPPolicy` policy, please set the `reschedule_everytime` to true). Use `teles_num` set the number of telescopes.
 Change the `used_neighbour_num` to set the number of neighbours.
-### 
 
 ## How to change the policy being used
 In the config file which is in the root directory, change the policy_class property to optimisation.<class name of the policy>, for eg: for policy with class name LargestSlewPolicy, change the policy_class property to optimisation.LargestSlewPolicy.
+
+**NOTE: This branch is for the multiple telescopes simulation exclusively. Not compatible with single telescopes optimization policy. For the single telescope version, please checkout to stable branch. The specialised policies available are `MultiTelescopesMTSPPolicy` and `ConcordeMTSPPolicy`. For pre-optimisations, `TravellingSalesmanPreoptimisation` is available. Additionally, the `KMeansClusteringEarlySettingOptimisation`, `KMeansClusteringOptimisation`, `LoadBalancingOptimisation`, `RightAscensionOptimisation`, and `SimpleRoundRobinOptimisation` is only compatible with the `ConcordeMTSPPolicy`. GUI is available which supports up to 8 telescopes. The number of telescopes can be set by the teles_num item in config**
 
 ## How to change the preoptimisation being used
 In the config file which is in the root directory, change the preoptimisation property to "all" for selecting the pre-optimisation `AllPulsarsAsNeighbours`, change it to "tsp" for selecting the preoptimisation `TravellingSalesmanPreoptimisation` and any other string for that property would select the `DynamicNNOptimisation`.
