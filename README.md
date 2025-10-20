@@ -1,8 +1,8 @@
-# Multiple-Telescope-Scheduling version
+# Multiple-Telescope-Scheduling Partitioning version
 
 **Original Repository (this code can also be found in the original branch): https://bitbucket.org/imoser/radiotelescopescheduling/src/master/** 
 
-**NOTE: This branch is for the multiple telescopes simulation exclusively. Not compatible with single telescopes optimization policy. For the single telescope version, please checkout to stable branch. Currently, only `MultiTelescopesMTSPPolicy` policy and `TravellingSalesmanPreoptimisation` is available. GUI is available which supports up to 8 telescopes. The number of telescopes can be set by the teles_num item in config**
+**NOTE: This branch is for the multiple telescopes simulation exclusively. Not compatible with single telescopes optimization policy. For the single telescope version, please checkout to stable branch. The specialised policies available are `MultiTelescopesMTSPPolicy` and `ConcordeMTSPPolicy`. For pre-optimisations, `TravellingSalesmanPreoptimisation` is available. Additionally, the `KMeansClusteringEarlySettingOptimisation`, `KMeansClusteringOptimisation`, `LoadBalancingOptimisation`, `RightAscensionOptimisation`, and `SimpleRoundRobinOptimisation` is only compatible with the `ConcordeMTSPPolicy`. GUI is available which supports up to 8 telescopes. The number of telescopes can be set by the teles_num item in config**
 
 ## List of files and directories
 
@@ -10,10 +10,16 @@
 Folder where the results are output. Each observation is output as a .csv file containing the overall duration, slew times, waiting times, integrations, as well as the entire schedule of the observation. For simulations where multiple batches were run, an additional .csv is output containing the averaged values of all these observations.
 
 ### data directory
-Contains the main three data set files name_ra_dec_minP_minS.txt which is the data set 1, dataset2.txt which is data set 2 and dataset3.txt which is data set 3. The dataset files contain the list of the pulsar samples used in the observation runs. The dataset also contains important information of the pulsar’s initial coordinates, scintillation timescale, and the estimated integration time during observation.
+Contains the five data set files: <br>
+<b>Dataset 1:</b> name_ra_dec_minP_minS.txt <br>
+<b>Dataset 2:</b> dataset2.txt <br>
+<b>Dataset 3:</b> dataset3.txt <br>
+<b>Dataset 4:</b> dataset4.txt <br>
+<b>Dataset 5:</b> dataset5.txt <br>
+The dataset files contain the list of the pulsar samples used in the observation runs. The dataset also contains important information of the pulsar’s initial coordinates, scintillation timescale, and the estimated integration time during observation.
 
 ### norad and novas directories
-These folders are for the norad and novas libraries used for getting satellite data which in used in the simulation. These folders were provided by the original repository as well. There are changes to be made to the files of these folders and have been described in the getting stared section.
+These folders are for the norad and novas libraries used for getting satellite data which in used in the simulation. These folders were provided by the original repository as well. There are changes to be made to the files of these folders and have been described in the getting started section.
 
 ### src/optimisation directory
 Contains all the scheduling policies. In the triangulations sub directory it contains all the pre-optimisation algorithms. The code for the main scheduler that schedules observations is in this directory as well.
@@ -46,18 +52,19 @@ The main class that includes the main function which is needed to run the progra
 9) Add GUROBI library
     1) Download and install GUROBI Optimizer, set the license.
     2) Add `gurobi_root/win64/lib` and `gurobi_root/win64/bin` as project library 
-10) The program can be started by running the SchedulingMain main function.
+10) Download Docker Engine ≥ 28.0.4
+11) The program can be started by running the SchedulingMain main function.
 
 
 ## The configurations of each ongoing test
 ### Reschedule step test
-This test must be curried by `MultiTelescopesMTSPPolicy` policy with `tsp` preoptimization policy.
+This test must be carried out by the `MultiTelescopesMTSPPolicy` policy with `tsp` preoptimization policy.
 Change the `used_neighbour_num` in config file to set the number of neighbours that preoptimization policy 
 return. Set the `reschedule_everytime` to true for the case of single reschedule step, which means
 recalculate the schedule list after each observation is done. Set the `reschedule_everytime` to false
 for the case of multiple reschedule step and use `reschedule_freq` to set how many observations 
 will take after a reschedule. Use `teles_num` set the number of telescopes.
-### Affect of neighbour number 
+### Effect of neighbour number 
 Firstly fix the `reschedule_freq` (if not use
 `MultiTelescopesMTSPPolicy` policy, please set the `reschedule_everytime` to true). Use `teles_num` set the number of telescopes.
 Change the `used_neighbour_num` to set the number of neighbours.
@@ -67,7 +74,13 @@ Change the `used_neighbour_num` to set the number of neighbours.
 In the config file which is in the root directory, change the policy_class property to optimisation.<class name of the policy>, for eg: for policy with class name LargestSlewPolicy, change the policy_class property to optimisation.LargestSlewPolicy.
 
 ## How to change the preoptimisation being used
-In the config file which is in the root directory, change the preoptimisation property to "all" for selecting the preoptimisation AllPulsarsAsNeighbours, change it to "tsp" for selecting the preoptimisation TravellingSalesmanPreoptimisation and any other string for that property would select the DynamicNNOptimisation.
+In the config file which is in the root directory, change the preoptimisation property to "all" for selecting the pre-optimisation `AllPulsarsAsNeighbours`, change it to "tsp" for selecting the preoptimisation `TravellingSalesmanPreoptimisation` and any other string for that property would select the `DynamicNNOptimisation`.
+<br> For the partitioning pre-optimisations used by the `ConcordeMTSPPolicy`:
+<br>`KMeansClusteringEarlySettingOptimisation`: "kmeansearlysetting"
+<br>`KMeansClusteringOptimisation`: "kmeans"
+<br>`LoadBalancingOptimisation`: "loadbalance"
+<br>`RightAscensionOptimisation`: "rightascension"
+<br>`SimpleRoundRobinOptimisation`: "roundrobin"
 	
 **NOTE: To change the datasets being used, paths or any other configurations, update the config file present in the root directory.**
 	
@@ -76,7 +89,7 @@ In the config file which is in the root directory, change the preoptimisation pr
 
 2) Create a public function that throws an OutOfObservablesException in your class. Let’s call the function addTempLinks for this example.
 	
-	Example function defination:
+	Example function definition:
 	```java
 	public void addTempLinks( 
 		List<Target> targets , 
@@ -86,7 +99,7 @@ In the config file which is in the root directory, change the preoptimisation pr
 		Location loc , 
 		Telescope telescope) throws OutOfObservablesException {}
 	```
-	These areguments are the same as that used in the code.
+	These arguments are the same as that used in the code.
 
 3) At the start of the policy add current.clearNeighbours(); As the pre-optimisation sets the neighbours to the current pulsar being observed, all the neighbours first have to be cleared and then added based on the respective algorithm.
 
