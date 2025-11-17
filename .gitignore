@@ -1,0 +1,24 @@
+# Ignore build and environment directories
+__pycache__/
+*.py[cod]
+*.egg-info/
+.env/
+.venv/
+venv/
+
+# Ignore IDE/project files
+.idea/
+.vscode/
+
+# Ignore compiled and temporary files
+*.log
+*.tmp
+
+# Ignore specific project directories
+target/
+novas/
+norad/
+
+# Ignore system files
+.DS_Store
+Thumbs.db
